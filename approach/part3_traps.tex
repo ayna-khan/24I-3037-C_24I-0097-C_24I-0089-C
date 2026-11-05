@@ -1,0 +1,13 @@
+\section*{3. The traps}
+\small
+\begin{tabularx}{\textwidth}{@{}c Y Y l@{}}
+\toprule
+\textbf{Case} & \textbf{What was built} & \textbf{Why it is hostile} & \textbf{Check}\\
+\midrule
+46 & 2\,947 crates sorted by value (up), weight (up), expiry (down) and serial (up), i.e.\ four of the five fields are monotone. & Already-sorted input degrades quicksort with a first or last pivot to $O(n^2)$, and sorting steps are wasted. & V8: at least three monotone fields\\
+47 & 12 crates, capacity 20: a bait crate (11 kg, value 61, 5.55 per kg) and several crates of 10 kg and value 55 (5.50 per kg). & Greedy by value per kg takes the bait and nothing else fits: 61 against an optimum of 110 (55\%). & V8: dynamic-programming optimum against greedy ($\le 60\%$)\\
+48 & 2\,814 locations on a highway with hop diameter at least 2\,188. The HQ has a direct 60-minute road to location 8, whereas the 8-road detour costs 11. & The fewest-roads route (one road, cost 62) is 5.6 times as expensive as the cheapest route, so breadth-first search alone gives a wrong answer. & V8: diameter $\ge 500$ and cost ratio $\ge 1.5$\\
+49 & A log of 64\,662 symbols, 92\% of which is a single repeated symbol. Patterns of length 8--40 equal that symbol repeated $(\ell-1)$ times followed by a different symbol. & Every start position matches almost the whole pattern and then fails, so naive search needs about $N\cdot M$ steps whereas KMP remains linear. & V8: periodic run $\ge 90\%$; at least four near-miss patterns\\
+\bottomrule
+\end{tabularx}
+\normalsize

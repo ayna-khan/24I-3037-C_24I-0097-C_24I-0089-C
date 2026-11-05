@@ -1,0 +1,32 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[margin=1.5cm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{tabularx,booktabs,array}
+\usepackage{enumitem}
+\usepackage{microtype}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{2pt}
+\setlist{nosep,leftmargin=1.2em}
+\renewcommand{\arraystretch}{1.12}
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+\pagestyle{empty}
+
+\begin{document}
+
+{\large\bfseries LIFELINE: Algorithmic Relief-Command Engine; Iteration 1 Approach Note}\\[1pt]
+\small Group 41 \;|\; Dur E Adan (24I-3037-C), Ayna Khan (24I-0097-C), Hamza Sardar (24I-0089-C) \;|\; Design and Analysis of Algorithms\\[3pt]
+\normalsize
+
+\textbf{General design.} The group seed is $s=41$. Every module of every case draws its randomness from a separate generator seeded with the string \texttt{41-k-module}, so the workbook is reproduced exactly by the single command given in the generator README. Unless stated otherwise, sizes are drawn uniformly from the ranges of the tier of the case. Crate weights lie in 1--20 kg, values in 10--100, expiry hours in 0--999, and the truck capacity is between 25\% and 55\% of the total crate weight.
+
+
+\input{approach/part1_story_to_numbers}
+
+\input{approach/part2_planted_objects}
+
+\input{approach/part3_traps}
+
+\input{approach/part4_what_will_be_hard}
+
+\end{document}
