@@ -1,0 +1,15 @@
+\section*{1. From story to numbers}
+\small
+\begin{tabularx}{\textwidth}{@{}l Y@{}}
+\toprule
+\textbf{Case study} & \textbf{Main choices and the sentence of the story that justifies them}\\
+\midrule
+1 Delta Flood & The network is a random spanning tree with additional roads, with average degree 2.2--3.2 (``a flat delta of small villages joined by raised roads''). Penalties are drawn from $\{0,1,2,4,6\}$ with weights favouring large values and are then repaired until at least 40\% of the locations have penalty $\ge 2$ (``food and water matter most'' while roads ``go under water''). Three to five waves are generated, each with at most $E/6$ roads (``in waves''). At least 55\% of the crates are food or water.\\
+2 Mountain Earthquake & Each node is attached to one of the three previous nodes, producing a long, narrow valley with average degree 2.0--2.6 (``a few roads and almost no alternatives''). At least 45\% of the crates are medicine or tools. Alarm arrivals contain bursts around random ``aftershock'' ticks, and priorities are weighted towards 6--10 until the mean is at least 6.3 (``bursts of urgent calls'').\\
+3 Coastal Cyclone & At least 28\% of the locations are shelters (``a port city and fishing villages''). Windows last 5--120 minutes and are placed in a shrinking time horizon until each window overlaps at least 2.3 others on average (``short and overlap''). The radio log is uniform noise over all 38 symbols (``full of noise''), so at least 30 symbols occur.\\
+4 Urban Flash Flood & The average degree is 3.6--5.0 (``many alternative routes''). On tiers M and L the alarm rate is 1.55--1.75 per tick (``faster than anyone can answer''). At least 10\% of the crates are rare (``rare equipment is available'').\\
+5 Landslide Corridor & The network is a single highway $0,1,\dots,V-1$ with the HQ at one end, plus a few detours spanning two or three nodes, at most four roads per location and average degree at most 2.4. One road has no detour; it is closed in wave 1 and a target lies beyond it (``a collapse cuts off whole communities'').\\
+6 Outbreak Camp & At least 55\% of the crates are medicine or water, and 55\% of the crates receive an expiry hour of at most 300 (``supplies spoil''). The log repeats two beacon messages with 3\% noise, and the data is regenerated until the most frequent symbol exceeds 30\% of the log (``beacons repeat the same messages'').\\
+\bottomrule
+\end{tabularx}
+\normalsize
