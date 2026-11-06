@@ -1,0 +1,168 @@
+======================================================================
+PART 1: the submitted dataset cases.xlsx
+======================================================================
+Validating cases.xlsx  (full mode)
+41-00: PASS
+41-01: PASS
+41-02: PASS
+41-03: PASS
+41-04: PASS
+41-05: PASS
+41-06: PASS
+41-07: PASS
+41-08: PASS
+41-09: PASS
+41-10: PASS
+41-11: PASS
+41-12: PASS
+41-13: PASS
+41-14: PASS
+41-15: PASS
+41-16: PASS
+41-17: PASS
+41-18: PASS
+41-19: PASS
+41-20: PASS
+41-21: PASS
+41-22: PASS
+41-23: PASS
+41-24: PASS
+41-25: PASS
+41-26: PASS
+41-27: PASS
+41-28: PASS
+41-29: PASS
+41-30: PASS
+41-31: PASS
+41-32: PASS
+41-33: PASS
+41-34: PASS
+41-35: PASS
+41-36: PASS
+41-37: PASS
+41-38: PASS
+41-39: PASS
+41-40: PASS
+41-41: PASS
+41-42: PASS
+41-43: PASS
+41-44: PASS
+41-45: PASS
+41-46: PASS
+41-47: PASS
+41-48: PASS
+41-49: PASS
+RESULT: PASS  (50 of 50 cases pass, 0 global failures)
+
+======================================================================
+PART 2: valid test cases must PASS, every broken copy must be REJECTED
+======================================================================
+--- M-alarm-rate-off.xlsx: expected REJECT, got REJECT  [OK]
+    41-26: FAIL
+    V2: alarms per tick 0.12 outside 1.2..1.8
+    RESULT: FAIL  (0 of 1 cases pass, 0 global failures)
+--- M-duplicate-serial.xlsx: expected REJECT, got REJECT  [OK]
+    41-26: FAIL
+    V3: serial numbers not distinct
+    RESULT: FAIL  (0 of 1 cases pass, 0 global failures)
+--- M-float-in-cell.xlsx: expected REJECT, got REJECT  [OK]
+    41-26: FAIL
+    V2: crate 1 has a non-integer field
+    V1: case could not be checked (TypeError: both arguments should be Rational instances)
+    RESULT: FAIL  (0 of 1 cases pass, 0 global failures)
+--- M-long-log-part.xlsx: expected REJECT, got REJECT  [OK]
+    41-26: FAIL
+    V5: log part is not text or longer than 10000
+    V2: log length 10001 outside 2000..10000
+    V5: pattern 0 count is 5, true count 0
+    V5: pattern 1 count is 1, true count 0
+    V5: pattern 2 count is 1, true count 0
+    V5: at least two patterns must occur and at least one must not
+    V7: cyclone: log uses 1 symbols (<30)
+    RESULT: FAIL  (0 of 1 cases pass, 0 global failures)
+--- M-planted-breaks-rule.xlsx: expected REJECT, got REJECT  [OK]
+    41-26: FAIL
+    V6: planted assignment breaks rule 4
+    RESULT: FAIL  (0 of 1 cases pass, 0 global failures)
+--- M-rations-sum-wrong.xlsx: expected REJECT, got REJECT  [OK]
+    41-26: FAIL
+    V6: planted rations do not add up to rations target (positive)
+    RESULT: FAIL  (0 of 1 cases pass, 0 global failures)
+--- M-rule-repeats-switch.xlsx: expected REJECT, got REJECT  [OK]
+    41-26: FAIL
+    V2: rule 0: literals must be three non-zero integers on three different switches
+    RESULT: FAIL  (0 of 1 cases pass, 0 global failures)
+--- M-window-too-short.xlsx: expected REJECT, got REJECT  [OK]
+    41-26: FAIL
+    V2: window 1 out of range
+    RESULT: FAIL  (0 of 1 cases pass, 0 global failures)
+--- S-capacity-too-big.xlsx: expected REJECT, got REJECT  [OK]
+    41-04: FAIL
+    V2: capacity 241 is not 10%..70% of total weight 241
+    V5: claim cargo opt is 647, true value 1071
+    RESULT: FAIL  (0 of 1 cases pass, 0 global failures)
+--- S-cover-misses-edge.xlsx: expected REJECT, got REJECT  [OK]
+    41-04: FAIL
+    V6: planted cover misses an edge
+    RESULT: FAIL  (0 of 1 cases pass, 0 global failures)
+--- S-edit-bound-too-low.xlsx: expected REJECT, got REJECT  [OK]
+    41-04: FAIL
+    V5: edit bound 0 not in [3, 35]
+    RESULT: FAIL  (0 of 1 cases pass, 0 global failures)
+--- S-network-disconnected.xlsx: expected REJECT, got REJECT  [OK]
+    41-04: FAIL
+    V2: E=4 outside V-1..3V
+    V4: network not connected before closures
+    V7: landslide: farthest location 0 roads away (< 1)
+    RESULT: FAIL  (0 of 1 cases pass, 0 global failures)
+--- S-penalty-on-hq.xlsx: expected REJECT, got REJECT  [OK]
+    41-04: FAIL
+    V2: location 0 must be depot with penalty 0
+    RESULT: FAIL  (0 of 1 cases pass, 0 global failures)
+--- S-road-in-two-waves.xlsx: expected REJECT, got REJECT  [OK]
+    41-04: FAIL
+    V2: waves must be numbered 1..w with 2<=w<=5, got [1, 2, 3, 4, 99]
+    V4: road 3 is in two waves
+    RESULT: FAIL  (0 of 1 cases pass, 0 global failures)
+--- S-road-u-ge-v.xlsx: expected REJECT, got REJECT  [OK]
+    41-04: FAIL
+    V3: road 0: ends invalid or u>=v
+    RESULT: FAIL  (0 of 1 cases pass, 0 global failures)
+--- S-tour-not-permutation.xlsx: expected REJECT, got REJECT  [OK]
+    41-04: FAIL
+    V6: tour is not a permutation of all sites starting at 0
+    RESULT: FAIL  (0 of 1 cases pass, 0 global failures)
+--- S-wrong-claim.xlsx: expected REJECT, got REJECT  [OK]
+    41-04: FAIL
+    V5: claim tour opt is 2293, true value 2292
+    RESULT: FAIL  (0 of 1 cases pass, 0 global failures)
+--- S-wrong-pattern-count.xlsx: expected REJECT, got REJECT  [OK]
+    41-04: FAIL
+    V5: pattern 0 count is 5, true count 4
+    RESULT: FAIL  (0 of 1 cases pass, 0 global failures)
+--- X46-not-monotone.xlsx: expected REJECT, got REJECT  [OK]
+    41-46: FAIL
+    V8: trap 46: only 2 monotone fields ['value', 'serial']
+    RESULT: FAIL  (0 of 1 cases pass, 0 global failures)
+--- X47-greedy-good-enough.xlsx: expected REJECT, got REJECT  [OK]
+    41-47: FAIL
+    V8: trap 47: greedy reaches 116 of 165 (> 60%)
+    RESULT: FAIL  (0 of 1 cases pass, 0 global failures)
+--- X48-cheap-shortcut.xlsx: expected REJECT, got REJECT  [OK]
+    41-48: FAIL
+    V8: trap 48: no target whose fewest-roads route costs >= 1.5 x cheapest
+    RESULT: FAIL  (0 of 1 cases pass, 0 global failures)
+--- X49-not-repetitive.xlsx: expected REJECT, got REJECT  [OK]
+    41-49: FAIL
+    V5: pattern 0 count is 59490, true count 54490
+    V5: pattern 1 count is 59486, true count 54486
+    V8: trap 49: less than 90% of the log repeats one block of <= 8 symbols
+    RESULT: FAIL  (0 of 1 cases pass, 0 global failures)
+--- valid-M-case.xlsx: expected PASS, got PASS  [OK]
+--- valid-S-case.xlsx: expected PASS, got PASS  [OK]
+--- valid-trap46.xlsx: expected PASS, got PASS  [OK]
+--- valid-trap47.xlsx: expected PASS, got PASS  [OK]
+--- valid-trap48.xlsx: expected PASS, got PASS  [OK]
+--- valid-trap49.xlsx: expected PASS, got PASS  [OK]
+
+SUMMARY: 22 broken copies, 6 valid copies, 0 unexpected results -> ALL AS EXPECTED
