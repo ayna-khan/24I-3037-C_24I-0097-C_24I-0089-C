@@ -1,0 +1,8 @@
+\section*{2. Planted objects and claims}
+\begin{itemize}
+\item \textbf{Tour.} A nearest-neighbour tour from site 0 is improved by 2-opt, which can only shorten it; hence the stored length is never greater than the nearest-neighbour length.
+\item \textbf{Vertex cover.} The cover is chosen first and the sensor edges are sampled only among pairs that contain at least one cover node. \textbf{Safety rules.} A hidden assignment is chosen first; any rule it violates has one literal flipped. The ratio of rules to switches is set by $k \bmod 3$ to the bands 2.6--3.3, 3.7--4.6 and 5.0--5.8 (9, 8 and 9 of the 26 M and L cases). \textbf{Rations.} The planted items are chosen first and the target is their sum.
+\item \textbf{Radio.} Present phrases are cut from the log, absent phrases are redrawn until their count is zero, and all counts are recomputed by scanning with overlaps. The edit bound equals the true edit distance plus 0--3. Several windows are moved so that they start where another finishes (touching pairs).
+\item \textbf{Variety rules.} Even-numbered tier-S cases are resampled until greedy by value per kg is not optimal (14 of the 20 tier-S cases satisfy this), and odd-numbered tier-S cases until some target has a more expensive fewest-roads route (11 of 20). Separate random streams make all modules different across cases.
+\item \textbf{Claims (tier S).} The generator computes them by dynamic programming, greedy selection, and enumeration of permutations. The validator recomputes them by different methods (subset enumeration, recursion over compatible sets, recursion over cuts, Held--Karp and branching vertex cover).
+\end{itemize}
