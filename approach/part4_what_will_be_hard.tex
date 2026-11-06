@@ -1,0 +1,14 @@
+\section*{4. What will be hard}
+\small
+\begin{tabularx}{\textwidth}{@{}l Y@{}}
+\toprule
+\textbf{Case study} & \textbf{Two hardest decisions and the property of the data that causes the difficulty}\\
+\midrule
+1 Delta & \textbf{B (routes):} at least 40\% penalised locations make the cheapest and the fewest-roads routes differ, and each of the 3--5 waves requires a new computation. \textbf{A (inventory):} food and water crates with random weights make the density-greedy choice suboptimal.\\
+2 Earthquake & \textbf{D (queue):} bursts raise the backlog and priorities are mostly 6--10, so many alarms tie. \textbf{B/F (routes, cable):} the map is almost a tree (degree about 2.3), so one closure disconnects locations and the answer is frequently ``no route''.\\
+3 Cyclone & \textbf{C (scheduling):} dense overlap makes the schedules of maximum count and maximum value differ. \textbf{E (radio):} uniform noise over 38 symbols gives a Huffman code of about 5.3 bits per symbol, i.e.\ almost no saving.\\
+4 Urban & \textbf{D (queue):} more than 1.5 alarms arrive per tick while one is released, so the backlog grows to thousands and a linear scan costs $O(m^2)$. \textbf{B (routes):} the dense graph has many alternatives of equal length (up to $2.5V$ roads).\\
+5 Landslide & \textbf{B (reachability):} the cut leaves targets unreachable, so ``no route'' must be reported, and a chain of depth about $V/3$ breaks recursive searches. \textbf{F (cable):} the network is nearly a path, so only the reachable part may be spanned.\\
+6 Outbreak & \textbf{A (inventory):} half of the crates expire by hour 300, so value density alone is misleading. \textbf{E (radio):} the repetitive beacons produce many overlapping matches and a strongly skewed Huffman code.\\
+\bottomrule
+\end{tabularx}
