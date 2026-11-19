@@ -1,0 +1,30 @@
+Sample outputs of modules A and D (master_release_v1, group seed 41)
+
+== module A, tier S case 1-06: 19 crates, capacity 82 kg ==
+DP (shipped): status OK, 12 crates, weight 82/82, value 826, operations {'items_examined': 19, 'cells': 1398, 'calls': 1}
+    crates loaded: [1, 2, 3, 4, 7, 9, 10, 11, 13, 14, 15, 19]
+ratio greedy (baseline): status OK, 11 crates, weight 77/82, value 807, operations {'items_examined': 38, 'comparisons': 64, 'moves': 95, 'calls': 1}
+    crates loaded: [1, 2, 3, 4, 7, 9, 10, 11, 14, 18, 19]
+
+== module A, trap 47 case 8-47: 12 crates, capacity 12 kg ==
+DP (shipped): status OK, 2 crates, weight 12/12, value 170, operations {'items_examined': 12, 'cells': 83, 'calls': 1}
+    crates loaded: [2, 3]
+ratio greedy (baseline): status OK, 1 crates, weight 7/12, value 100, operations {'items_examined': 24, 'comparisons': 24, 'moves': 48, 'calls': 1}
+    crates loaded: [1]
+
+== module D, tier S case 1-06: 13 alarms ==
+binary heap (shipped): status OK, maximum backlog 5, total wait 38, longest wait 9
+    first 12 releases (alarm id, tick): [(2, 0), (4, 1), (3, 2), (5, 3), (9, 4), (6, 5), (11, 6), (7, 7), (12, 8), (1, 9), (8, 10), (10, 11)]
+linear scan (baseline): status OK, maximum backlog 5, total wait 38, longest wait 9
+    first 12 releases (alarm id, tick): [(2, 0), (4, 1), (3, 2), (5, 3), (9, 4), (6, 5), (11, 6), (7, 7), (12, 8), (1, 9), (8, 10), (10, 11)]
+
+== module D, tier L case 2-40: 2258 alarms ==
+binary heap (shipped): status OK, maximum backlog 754, total wait 850137, longest wait 2023
+    first 12 releases (alarm id, tick): [(2, 0), (3, 1), (5, 2), (6, 3), (8, 4), (9, 5), (10, 6), (11, 7), (14, 8), (15, 9), (7, 10), (13, 11)]
+linear scan (baseline): status OK, maximum backlog 754, total wait 850137, longest wait 2023
+    first 12 releases (alarm id, tick): [(2, 0), (3, 1), (5, 2), (6, 3), (8, 4), (9, 5), (10, 6), (11, 7), (14, 8), (15, 9), (7, 10), (13, 11)]
+
+-- infeasible and empty situations are reported, not hidden --
+A, capacity 0: EMPTY, note: capacity is 0
+A, no crates: EMPTY, note: no crates
+D, no alarms: EMPTY, note: no alarms
