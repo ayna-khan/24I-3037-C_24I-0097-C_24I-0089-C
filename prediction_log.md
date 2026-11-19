@@ -12,9 +12,9 @@ Master dataset: master_release_v1. Group seed 41 (so the sample positions are 41
 Time unit: seconds on one core, median of 5 runs after one discarded warm-up run.
 
 **Order of events.** The entries below were drafted in a working session on 2026-11-16 (times are UTC) before any full run.
-The first complete run of all rounds was then made in that session on a cloud machine, and the "After the run" notes describe that run.
-The group repeats the rounds on its own machine: the prediction entries are committed first, the rerun and the new results afterwards,
-and any "After the run" statement that no longer matches the new numbers is corrected in a later commit instead of being rewritten silently.
+A first complete run was made in that session on a cloud machine (not reported here, used only as a cross-check where it is mentioned).
+The numbers in the "After the run" notes are those of the run on Ayna's laptop (Windows 11, Intel CPU with 12 logical processors, Python 3.13.7, `results/environment.json`),
+which produced `results/`. Predictions were committed before that run; the notes were written after it.
 
 **Honest note on what was known before writing.** Before the entries below, the harness
 (`experiments/runAD.py --quick`) was run once on tiny sizes (n up to 400, m up to 1000) only to check that
@@ -74,23 +74,21 @@ DP fills n x W cells. The DP wins on *value*: it is optimal, the greedy rule is 
   bait 61 against 2 x 55 = 110 gives 0.55 (1.12). The claims were computed by exhaustive search by their authors; a
   correct DP must reproduce them (1.13); a miss would mean a bug of mine or a defective case.
 
-**After the run** (written 2026-11-16 after round 1; full table in `results/predictions-vs-measurements-AD.md`):
-13 of 13 predictions were inside their tolerance, but several hits are for a different reason than the one I gave, and some tolerances were too wide to say much.
-- **1.1 (slope 2.0, measured 2.14 +- 0.13).** My reasoning assumed W is proportional to n with 3.4 kg per crate. That was only true
-  for the first two sizes: the pooled capacity per crate was 3.4 (n = 200, 400), 2.9 (800), 4.2 (1600, 3200) and 3.9 (6400),
-  because the consecutive tier L cases that are joined have different capacities per crate. So W grew slightly faster than n and the
-  slope is above 2. The better evidence is the cell count: time against cells has slope 1.03 +- 0.06, so the counted operations explain the time.
-- **1.3 and 1.4 (time 14 s predicted, 19.0 s measured; ratio 450 predicted, 761 measured).** Two causes: the DP did 1.61 x 10^8 cells instead of my 1.4 x 10^8 (see above), and one cell
-  costs 118 ns at the large sizes, not 100 ns (92 to 135 ns over the sizes). Constants like this are machine-dependent; the shapes are not.
-- **1.7 (greedy memory 80 bytes per crate predicted, 102 measured).** I counted too few lists of n references (filter, two merge buffers,
-  chosen, ids). I did not profile it further, so this explanation is a guess.
-- **1.9 (greedy slope in W: 0.0 predicted, 0.12 measured).** A hit only because the tolerance was +-0.15. The fit has R^2 = 0.49 and a 95 % interval of +-0.18 that includes 0:
-  the greedy times are 5 to 9 ms with noise of the same size as the trend, so this measurement says "no clear dependence on W", not more. The operation count of the greedy rule is exactly constant in W.
-- **1.10 (greedy not optimal in 55 % of tier S, measured 65 %)** and **1.12 (0.55 predicted, 0.56 measured for trap 47)** are close.
-  A surprise: in the tier S sample a few cases of other groups give greedy / DP of only 0.58, nearly as bad as the trap cases (see Figure A4).
-- **1.13:** the DP equals the exhaustive-search claim in 20 of 20 tier S cases, so no sign of a bug or a defective case.
-- The tolerance for 1.4 (200 to 1500) and 1.11 were wide; a hit there does not show that I understand the constant.
+**After the run** (Ayna's laptop, on or before 2026-11-20; full table in `results/predictions-vs-measurements-AD.md`): 10 of 13 inside the tolerance, misses 1.1, 1.2 and 1.3.
 
+*A problem with the measurement itself, stated first.* The speed of the machine changed while round 1 was running. Time per DP cell: 200 ns (n = 200), 181, 145, 139 (n = 1600), then 253 (n = 3200, where the IQR is 8.8 s, 80 % of the median, so the speed changed during the 5 timed runs) and 398 ns (n = 6400);
+in the W sweep, which ran afterwards on the same 1600 crates, 317 to 350 ns per cell. The greedy rule on the same 1600 crates took 7.6 ms in `A-scale-n` and 17 to 24 ms in `A-scale-W`. The operation counts are exact and did not change, so they are the reliable part of this round.
+I did not establish the cause. Possible causes: laptop power or heat management, other programs running, or Windows moving the run between fast and slow cores of this hybrid Intel CPU. A repeat with the charger connected and the power mode on best performance would tell.
+- **1.1 (miss, slope 2.26 +- 0.36, limit 2.25).** The interval contains my 2.0, so this is a borderline miss. Two causes: W per crate is not constant (3.4, 3.4, 2.9, 4.2, 4.2, 3.9 kg per crate for the six sizes, because the joined tier L cases differ), so the counted cells have slope 2.08 +- 0.12, not 2.0;
+  and the drift above added to the time of the large sizes. Time against cells has slope 1.09 +- 0.16, so the counted operations still explain the time.
+- **1.2 (miss, greedy slope 1.44, range 0.9 to 1.3).** The greedy operations have slope 1.150 +- 0.016, as predicted. The times at n = 3200 (45 ms) and n = 6400 (93 ms) are 6 and 12 times the time at n = 1600 while the operations are 2.2 and 4.8 times larger: the same drift.
+- **1.3 (miss, 64.2 s against 14 s).** I took 100 ns per cell from a smoke run on a cloud machine, where the full round later gave 19.0 s. Here a cell cost 398 ns at n = 6400 (139 ns at n = 1600), and the cell count was 161 million, not my 140 million.
+  The lesson: a time constant measured on one machine does not carry over to another; the cell count (a prediction I made about counts) was close.
+- **1.4 (hit, 689 against 450).** A hit with a wide tolerance; I would not read much into it.
+- **1.5, 1.6, 1.7, 1.8, 1.9** hit. 1.8: DP slope in W is 0.995 +- 0.037, clean because the W sweep ran at an almost constant speed. 1.7: greedy memory is 102 bytes per crate against 80 predicted (I counted too few lists of n references; not profiled further).
+  1.9 is a hit only because of the tolerance: the greedy time has slope 0.08 with R^2 = 0.57 (the operation count is exactly constant), which says "no clear dependence on W" and nothing more.
+- **1.10 to 1.13 (quality, machine independent, identical to the first run on the cloud machine):** greedy is not optimal in 65 % of tier S cases (55 % predicted), mean greedy/DP is 0.9985 on tiers M and L, 0.561 on trap 47, and the DP equals the claim in 20 of 20 tier S cases.
+  A surprise: a few tier S cases of other groups give greedy/DP of only 0.58, nearly as bad as the trap cases (Figure A4).
 
 ---
 
@@ -117,11 +115,10 @@ DP costs a fixed overhead per crate (list slicing) and the table has only about 
 multiple of the sort-based greedy rule (2.3). For n = 8 both finish in tens of microseconds and the exponential
 has not taken off yet, so the crossover sits at the bottom of the range (2.4).
 
-**After the run** (written 2026-11-16 after round 2): 4 of 4 inside the tolerance.
-- 2.1: base 1.99 per crate (interval 1.91 to 2.08) and exactly 2^n subsets counted; 2.2: 0.165 s against 0.17 s predicted; 2.3: mean DP / greedy 4.6 against 4.
-- 2.4 is the least informative prediction: I had seen from the smoke run that n = 8 is already a tie. At n = 8 brute force needed 47 us and the DP 37 us (ratio 1.26), so the crossover is at or below n = 8 and I did not test smaller sizes.
-- At n = 20 the DP is 668 times faster than brute force; at n = 17 the IQR of brute force is large (15 ms around 28 ms), possibly because something else was running on the machine at that moment; I kept the data and did not repeat the run.
-
+**After the run** (Ayna's laptop): 3 of 4 inside the tolerance, miss 2.2.
+- **2.2 (miss).** Brute force at n = 20 took 0.585 s against 0.17 s predicted; the first run on the cloud machine gave 0.165 s. The factor 3.6 is a machine and speed-state difference, not an error in the 2^n argument: 2.1 hit (base 2.02, interval 1.94 to 2.11) and exactly 2^n subsets were counted at every size.
+- 2.3 hit (DP / greedy 3.9 on average). 2.4 hit (n = 8: DP 89 us, brute force 115 us, ratio 1.29); this prediction was partly informed by the smoke run and I did not test sizes below 8.
+- At n = 20 the DP is 878 times faster than brute force.
 
 ---
 
@@ -168,18 +165,13 @@ about equal. They give the same release order, so there is no difference in *out
 - At m = 250 the backlog is under 50 and a scan of 40 entries costs about as much as the overhead of heap
   operations (3.6).
 
-**After the run** (written 2026-11-16 after round 3): 10 of 11 inside the tolerance, **one miss: 3.8**.
-- **3.8 (miss).** I predicted that operations divided by (m log2 m) stay constant. They do not: the value grows from 2.47 at m = 250 to 3.17 at m = 64000 (ratio 1.28, limit 1.25).
-  Cause: my model forgot that the backlog starts at zero and then grows. A pop costs about log2 of the current backlog, so the average over the run is about log2(0.33 m) - 1.4 = log2 m - 3.0, not log2 m.
-  The ratio (log2 m - 3.0) / log2 m is 0.62 at m = 250 and 0.81 at m = 64000, which predicts growth by a factor 1.31; measured 1.28. So the heap is m log m, but with a negative constant term.
-- 3.1 and 3.2: heap slope 1.18 +- 0.03, scan slope 1.98 +- 0.06 over 9 sizes (R^2 above 0.998). The heap slope is above 1 as predicted.
-- 3.3, 3.7: key comparisons of the scan at m = 8000 are 10.7 million (10.9 predicted) and the backlog is 0.331 m (0.33 predicted). These were the best predictions because they follow from counting, not from timing.
-- 3.4 and 3.5 (absolute times): the scan at m = 64000 took 34.9 s (51 predicted): one comparison cost 51 ns, not 70 ns. The heap took 0.40 s (0.5 predicted).
-  The scan against heap time ratio went 1.2 (m = 250), 15 (8000), 88 (64000). Time per alarm of the heap grew from 2.2 to 6.2 microseconds; operations per alarm only grew by 2.6, so part of this might be cache misses in the larger heap. I did not test that.
-- 3.9 (memory): 185 bytes per alarm against 250 predicted; the heap and the scan need almost the same memory (they differ by under 0.1 %), because the answer and the arrival dictionary dominate.
-- 3.10: the mean wait of all alarms is identical under both orders in all 62 sampled cases, as the conservation argument says.
-- 3.11: ratio of 429 (predicted 80, tolerance 20 to 1000): a hit with a 81 % error. On tier L the priority 9 and 10 alarms wait 1.5 ticks on average under the urgency order and 639 under first-come-first-served; my estimate of the FIFO wait ("the whole backlog") was right in shape but I underestimated how short the urgent wait is.
-
+**After the run** (Ayna's laptop): 9 of 11 inside the tolerance, misses 3.5 and 3.8.
+- **3.8 (miss, 1.28 against a limit of 1.25).** Operation counts do not depend on the machine, so this is a real modelling error. I predicted that operations divided by (m log2 m) stay constant. They grow from 2.47 at m = 250 to 3.17 at m = 64000.
+  My model forgot that the backlog starts at zero and then grows. A pop costs about log2 of the current backlog, so the average over the run is about log2(0.33 m) - 1.4 = log2 m - 3.0 rather than log2 m. The ratio (log2 m - 3.0) / log2 m is 0.62 at m = 250 and 0.81 at m = 64000, a growth by a factor of 1.31; measured 1.28. So the heap is m log m with a negative constant term.
+- **3.5 (miss, heap at m = 64000 took 1.04 s against 0.5 s).** The first run on the cloud machine gave 0.40 s. On the laptop the heap time jumps from 0.108 s (m = 16000) to 0.481 s (m = 32000), 4.5 times for twice the size while the operations grow 2.1 times: the speed change again. As a result the scan/heap time ratio is 1.5, 1.6, 3.0, 4.8, 9.5, 17, 63, 57, 50 for the nine sizes and is not monotone at the top; do not read the 63 as a trend.
+- **3.1 (hit but inflated).** The heap slope is 1.26 +- 0.11 (limit 1.3); the operations have slope 1.164 +- 0.028, which is the m log m shape I expected. **3.2:** scan slope 2.03 +- 0.16, comparisons 1.99. **3.3:** 10.7 million comparisons at m = 8000 (10.9 predicted).
+- **3.4 (hit, 51.9 s against 51).** A lucky hit: my 70 ns per comparison came from the smoke run, here a comparison cost 76 ns, and the first cloud run gave 51 ns. The IQR of the scan at m = 32000 is 12.4 s (45 % of the median).
+- 3.6 hit (1.5), 3.7 hit (backlog 0.331 m), 3.9 hit (185 bytes per alarm; heap and scan memory differ by under 0.1 %), 3.10 hit (the mean wait of all alarms is identical under both orders in all 62 cases), 3.11 hit with a 81 % error (ratio 429 against 80 predicted; on tier L the priority 9 and 10 alarms wait 1.5 ticks under the urgency order and 639 under first-come-first-served).
 
 ---
 
@@ -200,21 +192,18 @@ about equal. They give the same release order, so there is no difference in *out
 **Reasoning.** Quadratic growth from 51 s at m = 64000 gives 51 x 16 = 816 s at 4 times the size; with the slope a bit below 2, 670 s
 (4.2). That is above 300 s, hence DNF (4.1). The heap is about 5 times 0.5 s with the logarithmic factor (4.3).
 
-**After the run** (written 2026-11-16 after round 4): 3 of 3 inside the tolerance.
-- 4.1: the scan at m = 256000 passed 300 s and is recorded as DNF; the heap finished in 1.67 s (2.5 s predicted).
-- Largest size that finished for the scan: m = 64000 (34.9 s). Missing point predicted from the fit on m <= 64000: 506 s (670 s predicted before the run), i.e. the scan would need about 8 to 9 minutes, which is still above the 300 s limit. The prediction error comes from the same lower cost per comparison as in 3.4.
-- The 506 s is an extrapolation of a log-log fit, not a measurement: the run was stopped at 300 s.
-
+**After the run** (Ayna's laptop): 2 of 3 inside the tolerance, miss 4.2.
+- 4.1 hit: the scan at m = 256000 passed 300 s and is recorded as DNF. 4.3 hit: the heap took 2.40 s (2.5 predicted).
+- **4.2 (miss, extrapolated 1189 s against 670 s).** The extrapolation uses the fitted line through nine sizes including the disturbed ones; plain quadratic growth from the last measured size (51.9 s at m = 64000, times 16) gives about 830 s. Both are far above 300 s, so the DNF conclusion does not depend on it.
+  The largest size that finished for the scan is m = 64000. The extrapolated figure is an estimate, not a measurement.
 
 ---
 
-## Summary after all rounds (2026-11-16)
+## Summary after all rounds
 
-31 numerical predictions, 30 inside the tolerance, 1 miss (3.8). The hits are not all equally meaningful:
-predictions about counts and exponents (1.5, 1.8, 3.2, 3.3, 3.7) were close; predictions about absolute times (1.3, 3.4, 3.5, 4.2, 4.3)
-were within 26 to 50 % and depend on the machine; and some tolerances (1.4, 1.11, 3.11) were wide enough to hit without much understanding.
-The one real modelling error was 3.8: ignoring that the backlog grows from zero.
-
-**Where the measurements were made.** These numbers were produced by the experiment scripts on a cloud virtual machine
-(2 logical CPUs, Intel Xeon at 2.1 GHz, Python 3.13, Linux, one thread, see `results/environment.json`), not on a laptop.
-Absolute times will differ on another machine; exponents, operation counts and quality numbers should not.
+31 numerical predictions on the laptop run: 24 inside the tolerance, 7 misses (1.1, 1.2, 1.3, 2.2, 3.5, 3.8, 4.2).
+- **Real modelling errors:** 3.8 (I forgot that the backlog starts at zero, so the heap work per alarm is log2 m - 3, not log2 m) and, in part, 1.1 (the capacity per crate of the pools is not constant, so the cell count grows with slope 2.08, not 2.0).
+- **Caused by speed and constants of the machine:** 1.2, 1.3, 2.2, 3.5 and 4.2. The speed of the laptop changed during round 1 and again in round 3 (time per DP cell 139 ns to 398 ns, heap time jumping 4.5 times for a doubling), and the time constants I used (100 ns per cell, 4 microseconds per alarm) came from a cloud machine. Predictions of counts, memory and quality
+  (1.5, 1.6, 1.8, 2.1, 3.3, 3.7, 3.10, 1.10 to 1.13) were close or exact on both machines.
+- **Weak hits:** some tolerances (1.4, 1.9, 3.4, 3.11) were wide enough to hit without much understanding; 3.4 is luck.
+- **What I would do differently:** predict ratios and operation counts, and calibrate any absolute time on the same machine and in the same power mode before predicting it; run timing rounds with the laptop connected to power.

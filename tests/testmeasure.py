@@ -1,128 +1,70 @@
-"""Deliberate fault-injection tests for modules A and D (Section 7.2).
-
-Each fault breaks one line of a COPY of src/ (the real code is never touched),
-then runs the unit-test files of A and D against that copy. The fault counts as
-'caught' when the suite fails. Run `python -m tests.testfaultinjection` for a
-table; results are also written to results/fault-injection-AD.txt.
-"""
-import os
-import re
-import shutil
-import subprocess
-import sys
-import tempfile
+"""Tests of the measurement helpers and the pooling rules used by the experiments."""
+import math
 import unittest
 
-ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-SUITE = ["tests.testinventory", "tests.testqueue"]
+from tests.helpers import ROOT  # noqa: F401  (puts the project root on sys.path)
 
-# (name, file, text to find (must occur exactly once), replacement, what kind of fault)
-FAULTS = [
-    ("A1 boundary: crate that exactly fills the truck is dropped",
-     "src/modules/inventory.py",
-     "items = [c for c in crates if c.weight <= capacity and c.value > 0]",
-     "items = [c for c in crates if c.weight < capacity and c.value > 0]",
-     "wrong boundary condition"),
-    ("A2 greedy tie rule reversed (ratio tie goes to the higher crate id)",
-     "src/modules/inventory.py",
-     "    return a.crate_id < b.crate_id\n",
-     "    return a.crate_id > b.crate_id\n",
-     "wrong tie rule"),
-    ("A3 ratio compared as a float instead of an exact fraction",
-     "src/modules/inventory.py",
-     "    left = a.value * b.weight\n    right = b.value * a.weight\n",
-     "    left = a.value / a.weight\n    right = b.value / b.weight\n",
-     "inexact comparison"),
-    ("A4 greedy fits a crate only if it leaves room (< instead of <=)",
-     "src/modules/inventory.py",
-     "if load + c.weight <= capacity:",
-     "if load + c.weight < capacity:",
-     "wrong boundary condition"),
-    ("A5 DP validation call removed (bad weights accepted)",
-     "src/modules/inventory.py",
-     "    validate_crates(crates, capacity)\n    ops = {\"items_examined\": len(crates), \"cells\": 0, \"calls\": 1}",
-     "    ops = {\"items_examined\": len(crates), \"cells\": 0, \"calls\": 1}",
-     "missing validation check"),
-    ("D1 alarm id tie rule reversed in the heap key",
-     "src/modules/emergencyqueue.py",
-     "key = (-a.priority, a.tick, a.alarm_id)",
-     "key = (-a.priority, a.tick, -a.alarm_id)",
-     "wrong tie rule"),
-    ("D2 older alarms lose to newer ones within a priority (tick descending)",
-     "src/modules/emergencyqueue.py",
-     "key = (-a.priority, a.tick, a.alarm_id)",
-     "key = (-a.priority, -a.tick, a.alarm_id)",
-     "wrong tie rule"),
-    ("D3 alarm arriving exactly at the current tick is not yet present",
-     "src/modules/emergencyqueue.py",
-     "        while i < m and arr[i].tick <= now:                    # push the arrivals of this tick",
-     "        while i < m and arr[i].tick < now:                    # push the arrivals of this tick",
-     "wrong boundary condition"),
-    ("D4 priority check removed from the validation layer of D",
-     "src/modules/emergencyqueue.py",
-     "        if not PRIORITY_MIN <= a.priority <= PRIORITY_MAX:",
-     "        if False:",
-     "missing validation check"),
-    ("D5 the scan baseline keeps the LEAST urgent alarm",
-     "src/modules/emergencyqueue.py",
-     "            if key < best_key:\n                best = j",
-     "            if key > best_key:\n                best = j",
-     "wrong comparison direction"),
-]
-
-def run_fault(fault):
-    """Return (caught, failing test names, output tail) for one fault."""
-    name, rel, old, new, _ = fault
-    tmp = tempfile.mkdtemp(prefix="lifeline_fault_")
-    try:
-        for part in ("src", "tests"):
-            shutil.copytree(os.path.join(ROOT, part), os.path.join(tmp, part),
-                            ignore=shutil.ignore_patterns("__pycache__"))
-        path = os.path.join(tmp, rel)
-        text = open(path, encoding="utf-8").read()
-        if text.count(old) != 1:
-            raise AssertionError(f"{name}: the text to break occurs {text.count(old)} times, expected 1")
-        open(path, "w", encoding="utf-8").write(text.replace(old, new))
-        proc = subprocess.run([sys.executable, "-m", "unittest"] + SUITE, cwd=tmp,
-                              capture_output=True, text=True, timeout=300)
-        out = proc.stderr
-        failing = sorted(set(re.findall(r"^(?:FAIL|ERROR): (\S+) \(", out, re.M)))
-        return proc.returncode != 0, failing, out
-    finally:
-        shutil.rmtree(tmp, ignore_errors=True)
+from experiments import mastersample as ms
+from src import measure
+from src.models import Alarm, Crate
+from src.sorting import merge_sort
 
 
-class FaultInjection(unittest.TestCase):
-    def test_every_injected_fault_is_caught_by_the_suite(self):
-        for fault in FAULTS:
-            with self.subTest(fault=fault[0]):
-                caught, failing, _ = run_fault(fault)
-                self.assertTrue(caught, f"the suite did NOT fail for: {fault[0]}")
-                self.assertTrue(failing)
+class Statistics(unittest.TestCase):
+    def test_median_and_iqr(self):
+        self.assertEqual(measure.median_iqr([1, 2, 3, 4, 5]), (3, 2))
+        self.assertEqual(measure.median_iqr([4]), (4, 0))
 
-    def test_at_least_three_faults_defined(self):
-        self.assertGreaterEqual(len(FAULTS), 3)
+    def test_loglog_fit_recovers_a_known_exponent(self):
+        xs = [100, 200, 400, 800, 1600]
+        f = measure.fit_loglog(xs, [3e-9 * x ** 2 for x in xs])
+        self.assertAlmostEqual(f["slope"], 2.0, places=9)
+        self.assertAlmostEqual(f["r2"], 1.0, places=9)
+
+    def test_semilog_fit_recovers_a_known_base(self):
+        f = measure.fit_semilog([8, 11, 14, 17, 20], [1e-7 * 2 ** n for n in (8, 11, 14, 17, 20)])
+        self.assertAlmostEqual(f["base"], 2.0, places=9)
+
+    def test_fit_needs_enough_points(self):
+        with self.assertRaises(ValueError):
+            measure.fit_loglog([1, 2], [1, 2])
+
+    def test_relative_error(self):
+        self.assertAlmostEqual(measure.relative_error(11, 10), 0.1)
 
 
-def main():
-    lines = ["Fault-injection results for modules A and D", ""]
-    all_caught = True
-    for fault in FAULTS:
-        caught, failing, _ = run_fault(fault)
-        all_caught &= caught
-        lines.append(f"{'CAUGHT' if caught else 'MISSED'}  {fault[0]}  [{fault[4]}]")
-        lines.append(f"        failing tests: {', '.join(failing[:4])}{' ...' if len(failing) > 4 else ''} ({len(failing)} in total)")
-    lines.append("")
-    lines.append("ALL FAULTS CAUGHT" if all_caught else "SOME FAULTS WERE NOT CAUGHT")
-    text = "\n".join(lines)
-    print(text)
-    os.makedirs(os.path.join(ROOT, "results"), exist_ok=True)
-    with open(os.path.join(ROOT, "results", "fault-injection-AD.txt"), "w", encoding="utf-8") as f:
-        f.write(text + "\n")
-    return 0 if all_caught else 1
+class Sorting(unittest.TestCase):
+    def test_merge_sort_orders_is_stable_and_counts(self):
+        counts = {}
+        items = [(3, "a"), (1, "b"), (3, "c"), (2, "d"), (1, "e")]
+        out = merge_sort(items, lambda x, y: x[0] < y[0], counts)
+        self.assertEqual([x[1] for x in out], ["b", "e", "d", "a", "c"])
+        self.assertGreater(counts["comparisons"], 0)
+        self.assertEqual(merge_sort([], lambda x, y: x < y, {}), [])
+
+
+class Pooling(unittest.TestCase):
+    CASES = [{"case_id": "g-00", "capacity": "30"}, {"case_id": "g-01", "capacity": "50"}]
+
+    def test_crate_pool_renumbers_and_scales_capacity(self):
+        by_case = {"g-00": [Crate(1, 0, 5, 9, 1, 1), Crate(2, 1, 6, 8, 1, 2)], "g-01": [Crate(1, 2, 7, 7, 1, 3), Crate(2, 3, 4, 6, 1, 4)]}
+        crates, cap, joined = ms.pool_crates(self.CASES, by_case, 3)
+        self.assertEqual([c.crate_id for c in crates], [1, 2, 3])
+        self.assertEqual(joined, ["g-00", "g-01"])
+        self.assertEqual(cap, (3 * 80) // 4)          # n * sum(W) / sum(crates of the joined cases)
+        with self.assertRaises(ValueError):
+            ms.pool_crates(self.CASES, by_case, 10)
+
+    def test_alarm_pool_shifts_ticks_past_the_previous_case(self):
+        by_case = {"g-00": [Alarm(1, 0, 3), Alarm(2, 4, 5)], "g-01": [Alarm(1, 0, 9), Alarm(2, 2, 1)]}
+        alarms, joined = ms.pool_alarms(self.CASES, by_case, 4)
+        self.assertEqual([(a.alarm_id, a.tick, a.priority) for a in alarms],
+                         [(1, 0, 3), (2, 4, 5), (3, 5, 9), (4, 7, 1)])
+
+    def test_sample_positions_follow_seed_mod_7(self):
+        cases = [{"case_id": str(i), "tier": "S"} for i in range(30)]
+        self.assertEqual([c["case_id"] for c in ms.sample_cases(cases, "S", 3, seed=41)], ["6", "13", "20"])
 
 
 if __name__ == "__main__":
-    if len(sys.argv) > 1 and sys.argv[1] == "unittest":
-        unittest.main(argv=sys.argv[:1])
-    sys.exit(main())
+    unittest.main()
