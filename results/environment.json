@@ -1,0 +1,13 @@
+{
+  "python": "3.13.18",
+  "implementation": "CPython",
+  "os": "Linux 6.18.44-fc-v470",
+  "cpu": "Intel(R) Xeon(R) Processor @ 2.10GHz",
+  "logical_cpus": 2,
+  "threads_used": 1,
+  "master_release": "master_release_v1",
+  "group_seed": 41,
+  "repeats": 5,
+  "warmup_runs": 1,
+  "dnf_seconds": 300.0
+}

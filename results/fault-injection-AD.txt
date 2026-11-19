@@ -1,0 +1,24 @@
+Fault-injection results for modules A and D
+
+CAUGHT  A1 boundary: crate that exactly fills the truck is dropped  [wrong boundary condition]
+        failing tests: test_changed_values_can_change_the_load, test_crate_exactly_filling_the_truck_is_allowed, test_every_trap47_case_of_the_sample, test_random_small_instances_against_pareto_reference ... (5 in total)
+CAUGHT  A2 greedy tie rule reversed (ratio tie goes to the higher crate id)  [wrong tie rule]
+        failing tests: test_every_trap47_case_of_the_sample, test_ratio_tie_goes_to_lower_crate_id (2 in total)
+CAUGHT  A3 ratio compared as a float instead of an exact fraction  [inexact comparison]
+        failing tests: test_exact_fraction_not_float (1 in total)
+CAUGHT  A4 greedy fits a crate only if it leaves room (< instead of <=)  [wrong boundary condition]
+        failing tests: test_crate_exactly_filling_the_truck_is_allowed, test_exact_fraction_not_float, test_greedy_exact_fit_after_skipping, test_ratio_tie_goes_to_lower_crate_id (4 in total)
+CAUGHT  A5 DP validation call removed (bad weights accepted)  [missing validation check]
+        failing tests: test_bad_capacity, test_bad_crates (2 in total)
+CAUGHT  D1 alarm id tie rule reversed in the heap key  [wrong tie rule]
+        failing tests: test_alarm_arriving_exactly_at_the_release_tick_competes, test_fifo_ignores_priority_and_is_worse_for_urgent_alarms, test_hand_example, test_heap_and_scan_agree_on_a_busy_stream ... (17 in total)
+CAUGHT  D2 older alarms lose to newer ones within a priority (tick descending)  [wrong tie rule]
+        failing tests: test_heap_and_scan_agree_on_a_busy_stream, test_random_streams, test_tier_s_streams_of_the_master_dataset (3 in total)
+CAUGHT  D3 alarm arriving exactly at the current tick is not yet present  [wrong boundary condition]
+        failing tests: test_alarm_arriving_exactly_at_the_release_tick_competes, test_fifo_ignores_priority_and_is_worse_for_urgent_alarms, test_hand_example, test_heap_and_scan_agree_on_a_busy_stream ... (18 in total)
+CAUGHT  D4 priority check removed from the validation layer of D  [missing validation check]
+        failing tests: test_bad_alarms (1 in total)
+CAUGHT  D5 the scan baseline keeps the LEAST urgent alarm  [wrong comparison direction]
+        failing tests: test_alarm_arriving_exactly_at_the_release_tick_competes, test_hand_example, test_heap_and_scan_agree_on_a_busy_stream, test_large_burst_at_one_tick ... (12 in total)
+
+ALL FAULTS CAUGHT
