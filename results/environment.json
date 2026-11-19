@@ -1,9 +1,9 @@
 {
-  "python": "3.13.18",
+  "python": "3.13.7",
   "implementation": "CPython",
-  "os": "Linux 6.18.44-fc-v470",
-  "cpu": "Intel(R) Xeon(R) Processor @ 2.10GHz",
-  "logical_cpus": 2,
+  "os": "Windows 11",
+  "cpu": "Intel64 Family 6 Model 154 Stepping 4, GenuineIntel",
+  "logical_cpus": 12,
   "threads_used": 1,
   "master_release": "master_release_v1",
   "group_seed": 41,
