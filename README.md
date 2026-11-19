@@ -121,7 +121,8 @@ Preprocessing is counted separately: module D first checks in one pass that tick
 - A run that passes 300 s is a DNF: the algorithm receives a deadline and raises `TimeBudgetExceeded`, and the row gets status DNF.
 - Growth claims use a least-squares fit on at least 5 sizes (log-log for polynomial, semi-log for exponential) with the 95 % interval from the t distribution, R^2 and, in `results/predictions-vs-measurements-AD.md`, the relative error between prediction and measurement.
 - **Hardware and software of the numbers in `results/`:** `results/environment.json`: Windows 11, an Intel laptop CPU (family 6, model 154, 12 logical processors), CPython 3.13.7, one thread, 5 timed runs after 1 warm-up.
-  The numbers were measured on this one laptop. **The speed of the laptop changed during the experiments** (time per DP cell was 139 ns for 1600 crates in one experiment and 317 to 398 ns later, with a very wide IQR at 3200 crates), so absolute times and some fitted slopes of
+  The numbers were measured on this one laptop. **The speed of the laptop changed during the first full run** (time per DP cell between 139 and 398 ns). Rounds 1 and 3 were therefore repeated with the charger connected and the power mode on best performance (about 85 ns per cell for 200 to 3200 crates);
+  rounds 2 and 4 come from the first run and have not been repeated. One long run (6400 crates) still changed speed during its five timed runs (IQR 8.8 s). Absolute times and some fitted slopes of
   times are distorted, while operation counts, memory and quality numbers are exact and repeatable. Details and the list of affected predictions are in `prediction_log.md`. Another machine gives other absolute times.
 - Prediction log: `prediction_log.md` (entries written and committed before each round; "After the run" notes written afterwards).
 
@@ -131,12 +132,12 @@ Full tables: `results/comparison-AD.md`; fits: `results/fits-AD.md`; plots with 
 
 | Module | Experiment | Result |
 |---|---|---|
-| A | A-scale-n, 200 to 6400 crates | counted cells grow with slope 2.08 +- 0.12; DP time slope 2.26 +- 0.36 (inflated by the change of machine speed); 64.2 s at 6400 crates (161 million cells); greedy 93 ms; time against cells has slope 1.09 +- 0.16 |
-| A | A-scale-W, n = 1600 | DP slope 0.995 +- 0.037 in W (cells: 1.005); greedy operation count exactly independent of W (time slope 0.08, R^2 0.57: no clear trend) |
-| A | A-small-n, 8 to 20 crates | brute force doubles per crate (base 2.02, interval 1.94 to 2.11), DP is 878 times faster than brute force at n = 20 (0.67 ms against 585 ms) |
+| A | A-scale-n, 200 to 6400 crates | counted cells grow with slope 2.08 +- 0.12; DP time slope 2.22 +- 0.28 (2.05 +- 0.21 without the 6400 point, whose run changed speed); about 85 ns per cell for 200 to 3200 crates; 31.3 s at 6400 crates (161 million cells; IQR 8.8 s); greedy 40 ms; time against cells has slope 1.07 +- 0.14 |
+| A | A-scale-W, n = 1600 | DP time slope 0.86 +- 0.27 in W (cells: 1.005; the first point, W = 522, is out of line at 195 ns per cell, the others cost 85 to 99 ns); greedy operation count exactly independent of W (time slope -0.08, R^2 0.07: no clear trend) |
+| A | A-small-n, 8 to 20 crates | brute force doubles per crate (base 2.02, interval 1.94 to 2.11), DP is 878 times faster than brute force at n = 20 (0.67 ms against 585 ms; this round is from the first, slower run) |
 | A | quality | DP equals the claim in 20 of 20 tier S cases; greedy is optimal in 7 of 20 tier S and 7 of 20 tier M cases, and loses 44 % on the trap-47 cases (mean greedy / DP 0.56) but only 0.2 % on tier M and 0.01 % on tier L |
-| D | D-scale-m, 250 to 64000 alarms | heap slope 1.26 +- 0.11 (operations: 1.16), scan slope 2.03 +- 0.16 (comparisons: 1.99); scan / heap time 1.5 at 250, 63 at 16000, 50 at 64000 |
-| D | D-dnf, 256000 alarms | heap 2.40 s; scan DNF (more than 300 s; plain quadratic growth from 51.9 s at 64000 alarms gives about 830 s, the fitted line about 1190 s) |
+| D | D-scale-m, 250 to 64000 alarms | heap slope 1.12 +- 0.11 (operations: 1.16), scan slope 1.96 +- 0.05 (comparisons: 1.99); scan / heap time 1.2 at 250, 29 at 16000, 113 at 64000 (heap 0.26 s, scan 29.8 s) |
+| D | D-dnf, 256000 alarms | scan DNF (more than 300 s; plain quadratic growth from 29.8 s at 64000 alarms gives about 480 s, the fitted line about 390 s); heap 2.40 s, but this round is from the first, slower run and a repeat is expected to give about 1.2 s |
 | D | quality | the mean wait of all alarms is the same under urgency order and first-come-first-served; priority 9 and 10 alarms wait 1.5 ticks (urgency) against 639 (FIFO) on tier L |
 
 ## 9. Recommendation for the lead designer (Problem N)
@@ -146,17 +147,17 @@ Full tables: `results/comparison-AD.md`; fits: `results/fits-AD.md`; plots with 
 - **Ship:** the dynamic programme over the capacity.
 - **Evidence (experiments A-scale-n and the quality table):** it reproduces the exhaustive-search optimum in 20 of 20 tier S cases; the greedy rule loses 44 % on the trap-47 crates
   (greedy / DP between 0.55 and 0.59 in 10 of 10 cases) and up to 42 % in some tier S cases. Cost for the sizes of the data: a tier L case (up to 1500 crates, W up to about 10,000) is at most about 15 million cells,
-  roughly 2 to 5 s here (1.5 s measured for 10.6 million cells: 1600 crates, W = 6637; the later runs on this laptop cost two to three times more per cell).
-- **Clash between theory and practice, and what we chose:** on tiers M and L the greedy rule is within 0.2 % and 0.01 % of the optimum in 0.1 % to 0.6 % of the time (sizes 1600 to 6400 crates). We still ship the DP because a daily
+  roughly 1.3 s here (0.88 s measured for 10.6 million cells: 1600 crates, W = 6637, at about 83 ns per cell).
+- **Clash between theory and practice, and what we chose:** on tiers M and L the greedy rule is within 0.2 % and 0.01 % of the optimum in 0.1 % to 0.5 % of the time (sizes 1600 to 6400 crates). We still ship the DP because a daily
   truck load is decided once, the DP costs seconds, and a missed 40 % on a hostile case (trap 47) is not acceptable for lives; the greedy rule is the fallback when the DP is too slow.
-- **Assumption:** weights are small whole numbers and the capacity is moderate, so that `n * W` stays below about 5 x 10^7 cells (about 7 to 20 s here, depending on the speed of the machine at that moment) and the `n * W` byte table fits in memory (about 160 MB at 6400 crates and W = 25,000, computed as n * W, not measured).
+- **Assumption:** weights are small whole numbers and the capacity is moderate, so that `n * W` stays below about 5 x 10^7 cells (about 4 to 10 s here at 85 to 190 ns per cell, depending on the speed of the machine at that moment) and the `n * W` byte table fits in memory (about 160 MB at 6400 crates and W = 25,000, computed as n * W, not measured).
 - **It would be wrong when** the capacity is measured in a much finer unit (grams instead of kilograms multiplies W by 1000) or the fleet is much larger. **Measurement that tells:** compute `items * min(W, total weight)` before the run;
   above about 5 x 10^7 (or when the table would not fit in memory), switch to the greedy rule and report its gap, or implement branch and bound.
 
 ### Module D - emergency queue
 
 - **Ship:** the binary heap.
-- **Evidence (experiments D-scale-m and D-dnf):** the heap is 50 times faster than the scan at 64,000 alarms (1.04 s against 51.9 s) and finishes 256,000 alarms in 2.4 s, where the scan does not finish in 300 s.
+- **Evidence (experiments D-scale-m and D-dnf):** the heap is 113 times faster than the scan at 64,000 alarms (0.26 s against 29.8 s) and finishes 256,000 alarms in 2.4 s (first, slower run), where the scan does not finish in 300 s.
   Under the urgency order, alarms of priority 9 and 10 wait 1.5 ticks on tier L, against 639 under first-come-first-served, with the same mean wait for all alarms.
 - **Assumption:** more alarms arrive than can be answered (1.2 to 1.8 per tick against one release per tick), so the backlog grows with m (a third of m in our data) and the scan has to look at thousands of alarms per release.
 - **It would be wrong when** the alarm rate stays below one per tick: then the backlog stays small and a scan of a few dozen alarms is as fast as the heap (they were close at 250 alarms: ratio 1.5). With only ten priority levels a
@@ -176,8 +177,8 @@ Full tables: `results/comparison-AD.md`; fits: `results/fits-AD.md`; plots with 
 
 ## 10. Known limitations
 
-- Pure Python: a DP cell costs 139 to 398 ns on our laptop, so module A is slow compared with compiled code; sizes beyond 6400 crates were not run.
-- **Timing noise.** The laptop changed speed during the run of round 1 (see section 7), so timing-based statements (slopes of time, absolute times, the scan-to-heap ratio between 16,000 and 64,000 alarms) are less reliable than the operation counts. A repeat with the charger connected and the power mode set to best performance is the way to improve them.
+- Pure Python: a DP cell costs about 85 ns on our laptop in the good state (up to 400 ns in the disturbed first run), so module A is slow compared with compiled code; sizes beyond 6400 crates were not run.
+- **Timing noise.** The first full run changed speed on the laptop; rounds 1 and 3 were repeated with the charger connected and best performance, and are mostly clean (about 85 ns per DP cell). The 6400-crate run (IQR 8.8 s) and the W = 522 point are still disturbed, and rounds 2 and 4 (brute force at 8 to 20 crates, the 256,000-alarm run) come from the first, slower run, so their absolute times are less reliable than the operation counts, memory and quality numbers.
 - The DP keeps one byte per (crate, capacity) cell; memory was not measured above 8 s per run (n = 1600 is the largest size with a measurement: 1.08 times `n * W` bytes).
 - Module D assumes one release per tick and no preemption; values of day events enter only through the data given to the module.
 - The tie rule among equal-value loads of module A is documented but arbitrary, so another correct implementation may return a different set with the same value.

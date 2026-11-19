@@ -1,28 +1,4 @@
 module,experiment,algorithm,instance,size,size2,time_s,time_iqr_s,ops,mem_bytes,status,note
-A,A-scale-n,dp,"pool L from 2-40, 1 cases",200,681,0.0269069,0.00448210002,134258,221805,OK,cells=134258; items=200; value=6533
-A,A-scale-n,greedy,"pool L from 2-40, 1 cases",200,681,0.000773074993,0.000502374984,2921,10528,OK,comparisons=1321; moves=1600; value=6528; batch=8
-A,A-scale-n,dp,"pool L from 2-40, 1 cases",400,1363,0.0980388001,0.00954180013,541281,716727,OK,cells=541281; items=400; value=13109
-A,A-scale-n,greedy,"pool L from 2-40, 1 cases",400,1363,0.00157810001,0.000172766643,6643,41248,OK,comparisons=3043; moves=3600; value=13108; batch=6
-A,A-scale-n,dp,"pool L from 2-40, 2 cases",800,2344,0.2702386,0.00307189999,1867539,2175684,OK,cells=1867539; items=800; value=25158
-A,A-scale-n,greedy,"pool L from 2-40, 2 cases",800,2344,0.0031341,0.000235799933,14879,41248,OK,comparisons=6879; moves=8000; value=25152; batch=2
-A,A-scale-n,dp,"pool L from 2-40, 3 cases",1600,6637,1.4781843,0.0124855001,10604071,11411664,OK,cells=10604071; items=1600; value=61370
-A,A-scale-n,greedy,"pool L from 2-40, 3 cases",1600,6637,0.00755630003,0.000769100036,32979,164128,OK,comparisons=15379; moves=17600; value=61365
-A,A-scale-n,dp,"pool L from 2-40, 6 cases",3200,13608,11.0183382,8.7604143,43515074,,OK,cells=43515074; items=3200; value=124807; memory not measured (tracemalloc too slow at this size)
-A,A-scale-n,greedy,"pool L from 2-40, 6 cases",3200,13608,0.0453185999,0.0116328,72399,164128,OK,comparisons=33999; moves=38400; value=124798
-A,A-scale-n,dp,"pool L from 2-40, 10 cases",6400,25205,64.2061175,1.0689041,161254146,,OK,cells=161254146; items=6400; value=243973; memory not measured (tracemalloc too slow at this size)
-A,A-scale-n,greedy,"pool L from 2-40, 10 cases",6400,25205,0.0932387999,0.00622749992,157465,655648,OK,comparisons=74265; moves=83200; value=243969
-A,A-scale-W,dp,"pool L from 2-40, first 1600 crates, total weight 16729",1600,522,0.287462,0.0071554,820071,1008020,OK,cells=820071; items=1600; value=15626
-A,A-scale-W,greedy,"pool L from 2-40, first 1600 crates, total weight 16729",1600,522,0.0173461,0.00207160006,32979,164128,OK,comparisons=15379; moves=17600; value=15626
-A,A-scale-W,dp,"pool L from 2-40, first 1600 crates, total weight 16729",1600,1045,0.5585613,0.0111738,1656871,1896290,OK,cells=1656871; items=1600; value=22812
-A,A-scale-W,greedy,"pool L from 2-40, first 1600 crates, total weight 16729",1600,1045,0.0168758,0.00138800009,32979,164128,OK,comparisons=15379; moves=17600; value=22811
-A,A-scale-W,dp,"pool L from 2-40, first 1600 crates, total weight 16729",1600,2091,1.0721105,0.0231879,3330471,3675422,OK,cells=3330471; items=1600; value=33060
-A,A-scale-W,greedy,"pool L from 2-40, first 1600 crates, total weight 16729",1600,2091,0.0165427999,0.00103560009,32979,164128,OK,comparisons=15379; moves=17600; value=33051
-A,A-scale-W,dp,"pool L from 2-40, first 1600 crates, total weight 16729",1600,4182,2.115527,0.0369343001,6676071,7236156,OK,cells=6676071; items=1600; value=48087
-A,A-scale-W,greedy,"pool L from 2-40, first 1600 crates, total weight 16729",1600,4182,0.0167805001,0.000461700023,32979,164128,OK,comparisons=15379; moves=17600; value=48086
-A,A-scale-W,dp,"pool L from 2-40, first 1600 crates, total weight 16729",1600,8364,4.3436563,0.4280627,13367271,14335236,OK,cells=13367271; items=1600; value=69338
-A,A-scale-W,greedy,"pool L from 2-40, first 1600 crates, total weight 16729",1600,8364,0.0191285,0.000427999883,32979,164128,OK,comparisons=15379; moves=17600; value=69330
-A,A-scale-W,dp,"pool L from 2-40, first 1600 crates, total weight 16729",1600,16729,9.158412,0.0602267,26751271,,OK,cells=26751271; items=1600; value=90056; memory not measured (tracemalloc too slow at this size)
-A,A-scale-W,greedy,"pool L from 2-40, first 1600 crates, total weight 16729",1600,16729,0.0236457001,0.00328499998,32979,164128,OK,comparisons=15379; moves=17600; value=90056
 A,A-small-n,dp,"pool S from 1-06, 1 cases",8,34,8.93782598e-05,3.17681166e-05,205,3712,OK,cells=205; items=8; value=338; batch=69
 A,A-small-n,greedy,"pool S from 1-06, 1 cases",8,34,3.45631155e-05,1.34426223e-05,38,1268,OK,comparisons=14; moves=24; value=338; batch=122
 A,A-small-n,brute,"pool S from 1-06, 1 cases",8,34,0.000115050003,3.68187466e-05,256,1904,OK,subsets=256; value=338; batch=16
@@ -38,23 +14,47 @@ A,A-small-n,brute,"pool S from 1-06, 1 cases",17,73,0.0735708999,0.00173170003,1
 A,A-small-n,dp,"pool S from 1-06, 2 cases",20,73,0.000666368753,0.0001251875,1297,10822,OK,cells=1297; items=20; value=769; batch=16
 A,A-small-n,greedy,"pool S from 1-06, 2 cases",20,73,0.000144084746,2.40474572e-05,168,2848,OK,comparisons=68; moves=100; value=769; batch=59
 A,A-small-n,brute,"pool S from 1-06, 2 cases",20,73,0.5847559,0.0165252001,1048576,4408,OK,subsets=1048576; value=769
-D,D-scale-m,heap,"pool L from 2-40, 1 cases",250,,0.00085781667,7.41333254e-05,4927,38468,OK,comparisons=2803; moves=2124; pre_comparisons=249; pre_moves=0; max_backlog=84; batch=12
-D,D-scale-m,scan,"pool L from 2-40, 1 cases",250,,0.0012997375,0.000245525007,10958,38412,OK,comparisons=10458; moves=500; pre_comparisons=249; pre_moves=0; max_backlog=84; batch=8
-D,D-scale-m,heap,"pool L from 2-40, 1 cases",500,,0.00223596666,0.00014826667,11989,85288,OK,comparisons=6909; moves=5080; pre_comparisons=499; pre_moves=0; max_backlog=168; batch=6
-D,D-scale-m,scan,"pool L from 2-40, 1 cases",500,,0.00357850001,0.000624650042,42750,85288,OK,comparisons=41750; moves=1000; pre_comparisons=499; pre_moves=0; max_backlog=168; batch=2
-D,D-scale-m,heap,"pool L from 2-40, 1 cases",1000,,0.00450076667,0.00037293334,28046,182124,OK,comparisons=16364; moves=11682; pre_comparisons=999; pre_moves=0; max_backlog=334; batch=3
-D,D-scale-m,scan,"pool L from 2-40, 1 cases",1000,,0.0135853001,0.00131069997,168833,182124,OK,comparisons=166833; moves=2000; pre_comparisons=999; pre_moves=0; max_backlog=334
-D,D-scale-m,heap,"pool L from 2-40, 1 cases",2000,,0.0104125,0.000993499998,64560,372004,OK,comparisons=37941; moves=26619; pre_comparisons=1999; pre_moves=0; max_backlog=668
-D,D-scale-m,scan,"pool L from 2-40, 1 cases",2000,,0.0498553,0.000391099951,671000,372004,OK,comparisons=667000; moves=4000; pre_comparisons=1999; pre_moves=0; max_backlog=668
-D,D-scale-m,heap,"pool L from 2-40, 2 cases",4000,,0.0199753001,0.00326680008,145693,756620,OK,comparisons=86164; moves=59529; pre_comparisons=3999; pre_moves=0; max_backlog=1335
-D,D-scale-m,scan,"pool L from 2-40, 2 cases",4000,,0.1893628,0.00806100003,2675914,756588,OK,comparisons=2667914; moves=8000; pre_comparisons=3999; pre_moves=0; max_backlog=1335
-D,D-scale-m,heap,"pool L from 2-40, 4 cases",8000,,0.047981,0.00726300001,326229,1480132,OK,comparisons=193805; moves=132424; pre_comparisons=7999; pre_moves=0; max_backlog=2668
-D,D-scale-m,scan,"pool L from 2-40, 4 cases",8000,,0.8046783,0.0380462001,10686639,1480068,OK,comparisons=10670639; moves=16000; pre_comparisons=7999; pre_moves=0; max_backlog=2668
-D,D-scale-m,heap,"pool L from 2-40, 8 cases",16000,,0.107569,0.00524279999,698004,2886444,OK,comparisons=418908; moves=279096; pre_comparisons=15999; pre_moves=0; max_backlog=5195
-D,D-scale-m,scan,"pool L from 2-40, 8 cases",16000,,6.8044884,0.115322,42623454,2886476,OK,comparisons=42591454; moves=32000; pre_comparisons=15999; pre_moves=0; max_backlog=5195
-D,D-scale-m,heap,"pool L from 2-40, 14 cases",32000,,0.4811761,0.00372080004,1467092,5871044,OK,comparisons=891113; moves=575979; pre_comparisons=31999; pre_moves=0; max_backlog=11060
-D,D-scale-m,scan,"pool L from 2-40, 14 cases",32000,,27.5982638,12.4297933,171275244,,OK,comparisons=171211244; moves=64000; pre_comparisons=31999; pre_moves=0; max_backlog=11060; memory not measured (tracemalloc too slow at this size)
-D,D-scale-m,heap,"pool L from 2-40, 23 cases",64000,,1.0386245,0.00737749995,3234885,11553740,OK,comparisons=1962764; moves=1272121; pre_comparisons=63999; pre_moves=0; max_backlog=21200
-D,D-scale-m,scan,"pool L from 2-40, 23 cases",64000,,51.9290208,1.4022794,679960508,,OK,comparisons=679832508; moves=128000; pre_comparisons=63999; pre_moves=0; max_backlog=21200; memory not measured (tracemalloc too slow at this size)
 D,D-dnf,heap,"pool L from 2-40, 80 cases",256000,,2.4000065,0.1386502,14821064,45588656,OK,comparisons=9058925; moves=5762139; pre_comparisons=255999; pre_moves=0; max_backlog=86775
 D,D-dnf,scan,"pool L from 2-40, 80 cases",256000,,,,,,DNF,single run passed 300 s; no time recorded
+A,A-scale-n,dp,"pool L from 2-40, 1 cases",200,681,0.0126926,0.000223299954,134258,221805,OK,cells=134258; items=200; value=6533
+A,A-scale-n,greedy,"pool L from 2-40, 1 cases",200,681,0.000452650001,8.00849986e-05,2921,10528,OK,comparisons=1321; moves=1600; value=6528; batch=20
+A,A-scale-n,dp,"pool L from 2-40, 1 cases",400,1363,0.0480701999,0.00143419998,541281,716727,OK,cells=541281; items=400; value=13109
+A,A-scale-n,greedy,"pool L from 2-40, 1 cases",400,1363,0.000931829994,0.000107960007,6643,41248,OK,comparisons=3043; moves=3600; value=13108; batch=10
+A,A-scale-n,dp,"pool L from 2-40, 2 cases",800,2344,0.1617933,0.00923560001,1867539,2175684,OK,cells=1867539; items=800; value=25158
+A,A-scale-n,greedy,"pool L from 2-40, 2 cases",800,2344,0.0031404,0.00052639998,14879,41248,OK,comparisons=6879; moves=8000; value=25152; batch=5
+A,A-scale-n,dp,"pool L from 2-40, 3 cases",1600,6637,0.8828149,0.0480259,10604071,11411664,OK,cells=10604071; items=1600; value=61370
+A,A-scale-n,greedy,"pool L from 2-40, 3 cases",1600,6637,0.00450633334,0.000353800016,32979,164128,OK,comparisons=15379; moves=17600; value=61365; batch=3
+A,A-scale-n,dp,"pool L from 2-40, 6 cases",3200,13608,3.6451684,0.020728,43515074,45195686,OK,cells=43515074; items=3200; value=124807
+A,A-scale-n,greedy,"pool L from 2-40, 6 cases",3200,13608,0.0088909,0.000313349999,72399,164128,OK,comparisons=33999; moves=38400; value=124798; batch=2
+A,A-scale-n,dp,"pool L from 2-40, 10 cases",6400,25205,31.2784179,8.7870778,161254146,,OK,cells=161254146; items=6400; value=243973; memory not measured (tracemalloc too slow at this size)
+A,A-scale-n,greedy,"pool L from 2-40, 10 cases",6400,25205,0.0402210001,0.00150770007,157465,655648,OK,comparisons=74265; moves=83200; value=243969
+A,A-scale-W,dp,"pool L from 2-40, first 1600 crates, total weight 16729",1600,522,0.1597523,0.00771519996,820071,1008020,OK,cells=820071; items=1600; value=15626
+A,A-scale-W,greedy,"pool L from 2-40, first 1600 crates, total weight 16729",1600,522,0.00968439999,0.00119555002,32979,164128,OK,comparisons=15379; moves=17600; value=15626; batch=2
+A,A-scale-W,dp,"pool L from 2-40, first 1600 crates, total weight 16729",1600,1045,0.1441387,0.00832900009,1656871,1896290,OK,cells=1656871; items=1600; value=22812
+A,A-scale-W,greedy,"pool L from 2-40, first 1600 crates, total weight 16729",1600,1045,0.00494873334,0.000511966646,32979,164128,OK,comparisons=15379; moves=17600; value=22811; batch=3
+A,A-scale-W,dp,"pool L from 2-40, first 1600 crates, total weight 16729",1600,2091,0.3304645,0.0149558,3330471,3675422,OK,cells=3330471; items=1600; value=33060
+A,A-scale-W,greedy,"pool L from 2-40, first 1600 crates, total weight 16729",1600,2091,0.00407723334,0.000238066656,32979,164128,OK,comparisons=15379; moves=17600; value=33051; batch=3
+A,A-scale-W,dp,"pool L from 2-40, first 1600 crates, total weight 16729",1600,4182,0.5909029,0.0539843,6676071,7236156,OK,cells=6676071; items=1600; value=48087
+A,A-scale-W,greedy,"pool L from 2-40, first 1600 crates, total weight 16729",1600,4182,0.00458909998,0.000209633339,32979,164128,OK,comparisons=15379; moves=17600; value=48086; batch=3
+A,A-scale-W,dp,"pool L from 2-40, first 1600 crates, total weight 16729",1600,8364,1.1334451,0.1650144,13367271,14335236,OK,cells=13367271; items=1600; value=69338
+A,A-scale-W,greedy,"pool L from 2-40, first 1600 crates, total weight 16729",1600,8364,0.00982035004,0.00151325,32979,164128,OK,comparisons=15379; moves=17600; value=69330; batch=2
+A,A-scale-W,dp,"pool L from 2-40, first 1600 crates, total weight 16729",1600,16729,2.6594587,0.2395822,26751271,28563200,OK,cells=26751271; items=1600; value=90056
+A,A-scale-W,greedy,"pool L from 2-40, first 1600 crates, total weight 16729",1600,16729,0.00418570001,6.00666584e-05,32979,164128,OK,comparisons=15379; moves=17600; value=90056; batch=3
+D,D-scale-m,heap,"pool L from 2-40, 1 cases",250,,0.000513423082,3.55307622e-05,4927,38468,OK,comparisons=2803; moves=2124; pre_comparisons=249; pre_moves=0; max_backlog=84; batch=13
+D,D-scale-m,scan,"pool L from 2-40, 1 cases",250,,0.000599633336,8.79799947e-05,10958,38412,OK,comparisons=10458; moves=500; pre_comparisons=249; pre_moves=0; max_backlog=84; batch=15
+D,D-scale-m,heap,"pool L from 2-40, 1 cases",500,,0.00114364445,4.04777756e-05,11989,85288,OK,comparisons=6909; moves=5080; pre_comparisons=499; pre_moves=0; max_backlog=168; batch=9
+D,D-scale-m,scan,"pool L from 2-40, 1 cases",500,,0.00190484999,6.61500186e-05,42750,85288,OK,comparisons=41750; moves=1000; pre_comparisons=499; pre_moves=0; max_backlog=168; batch=6
+D,D-scale-m,heap,"pool L from 2-40, 1 cases",1000,,0.00250175002,0.000137725001,28046,182124,OK,comparisons=16364; moves=11682; pre_comparisons=999; pre_moves=0; max_backlog=334; batch=4
+D,D-scale-m,scan,"pool L from 2-40, 1 cases",1000,,0.00677080004,0.000423350022,168833,182124,OK,comparisons=166833; moves=2000; pre_comparisons=999; pre_moves=0; max_backlog=334; batch=2
+D,D-scale-m,heap,"pool L from 2-40, 1 cases",2000,,0.00559486666,0.000312966644,64560,372004,OK,comparisons=37941; moves=26619; pre_comparisons=1999; pre_moves=0; max_backlog=668; batch=3
+D,D-scale-m,scan,"pool L from 2-40, 1 cases",2000,,0.0261585,0.00118699996,671000,372004,OK,comparisons=667000; moves=4000; pre_comparisons=1999; pre_moves=0; max_backlog=668
+D,D-scale-m,heap,"pool L from 2-40, 2 cases",4000,,0.024021,0.006498,145693,756620,OK,comparisons=86164; moves=59529; pre_comparisons=3999; pre_moves=0; max_backlog=1335
+D,D-scale-m,scan,"pool L from 2-40, 2 cases",4000,,0.0980322,0.00170200004,2675914,756588,OK,comparisons=2667914; moves=8000; pre_comparisons=3999; pre_moves=0; max_backlog=1335
+D,D-scale-m,heap,"pool L from 2-40, 4 cases",8000,,0.0253382999,0.00104440004,326229,1480132,OK,comparisons=193805; moves=132424; pre_comparisons=7999; pre_moves=0; max_backlog=2668
+D,D-scale-m,scan,"pool L from 2-40, 4 cases",8000,,0.4100527,0.0128497999,10686639,1480068,OK,comparisons=10670639; moves=16000; pre_comparisons=7999; pre_moves=0; max_backlog=2668
+D,D-scale-m,heap,"pool L from 2-40, 8 cases",16000,,0.0578143001,0.00106879999,698004,2886444,OK,comparisons=418908; moves=279096; pre_comparisons=15999; pre_moves=0; max_backlog=5195
+D,D-scale-m,scan,"pool L from 2-40, 8 cases",16000,,1.6674986,0.0273844,42623454,2886476,OK,comparisons=42591454; moves=32000; pre_comparisons=15999; pre_moves=0; max_backlog=5195
+D,D-scale-m,heap,"pool L from 2-40, 14 cases",32000,,0.120419,0.00371150009,1467092,5871044,OK,comparisons=891113; moves=575979; pre_comparisons=31999; pre_moves=0; max_backlog=11060
+D,D-scale-m,scan,"pool L from 2-40, 14 cases",32000,,6.8177167,0.0513517001,171275244,5871012,OK,comparisons=171211244; moves=64000; pre_comparisons=31999; pre_moves=0; max_backlog=11060
+D,D-scale-m,heap,"pool L from 2-40, 23 cases",64000,,0.2649174,0.0149438001,3234885,11553740,OK,comparisons=1962764; moves=1272121; pre_comparisons=63999; pre_moves=0; max_backlog=21200
+D,D-scale-m,scan,"pool L from 2-40, 23 cases",64000,,29.8395153,0.0338255999,679960508,,OK,comparisons=679832508; moves=128000; pre_comparisons=63999; pre_moves=0; max_backlog=21200; memory not measured (tracemalloc too slow at this size)
