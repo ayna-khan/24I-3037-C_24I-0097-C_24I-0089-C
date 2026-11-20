@@ -4,9 +4,9 @@ Each entry: (id, round, what is measured, point prediction, lowest and highest v
 that still counts as a hit, function that extracts the measured value).
 `python experiments/predictionsG.py` compares them with results/ and prints a table
 (HIT / MISS and the relative error |prediction - measurement| / measurement).
-The same numbers, with the reasoning, are in predlogG.md (same ids). The numbers
+The same numbers, with the reasoning, are in prediction_log.md, section "Module G" (same ids). The numbers
 here must not be changed after a run: a wrong prediction stays a MISS and is explained
-in the "After the run" part of predlogG.md.
+in the "After the run" part of its entry in prediction_log.md.
 """
 import csv
 import os

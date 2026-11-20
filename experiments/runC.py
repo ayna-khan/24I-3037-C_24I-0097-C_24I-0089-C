@@ -3,7 +3,7 @@
     python experiments/runC.py --master PATH/TO/master_release_v1 --round 1
     python experiments/runC.py --master PATH/TO/master_release_v1 --round all
 
-Rounds (each has an entry in predlogC.md that is written BEFORE the round is run):
+Rounds (each has an entry in prediction_log.md (section "Module C") that is written BEFORE the round is run):
     1  growth in n of the greedy rule (count), the DP with binary search and the O(n^2) DP (value), n = 47 ... 3000
     2  quality of the greedy rule against the DP on 62 sampled master-data cases (count and value), and the claims of tier S
     3  small inputs (n = 8 ... 20): DP, O(n^2) DP and greedy against brute force

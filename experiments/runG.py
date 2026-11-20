@@ -3,7 +3,7 @@
     python experiments/runG.py --master PATH/TO/MASTER --round 1
     python experiments/runG.py --master PATH/TO/MASTER --round all
 
-Rounds (each has an entry in predlogG.md that is written BEFORE the round is run):
+Rounds (each has an entry in prediction_log.md (section "Module G") that is written BEFORE the round is run):
     1  growth in n of the chain DP and the memoised recursion, n = 10 ... 640 matrices          (about 10 minutes: the recursion at n = 640)
     2  growth in L of the drum DP, the memoised recursion and the greedy cut, L = 63 ... 2000
     3  quality: greedy cut against DP on 62 sampled cases, best bracketing against left to right
