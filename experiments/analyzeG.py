@@ -1,0 +1,283 @@
+"""Fits, comparison tables and plots for module G, all from results/.
+
+    python experiments/analyzeG.py            (after runG.py)
+
+Writes results/fits-G.csv, results/fits-G.md, results/comparison-G.md and the plots
+results/plots/G-*.png. Every plot has labelled axes with units, a legend and a caption
+(printed under the plot and repeated in results/plots/captions-G.md; the captions of the
+other modules are not touched).
+"""
+import csv
+import os
+import sys
+import textwrap
+
+import matplotlib
+matplotlib.use("Agg")
+import matplotlib.pyplot as plt  # noqa: E402
+
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.insert(0, ROOT)
+from src import measure  # noqa: E402
+
+NAME = {"dp": "G: bottom-up DP (ours)", "memo": "G: memoised recursion (ours)", "greedy": "G: greedy cut by price per length (ours)",
+        "brute": "G: brute force (ours)"}
+STYLE = {"dp": ("tab:blue", "o"), "memo": ("tab:green", "D"), "greedy": ("tab:orange", "s"), "brute": ("tab:red", "^")}
+
+THEORY = {("G-chain-n", "dp"): "n^3: slope slightly below 3 (quadratic parts at small n)", ("G-chain-n", "memo"): "n^3: slope slightly below 3",
+          ("G-drum-L", "dp"): "L^2: slope slightly below 2", ("G-drum-L", "memo"): "L^2: slope slightly below 2",
+          ("G-drum-L", "greedy"): "L log L: slope slightly above 1",
+          ("G-small-chain", "brute"): "Catalan numbers: about 3.2 per extra matrix between 4 and 12 (tends to 4)",
+          ("G-small-drum", "brute"): "2^(L-1): base 2 per unit of length"}
+SEMILOG = {"G-small-chain", "G-small-drum"}
+
+
+def load(folder):
+    with open(os.path.join(folder, "results.csv"), newline="", encoding="utf-8") as f:
+        return [r for r in csv.DictReader(f) if r["module"] == "G"]
+
+
+def series(rows, exp, alg, field="time_s"):
+    pts = [(float(r["size"]), float(r[field]), float(r["time_iqr_s"] or 0)) for r in rows
+           if (r["experiment"], r["algorithm"]) == (exp, alg) and r["status"] == "OK" and r[field] != ""]
+    return sorted(pts)
+
+
+def fits(rows):
+    out = []
+    for (exp, alg), theory in THEORY.items():
+        for field, label in (("time_s", "time"), ("ops", "operations")):
+            pts = [p for p in series(rows, exp, alg, field) if p[1] > 0]
+            if len(pts) < 5:
+                continue
+            xs, ys = [p[0] for p in pts], [p[1] for p in pts]
+            if exp in SEMILOG:
+                f = measure.fit_semilog(xs, ys)
+                out.append(dict(experiment=exp, algorithm=alg, quantity=label, model="semi-log", sizes=len(xs),
+                                estimate=f"{f['base']:.3f}", ci95=f"{f['base_ci95'][0]:.3f} to {f['base_ci95'][1]:.3f}",
+                                r2=f"{f['r2']:.4f}", theory=theory))
+            else:
+                f = measure.fit_loglog(xs, ys)
+                out.append(dict(experiment=exp, algorithm=alg, quantity=label, model="log-log", sizes=len(xs),
+                                estimate=f"{f['slope']:.3f}", ci95=f"+-{f['ci95']:.3f}", r2=f"{f['r2']:.4f}", theory=theory))
+    for exp, alg in (("G-chain-n", "dp"), ("G-chain-n", "memo"), ("G-drum-L", "dp"), ("G-drum-L", "memo"), ("G-drum-L", "greedy")):
+        pts = sorted((float(r["ops"]), float(r["time_s"])) for r in rows
+                     if (r["experiment"], r["algorithm"]) == (exp, alg) and r["status"] == "OK" and r["ops"] != "")
+        pts = [p for p in pts if p[0] > 0 and p[1] > 0]
+        if len(pts) >= 5:
+            f = measure.fit_loglog([p[0] for p in pts], [p[1] for p in pts])
+            out.append(dict(experiment=exp, algorithm=alg, quantity="time against ops", model="log-log", sizes=len(pts),
+                            estimate=f"{f['slope']:.3f}", ci95=f"+-{f['ci95']:.3f}", r2=f"{f['r2']:.4f}",
+                            theory="time proportional to the counted operations: slope 1"))
+    return out
+
+
+def write_fit_files(folder, fit_rows):
+    if not fit_rows:
+        return
+    with open(os.path.join(folder, "fits-G.csv"), "w", newline="", encoding="utf-8") as f:
+        w = csv.DictWriter(f, fieldnames=list(fit_rows[0]))
+        w.writeheader()
+        w.writerows(fit_rows)
+    lines = ["| experiment | algorithm | quantity | model | sizes | slope or base | 95 % interval | R^2 | theory |",
+             "|---|---|---|---|---|---|---|---|---|"]
+    for r in fit_rows:
+        lines.append("| " + " | ".join(str(r[k]) for k in ("experiment", "algorithm", "quantity", "model", "sizes",
+                                                            "estimate", "ci95", "r2", "theory")) + " |")
+    with open(os.path.join(folder, "fits-G.md"), "w", encoding="utf-8") as f:
+        f.write("\n".join(lines) + "\n")
+
+
+def human(seconds):
+    if seconds < 1e-3:
+        return f"{seconds * 1e6:.1f} us"
+    if seconds < 1:
+        return f"{seconds * 1e3:.2f} ms"
+    return f"{seconds:.2f} s"
+
+
+def comparison_tables(folder, rows):
+    parts = ["# Comparison tables for module G (generated by experiments/analyzeG.py)\n",
+             "Time = median of 5 runs after one warm-up, with the interquartile range (IQR). ops = operations as defined in the README "
+             "(comparisons + moves + windows examined + table cells + split candidates + enumerated bracketings or cuts; recursive calls are in the note of results.csv). "
+             "mem = peak memory beyond the input.\n"]
+    for exp, title, label, algs, ratio in (("G-chain-n", "G: chain, growth in n", "n", ["dp", "memo"], ("memo", "dp")),
+                                           ("G-drum-L", "G: drum, growth in L", "L", ["dp", "memo", "greedy"], ("memo", "dp")),
+                                           ("G-small-chain", "G: chain, small inputs", "n", ["dp", "memo", "brute"], ("brute", "dp")),
+                                           ("G-small-drum", "G: drum, small inputs", "L", ["dp", "memo", "greedy", "brute"], ("brute", "dp"))):
+        sizes = sorted({float(r["size"]) for r in rows if r["experiment"] == exp})
+        if not sizes:
+            continue
+        parts.append(f"\n## {title}\n")
+        head = f"| {label} | " + " | ".join(f"{a} time (IQR) | {a} ops | {a} mem" for a in algs) + f" | {ratio[0]} / {ratio[1]} time |"
+        parts += [head, "|" + "---|" * (len(algs) * 3 + 2)]
+        for s in sizes:
+            cells, times = [], {}
+            for a in algs:
+                r = next((x for x in rows if x["experiment"] == exp and x["algorithm"] == a and float(x["size"]) == s), None)
+                if r is None or r["status"] != "OK":
+                    cells += ["DNF" if r else "-", "-", "-"]
+                    continue
+                times[a] = float(r["time_s"])
+                mem = f"{int(float(r['mem_bytes'])):,}" if r["mem_bytes"] != "" else "-"
+                cells += [f"{human(float(r['time_s']))} ({human(float(r['time_iqr_s']))})", f"{int(float(r['ops'])):,}", mem]
+            q = f"{times[ratio[0]] / times[ratio[1]]:.3g}" if ratio[0] in times and ratio[1] in times else "-"
+            parts.append(f"| {int(s):,} | " + " | ".join(cells) + f" | {q} |")
+    with open(os.path.join(folder, "comparison-G.md"), "w", encoding="utf-8") as f:
+        f.write("\n".join(parts) + "\n")
+
+
+def quality_tables(folder):
+    qg = os.path.join(folder, "quality-G.csv")
+    if not os.path.exists(qg):
+        return
+    with open(qg, newline="", encoding="utf-8") as f:
+        rows = list(csv.DictReader(f))
+    lines = ["\n## G: the greedy cut against the DP (sample of the master data)\n",
+             "| tier | cases | greedy price = optimum | mean greedy/DP price | worst greedy/DP price | mean pieces of the DP cut / L | DP price equals claim |",
+             "|---|---|---|---|---|---|---|"]
+    for tier in ("S", "M", "L", "X"):
+        sub = [r for r in rows if r["tier"] == tier]
+        if not sub:
+            continue
+        ratios = [float(r["greedy_over_dp"]) for r in sub]
+        vc = [int(r["dp_matches_claim"]) for r in sub if r["dp_matches_claim"] != ""]
+        lines.append(f"| {tier} | {len(sub)} | {sum(int(r['greedy_optimal']) for r in sub)}/{len(sub)} | {sum(ratios) / len(ratios):.4f} | "
+                     f"{min(ratios):.4f} | {sum(float(r['dp_pieces_over_length']) for r in sub) / len(sub):.3f} | "
+                     f"{(str(sum(vc)) + '/' + str(len(vc))) if vc else 'n/a'} |")
+    lines += ["\n## G: optimal bracketing against multiplying from left to right (sample of the master data)\n",
+              "| tier | cases | matrices (mean) | mean cost left to right / optimal cost | largest ratio |", "|---|---|---|---|---|"]
+    for tier in ("S", "M", "L", "X"):
+        sub = [r for r in rows if r["tier"] == tier]
+        if not sub:
+            continue
+        ratios = [float(r["left_to_right_over_opt"]) for r in sub]
+        lines.append(f"| {tier} | {len(sub)} | {sum(int(r['matrices']) for r in sub) / len(sub):.0f} | {sum(ratios) / len(ratios):.3f} | {max(ratios):.3f} |")
+    with open(os.path.join(folder, "comparison-G.md"), "a", encoding="utf-8") as f:
+        f.write("\n".join(lines) + "\n")
+
+
+# ------------------------------------------------------------------ plots
+CAPTIONS = []
+
+
+def finish(fig, ax, path, title, caption, xlabel, ylabel, legend=True):
+    ax.set_xlabel(xlabel)
+    ax.set_ylabel(ylabel)
+    ax.set_title(title, fontsize=11)
+    ax.grid(True, which="both", alpha=0.3)
+    if legend:
+        ax.legend(fontsize=8)
+    fig.text(0.01, 0.005, textwrap.fill(caption, 118), fontsize=7.5, ha="left", va="bottom")
+    fig.tight_layout(rect=(0, 0.11, 1, 1))
+    fig.savefig(path, dpi=160)
+    plt.close(fig)
+    CAPTIONS.append(f"**{os.path.basename(path)}**: {caption}")
+
+
+def line_plot(rows, folder, exp, algs, field, fname, title, xlabel, ylabel, caption, logx=True):
+    fig, ax = plt.subplots(figsize=(6.4, 4.8))
+    drew = False
+    for a in algs:
+        pts = series(rows, exp, a, field)
+        if not pts:
+            continue
+        c, mk = STYLE[a]
+        ax.errorbar([p[0] for p in pts], [p[1] for p in pts], yerr=[p[2] / 2 for p in pts] if field == "time_s" else None,
+                    color=c, marker=mk, capsize=2, label=NAME[a])
+        drew = True
+    if not drew:
+        plt.close(fig)
+        return
+    if logx:
+        ax.set_xscale("log", base=2)
+    ax.set_yscale("log")
+    finish(fig, ax, os.path.join(folder, "plots", fname), title, caption, xlabel, ylabel)
+
+
+def make_plots(folder, rows):
+    os.makedirs(os.path.join(folder, "plots"), exist_ok=True)
+    tlabel = "running time (seconds, median of 5)"
+    line_plot(rows, folder, "G-chain-n", ["dp", "memo"], "time_s", "G-chain-time-vs-n.png", "Module G: matrix chain, running time against n",
+              "number of matrices n", tlabel,
+              "Figure G1. Median time on pooled tier L dimensions; bars are the interquartile range. Both axes are logarithmic: the bottom-up DP and the memoised "
+              "recursion follow lines of slope close to 3 (n^3 split candidates); the recursion is a constant factor slower because it makes two calls per candidate.")
+    line_plot(rows, folder, "G-drum-L", ["dp", "memo", "greedy"], "time_s", "G-drum-time-vs-L.png", "Module G: drum cutting, running time against L",
+              "length of the drum L", tlabel,
+              "Figure G2. Median time on prefixes of one real price table. Both axes are logarithmic: the DP and the memoised recursion follow lines of slope close to 2 "
+              "(L^2 candidates), the greedy cut a line of slope a little above 1 (sorting L pieces).")
+    line_plot(rows, folder, "G-small-chain", ["dp", "memo", "brute"], "time_s", "G-small-chain.png", "Module G: chain, small inputs",
+              "number of matrices n", tlabel,
+              "Figure G3. Median time on pooled tier S dimensions. The vertical axis is logarithmic and the horizontal one linear: brute force over all bracketings "
+              "(Catalan numbers) is almost a straight line, the DP and the recursion stay almost flat.", logx=False)
+    line_plot(rows, folder, "G-small-drum", ["dp", "memo", "greedy", "brute"], "time_s", "G-small-drum.png", "Module G: drum, small inputs",
+              "length of the drum L", tlabel,
+              "Figure G4. Median time on prefixes of one tier M price table. The vertical axis is logarithmic and the horizontal one linear, so brute force over all "
+              "2^(L-1) cuts is a straight line while the DP, the recursion and the greedy cut stay almost flat.", logx=False)
+
+    fig, ax = plt.subplots(figsize=(6.4, 4.8))
+    drew = False
+    for exp, algs, ls in (("G-chain-n", ["dp"], "-"), ("G-drum-L", ["dp", "greedy"], "--")):
+        for a in algs:
+            pts = series(rows, exp, a, "ops")
+            if pts:
+                c, mk = STYLE[a]
+                tag = "chain" if exp == "G-chain-n" else "drum"
+                ax.plot([p[0] for p in pts], [p[1] for p in pts], marker=mk, linestyle=ls, color=c, label=f"{tag}: {NAME[a]}")
+                drew = True
+    if drew:
+        ax.set_xscale("log", base=2)
+        ax.set_yscale("log")
+        finish(fig, ax, os.path.join(folder, "plots", "G-operations.png"), "Operations counted against input size",
+               "Figure G5. Operations as defined in the README: table cells plus split candidates for the DP (chain: n^3 / 6, drum: L^2 / 2), comparisons plus moves plus pieces examined "
+               "for the greedy cut. Solid lines belong to the chain, dashed lines to the drum; the horizontal axis is n for the chain and L for the drum.",
+               "input size (matrices n for the chain, length L for the drum)", "operations counted (number)")
+    else:
+        plt.close(fig)
+
+    qg = os.path.join(folder, "quality-G.csv")
+    if os.path.exists(qg):
+        with open(qg, newline="", encoding="utf-8") as f:
+            q = list(csv.DictReader(f))
+        tiers = [t for t in ("S", "M", "L", "X") if any(r["tier"] == t for r in q)]
+        for col, fname, title, caption, ylabel, logy in (
+                ("greedy_over_dp", "G-greedy-quality.png", "Module G: price of the greedy cut relative to the optimum",
+                 "Figure G6. For every sampled case, the total price of the greedy cut (best price per length first) divided by the optimal price found by the DP "
+                 "(1.0 = the greedy cut is optimal). Black bars are the means per tier.", "greedy price / optimal price (ratio)", False),
+                ("left_to_right_over_opt", "G-chain-left-to-right.png", "Module G: cost of multiplying from left to right relative to the optimum",
+                 "Figure G7. For every sampled case, the number of scalar multiplications of the left-to-right bracketing ((A1 A2) A3) ... divided by that of the optimal "
+                 "bracketing found by the DP (1.0 = left to right is optimal). Black bars are the means per tier; the vertical axis is logarithmic.",
+                 "cost left to right / optimal cost (ratio)", True)):
+            fig, ax = plt.subplots(figsize=(6.4, 4.8))
+            for i, t in enumerate(tiers):
+                vals = [float(r[col]) for r in q if r["tier"] == t]
+                ax.scatter([i + 0.04 * (k % 7 - 3) for k in range(len(vals))], vals, alpha=0.6, color="tab:orange")
+                ax.hlines(sum(vals) / len(vals), i - 0.3, i + 0.3, color="black", label="mean" if i == 0 else None)
+            ax.set_xticks(range(len(tiers)))
+            ax.set_xticklabels([f"tier {t}" for t in tiers])
+            ax.scatter([], [], color="tab:orange", label="one sampled case")
+            if logy:
+                ax.set_yscale("log")
+            else:
+                ax.set_ylim(min(0.8, min(float(r[col]) for r in q) - 0.02), 1.02)
+            finish(fig, ax, os.path.join(folder, "plots", fname), title, caption, "tier of the sampled master-data cases", ylabel)
+    if CAPTIONS:
+        with open(os.path.join(folder, "plots", "captions-G.md"), "w", encoding="utf-8") as f:
+            f.write("# Captions of the plots of module G\n\n" + "\n\n".join(CAPTIONS) + "\n")
+
+
+def main():
+    folder = sys.argv[1] if len(sys.argv) > 1 else os.path.join(ROOT, "results")
+    rows = load(folder)
+    fit_rows = fits(rows)
+    write_fit_files(folder, fit_rows)
+    comparison_tables(folder, rows)
+    quality_tables(folder)
+    make_plots(folder, rows)
+    path = os.path.join(folder, "fits-G.md")
+    if os.path.exists(path):
+        print(open(path, encoding="utf-8").read())
+
+
+if __name__ == "__main__":
+    main()

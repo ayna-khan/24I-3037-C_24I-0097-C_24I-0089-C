@@ -1,0 +1,46 @@
+Sample outputs of module G (master data, group seed 41)
+
+== chain, tier S case 1-06: 4 matrices ==
+bottom-up DP (shipped): status OK, cost 418150, operations {'cells': 6, 'candidates': 10}
+    bracketing: (((A1 A2) A3) A4)
+memoised recursion (baseline): status OK, cost 418150, operations {'cells': 6, 'candidates': 10}
+    bracketing: (((A1 A2) A3) A4)
+brute force (baseline): status OK, cost 418150, operations {'enumerated': 5}
+    bracketing: (((A1 A2) A3) A4)
+
+== tier S case 1-06: drum of length 13 ==
+bottom-up DP (shipped): status OK, price 133, operations {'cells': 13, 'candidates': 91}
+    pieces: [1, 2, 2, 2, 2, 2, 2]
+memoised recursion (baseline): status OK, price 133, operations {'cells': 13, 'candidates': 91}
+    pieces: [1, 2, 2, 2, 2, 2, 2]
+greedy by price per length (baseline): status OK, price 133, operations {'comparisons': 35, 'moves': 52, 'items_examined': 13}
+    pieces: [2, 2, 2, 2, 2, 2, 1]
+brute force (baseline): status OK, price 133, operations {'enumerated': 4096}
+    pieces: [1, 2, 2, 2, 2, 2, 2]
+claim of the master data: 133
+
+== chain, tier M case 1-26 (brute force refuses): 31 matrices ==
+bottom-up DP (shipped): status OK, cost 180850, operations {'cells': 465, 'candidates': 4960}
+    bracketing: ((((((((((((((((((((((((((((((A1 A2) A3) A4) A5) A6) A7) A8) A9) A1...
+memoised recursion (baseline): status OK, cost 180850, operations {'cells': 465, 'candidates': 4960}
+    bracketing: ((((((((((((((((((((((((((((((A1 A2) A3) A4) A5) A6) A7) A8) A9) A1...
+brute force (baseline): status TOO_LARGE, cost 0, operations none (brute force is limited to 12 matrices, got 31)
+
+== tier M case 1-26 (brute force refuses): drum of length 158 ==
+bottom-up DP (shipped): status OK, price 948, operations {'cells': 158, 'candidates': 12561}
+    pieces: [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2] ... (79 pieces)
+memoised recursion (baseline): status OK, price 948, operations {'cells': 158, 'candidates': 12561}
+    pieces: [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2] ... (79 pieces)
+greedy by price per length (baseline): status OK, price 948, operations {'comparisons': 994, 'moves': 1264, 'items_examined': 1}
+    pieces: [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2] ... (79 pieces)
+brute force (baseline): status TOO_LARGE, price 0, operations none (brute force is limited to a drum of length 20, got 158)
+
+-- bad input and refused sizes are reported, not hidden --
+one dimension: status INVALID, note: invalid input: a chain needs at least two dimensions (n >= 1 matrices), got 1
+a zero dimension: status INVALID, note: invalid input: dimension p1 must be >= 1, got 0
+a fractional dimension: status INVALID, note: invalid input: dimension p1 must be a whole number, got 2.5
+drum of length 0: status INVALID, note: invalid input: the length of the drum must be >= 1, got 0
+a missing price: status INVALID, note: invalid input: 2 prices given for a drum of length 3: the price of length 3 is missing
+greedy for a chain: status INVALID, note: invalid input: unknown method 'greedy' for a chain; choose one of ['dp', 'memo', 'brute'] ('greedy' exists only for the drum)
+brute force on 30 matrices: status TOO_LARGE, note: brute force is limited to 12 matrices, got 30
+memoised recursion 30,000 deep: status TOO_LARGE, note: the memoised recursion would be 30002 calls deep; the limit is 20000
