@@ -1,0 +1,45 @@
+Sample outputs of module C (master_release_v1, group seed 41)
+
+== tier S case 1-06: 16 windows ==
+count, earliest-finish greedy (shipped): status OK, total 7, operations {'comparisons': 46, 'moves': 64, 'items_examined': 16}
+    windows: [3, 4, 7, 8, 13, 14, 16]
+count, DP with binary search: status OK, total 7, operations {'comparisons': 46, 'moves': 64, 'probes': 44, 'items_examined': 16, 'cells': 16}
+    windows: [3, 4, 7, 8, 13, 14, 16]
+value, DP with binary search (shipped): status OK, total 391, operations {'comparisons': 46, 'moves': 64, 'probes': 44, 'items_examined': 16, 'cells': 16}
+    windows: [3, 4, 7, 8, 13, 14, 16]
+value, plain O(n^2) DP: status OK, total 391, operations {'comparisons': 46, 'moves': 64, 'items_examined': 120, 'cells': 16}
+    windows: [3, 4, 7, 8, 13, 14, 16]
+value, earliest-finish greedy (baseline, ignores values): status OK, total 391, operations {'comparisons': 46, 'moves': 64, 'items_examined': 16}
+    windows: [3, 4, 7, 8, 13, 14, 16]
+claims of the master data: count 7, value 391
+
+== trap case 47 8-47: 1054 windows ==
+count, earliest-finish greedy (shipped): status OK, total 52, operations {'comparisons': 10071, 'moves': 11594, 'items_examined': 1054}
+    windows: [1, 2, 41, 67, 80, 110, 129, 144, 151, 154, 183, 193] ... (52 windows)
+count, DP with binary search: status OK, total 52, operations {'comparisons': 10071, 'moves': 11594, 'probes': 9139, 'items_examined': 1054, 'cells': 1054}
+    windows: [1, 2, 41, 67, 80, 110, 129, 144, 151, 154, 183, 193] ... (52 windows)
+value, DP with binary search (shipped): status OK, total 3564, operations {'comparisons': 10071, 'moves': 11594, 'probes': 9139, 'items_examined': 1054, 'cells': 1054}
+    windows: [1, 2, 3, 4, 65, 73, 98, 129, 154, 183, 229, 232] ... (49 windows)
+value, plain O(n^2) DP: status OK, total 3564, operations {'comparisons': 10071, 'moves': 11594, 'items_examined': 554931, 'cells': 1054}
+    windows: [1, 2, 3, 4, 65, 73, 98, 129, 154, 183, 229, 232] ... (49 windows)
+value, earliest-finish greedy (baseline, ignores values): status OK, total 2509, operations {'comparisons': 10071, 'moves': 11594, 'items_examined': 1054}
+    windows: [1, 2, 41, 67, 80, 110, 129, 144, 151, 154, 183, 193] ... (52 windows)
+
+== tier L case 2-40: 1090 windows ==
+count, earliest-finish greedy (shipped): status OK, total 59, operations {'comparisons': 10343, 'moves': 11990, 'items_examined': 1090}
+    windows: [7, 17, 29, 39, 49, 55, 61, 65, 91, 125, 126, 137] ... (59 windows)
+count, DP with binary search: status OK, total 59, operations {'comparisons': 10343, 'moves': 11990, 'probes': 9487, 'items_examined': 1090, 'cells': 1090}
+    windows: [7, 17, 29, 39, 49, 55, 61, 65, 91, 125, 126, 137] ... (59 windows)
+value, DP with binary search (shipped): status OK, total 3901, operations {'comparisons': 10343, 'moves': 11990, 'probes': 9487, 'items_examined': 1090, 'cells': 1090}
+    windows: [7, 29, 39, 126, 137, 160, 234, 236, 263, 274, 281, 290] ... (52 windows)
+value, plain O(n^2) DP: status OK, total 3901, operations {'comparisons': 10343, 'moves': 11990, 'items_examined': 593505, 'cells': 1090}
+    windows: [7, 29, 39, 126, 137, 160, 234, 236, 263, 274, 281, 290] ... (52 windows)
+value, earliest-finish greedy (baseline, ignores values): status OK, total 2947, operations {'comparisons': 10343, 'moves': 11990, 'items_examined': 1090}
+    windows: [7, 17, 29, 39, 49, 55, 61, 65, 91, 125, 126, 137] ... (59 windows)
+
+-- day filter, empty and invalid situations are reported, not hidden --
+S case 1-06: 16 windows, 13 available on day 3, unavailable ids [2, 7, 12]
+no windows: EMPTY, note: no windows (none given, or all of them unavailable)
+all windows unavailable: EMPTY
+a window finishing before it starts: INVALID, note: invalid input: window 1: finish must be after start, got 9..3
+unknown objective: INVALID, note: invalid input: objective must be one of ['count', 'value'], got 'speed'

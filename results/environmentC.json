@@ -1,0 +1,14 @@
+{
+  "python": "3.14.6",
+  "implementation": "CPython",
+  "os": "Windows 10",
+  "cpu": "Intel64 Family 6 Model 142 Stepping 10, GenuineIntel",
+  "logical_cpus": 8,
+  "threads_used": 1,
+  "master_release": "master_release_v1",
+  "group_seed": 41,
+  "repeats": 5,
+  "warmup_runs": 1,
+  "dnf_seconds": 300.0,
+  "module": "C"
+}
