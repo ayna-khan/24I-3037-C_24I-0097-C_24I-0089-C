@@ -1,0 +1,44 @@
+Fault-injection results for module G (tests/testchains.py against 20 planted bugs of src/modules/chains.py)
+
+CAUGHT      G1 chain DP: a later split replaces an equal-cost earlier one (<= instead of <)  [wrong tie rule]
+            failing tests: test_larger_chains_against_the_reference, test_small_chains_against_exhaustive_references, test_equal_cost_splits_take_the_smallest_split_point, test_larger_chains_and_trap_cases ... (6 in total)
+CAUGHT      G2 chain memo: a later split replaces an equal-cost earlier one (<= instead of <)  [wrong tie rule]
+            failing tests: test_larger_chains_against_the_reference, test_small_chains_against_exhaustive_references, test_equal_cost_splits_take_the_smallest_split_point, test_larger_chains_and_trap_cases ... (6 in total)
+CAUGHT      G3 chain DP: the cost of a product uses p(k+1) instead of p(k)  [wrong index]
+            failing tests: test_larger_chains_against_the_reference, test_small_chains_against_exhaustive_references, test_brute_force_limit_and_edge, test_a_tie_in_the_middle_of_a_larger_chain ... (12 in total)
+CAUGHT      G4 bracketing string: no space between the two factors  [wrong output format]
+            failing tests: test_larger_chains_against_the_reference, test_small_chains_against_exhaustive_references, test_brackets_and_spaces_of_a_long_chain, test_dimensions_of_one ... (12 in total)
+CAUGHT      G5 chain brute force: a later bracketing replaces an equal-cost earlier one  [wrong tie rule]
+            failing tests: test_small_chains_against_exhaustive_references, test_equal_cost_splits_take_the_smallest_split_point, test_tier_s_chains_against_brute_force_and_reference (3 in total)
+CAUGHT      G6 chain DP: counts one split candidate too many per cell  [wrong operation count]
+            failing tests: test_chain_dp_and_memo (1 in total)
+CAUGHT      G7 drum DP: a later first piece replaces an equal one (price and pieces equal)  [wrong tie rule]
+            failing tests: test_larger_drums_against_the_reference, test_small_drums_against_exhaustive_references, test_equal_price_and_pieces_take_the_smallest_first_piece, test_textbook_example ... (5 in total)
+CAUGHT      G8 drum DP: equal prices no longer prefer fewer pieces  [wrong tie rule]
+            failing tests: test_larger_drums_against_the_reference, test_small_drums_against_exhaustive_references, test_all_prices_zero, test_equal_price_takes_the_fewest_pieces ... (5 in total)
+CAUGHT      G9 drum memo: a later first piece replaces an equal one (price and pieces equal)  [wrong tie rule]
+            failing tests: test_larger_drums_against_the_reference, test_small_drums_against_exhaustive_references, test_equal_price_and_pieces_take_the_smallest_first_piece, test_textbook_example ... (5 in total)
+CAUGHT      G10 drum DP: the first candidate (one piece of length 1) is overpriced by 1  [wrong boundary condition]
+            failing tests: test_larger_drums_against_the_reference, test_small_drums_against_exhaustive_references, test_all_prices_zero, test_brute_force_limit ... (15 in total)
+CAUGHT      G11 greedy: the piece with the LOWEST price per length comes first  [wrong comparison direction]
+            failing tests: test_greedy_against_its_reference_and_never_above_the_optimum, test_greedy_compares_exact_fractions, test_greedy_is_a_rule_of_thumb, test_greedy_ties_go_to_the_longer_piece (4 in total)
+CAUGHT      G12 greedy: equal ratios go to the shorter piece  [wrong tie rule]
+            failing tests: test_greedy_against_its_reference_and_never_above_the_optimum, test_greedy_ties_go_to_the_longer_piece (2 in total)
+CAUGHT      G13 greedy: the ratio is compared as a float instead of an exact fraction  [inexact comparison]
+            failing tests: test_greedy_compares_exact_fractions (1 in total)
+CAUGHT      G14 a chain of one dimension (n = 0) is accepted  [missing validation check]
+            failing tests: test_bad_dimensions_give_a_status_not_a_plan_or_a_crash, test_validate_dims_raises_for_direct_callers (2 in total)
+CAUGHT      G15 a dimension of 0 is accepted  [wrong boundary condition (validation)]
+            failing tests: test_bad_dimensions_give_a_status_not_a_plan_or_a_crash (1 in total)
+CAUGHT      G16 a drum of length 0 is accepted  [wrong boundary condition (validation)]
+            failing tests: test_length_zero_is_invalid, test_bad_input_gives_a_status_not_a_plan_or_a_crash (2 in total)
+CAUGHT      G17 missing prices are no longer detected  [missing validation check]
+            failing tests: test_bad_input_gives_a_status_not_a_plan_or_a_crash, test_validate_drum_raises_for_direct_callers (2 in total)
+CAUGHT      G18 the recursion limit is not raised for the memoised methods  [missing safeguard]
+            failing tests: test_run_deep_handles_a_very_deep_recursion_and_reports_a_recursion_error, test_deeper_than_the_default_recursion_limit (2 in total)
+CAUGHT      G19 the time budget is never checked  [missing deadline check]
+            failing tests: test_expired_deadline_raises_also_from_the_recursion_thread, test_expired_deadline_raises_time_budget (2 in total)
+CAUGHT      G20 greedy is accepted as a method for a chain  [missing validation check]
+            failing tests: test_bad_method (1 in total)
+
+ALL FAULTS CAUGHT
