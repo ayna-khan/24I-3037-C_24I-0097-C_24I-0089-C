@@ -1,0 +1,32 @@
+Fault-injection results for module C (tests/testrescue.py against 14 planted bugs of src/modules/rescue.py)
+
+CAUGHT      C1 touching windows are not compatible in the greedy rule (> instead of >=)  [wrong boundary condition]
+            failing tests: test_greedy_set_is_the_earliest_finish_set, test_larger_instances_against_timeline_reference, test_small_instances_against_brute_force_reference, test_brute_force_limit ... (13 in total)
+CAUGHT      C2 windows with the same finish are ordered by id descending  [wrong tie rule]
+            failing tests: test_greedy_set_is_the_earliest_finish_set, test_identical_windows_choose_the_lowest_id, test_larger_and_trap_cases, test_equal_total_does_not_take_the_later_window ... (5 in total)
+CAUGHT      C3 the windows are ordered by start instead of finish  [wrong sort key]
+            failing tests: test_dp_and_dpquad_choose_equally_good_sets_with_many_ties, test_greedy_set_is_the_earliest_finish_set, test_larger_instances_against_timeline_reference, test_small_instances_against_brute_force_reference ... (15 in total)
+CAUGHT      C4 binary search of the DP: a window that finishes exactly at the start is not counted as compatible  [wrong boundary condition]
+            failing tests: test_dp_and_dpquad_choose_equally_good_sets_with_many_ties, test_larger_instances_against_timeline_reference, test_small_instances_against_brute_force_reference, test_brute_force_at_sixteen_windows ... (12 in total)
+CAUGHT      C5 back-tracking of the DP steps back one window instead of jumping to p(i)  [wrong back-tracking]
+            failing tests: test_dp_and_dpquad_choose_equally_good_sets_with_many_ties, test_larger_instances_against_timeline_reference, test_small_instances_against_brute_force_reference, test_brute_force_at_sixteen_windows ... (14 in total)
+CAUGHT      C6 the quadratic DP treats touching windows as overlapping  [wrong boundary condition]
+            failing tests: test_dp_and_dpquad_choose_equally_good_sets_with_many_ties, test_larger_instances_against_timeline_reference, test_small_instances_against_brute_force_reference, test_touching_in_either_direction_and_chain ... (8 in total)
+CAUGHT      C7 brute force treats touching windows as overlapping  [wrong boundary condition]
+            failing tests: test_small_instances_against_brute_force_reference, test_brute_force_at_sixteen_windows, test_touching_in_either_direction_and_chain, test_touching_windows_are_compatible ... (6 in total)
+CAUGHT      C8 day rule changed: a window is unavailable when (id + day) % 5 == 1  [wrong rule]
+            failing tests: test_all_unavailable_and_empty, test_one_in_five_is_removed, test_order_objects_and_input_are_kept, test_rule ... (6 in total)
+CAUGHT      C9 duplicate window ids are no longer detected  [missing validation check]
+            failing tests: test_bad_windows_give_a_status_not_a_plan_or_a_crash (1 in total)
+CAUGHT      C10 a window with finish equal to start is accepted  [wrong boundary condition (validation)]
+            failing tests: test_bad_windows_give_a_status_not_a_plan_or_a_crash, test_validate_windows_raises_for_direct_callers (2 in total)
+CAUGHT      C11 the total of objective 'count' is the sum of the values  [wrong total]
+            failing tests: test_larger_instances_against_timeline_reference, test_small_instances_against_brute_force_reference, test_one_window, test_overlap_by_one_minute_is_not_compatible ... (10 in total)
+CAUGHT      C12 no windows is reported as an OK plan instead of EMPTY  [wrong status]
+            failing tests: test_no_windows, test_window_of_value_zero, test_all_unavailable_and_empty, test_every_plan_of_random_instances_satisfies_the_invariants (4 in total)
+CAUGHT      C13 the time budget is never checked  [missing deadline check]
+            failing tests: test_expired_deadline_raises_time_budget (1 in total)
+CAUGHT      C14 unknown objective is not refused  [missing validation check]
+            failing tests: test_ops_have_the_same_keys_for_every_outcome, test_bad_objective_or_method (2 in total)
+
+ALL FAULTS CAUGHT
