@@ -1,0 +1,24 @@
+{
+  "verified": [
+    "cases.csv",
+    "claims.csv",
+    "crates.csv",
+    "drum_prices.csv",
+    "incidents.csv",
+    "locations.csv",
+    "pipeline_dims.csv",
+    "radio_log.csv",
+    "radio_patterns.csv",
+    "radio_reports.csv",
+    "rations.csv",
+    "roads.csv",
+    "safety_planted.csv",
+    "safety_rules.csv",
+    "sensor_cover.csv",
+    "sensor_edges.csv",
+    "sites.csv",
+    "tour.csv",
+    "waves.csv",
+    "windows.csv"
+  ]
+}

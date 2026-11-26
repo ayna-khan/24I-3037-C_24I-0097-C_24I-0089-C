@@ -1,0 +1,9 @@
+Full repository unit, reference, integration and HTTP tests
+Command: python -m unittest discover -s tests -t .
+Note: local HTTP tests require loopback network access; rerun with that permission after WinError 10013 in the restricted run.
+
+......................................................................ss.......................................................................................................................................
+----------------------------------------------------------------------
+Ran 207 tests in 20.099s
+
+OK (skipped=2)

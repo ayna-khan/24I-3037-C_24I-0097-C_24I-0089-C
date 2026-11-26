@@ -1,0 +1,15 @@
+Fault injection of B/F, loader and campaign
+Baseline: PASS
+
+B-destination-penalty: CAUGHT (test assertion/error)
+B-wrong-relaxation: CAUGHT (5-second timeout (baseline under one second))
+B-ignore-closures: CAUGHT (test assertion/error)
+F-descending-edges: CAUGHT (test assertion/error)
+F-discard-tree-edges: CAUGHT (test assertion/error)
+F-ignore-closures: CAUGHT (test assertion/error)
+campaign-skip-day-values: CAUGHT (test assertion/error)
+campaign-skip-availability: CAUGHT (test assertion/error)
+campaign-forget-closures: CAUGHT (test assertion/error)
+loader-truncate-floats: CAUGHT (test assertion/error)
+
+SUMMARY: 10/10 faults caught. Production files untouched.

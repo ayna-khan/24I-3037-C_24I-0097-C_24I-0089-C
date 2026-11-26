@@ -679,4 +679,13 @@ network and its changing edge density, not a controlled universal exponent.
 No prediction of an absolute runtime: CPU power state is unknown. Bellman-Ford
 can stop early on this network, so BF7 may fail despite the worst-case theory.
 
-After the run: pending.
+After the run: all eight stated tolerances were met. See
+`results/predictions-vs-measurements-BF.md`. Dijkstra/Bellman agree on 867
+route checks, and Kruskal/Prim on 289 forest checks across 62 sampled cases.
+Worst BFS/optimal cost ratio: 20; operation exponents: 1.099 (Dijkstra),
+1.187 (Kruskal); largest Bellman/Dijkstra time ratio: 1.418.
+An initial timing trial overlapped fault-injection work and was discarded;
+the published growth measurements were rerun after that work finished. No
+other project benchmark was running during the published timings. CPU power
+state and unrelated background load could not be verified. The quality pass
+was also rerun. No pre-run prediction was changed.
