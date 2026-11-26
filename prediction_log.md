@@ -1,7 +1,7 @@
 # Prediction log
 
-Rules followed in this log (Section 7.3 of the project statement): every round has an entry
-that is written and **committed before the round is run**. After the run, the section "After the run"
+Rules of this log (Section 7.3 of the project statement): every round has an entry
+that is written before the round is run and is meant to be committed before it. After the run, the section "After the run"
 of the entry records what was wrong and why. The numbers below are checked automatically by
 `python experiments/predictionsAD.py` (same ids), which writes `results/predictions-vs-measurements-AD.md`.
 The entries of modules C and G (Adan) are checked the same way by `experiments/predictionsC.py` and `experiments/predictionsG.py`
@@ -9,6 +9,13 @@ The entries of modules C and G (Adan) are checked the same way by `experiments/p
 
 Entries in this file: Ayna Khan (24I-0097-C), modules A and D (rounds 1 to 4 and the summary below); Adan (24I-3037-C), modules C and G
 (the sections "Module C" and "Module G" after the summary of Ayna); Hamza adds his entries for B and F after them, in the same format, each committed from his own account.
+
+**Two sets of runs.** The A and D entries refer to two sets of runs: a first full run (rounds 1 to 4) and, after the laptop changed speed, a repeat of rounds 1 and 3 with the charger connected.
+Rounds 2 and 4 were not repeated, by choice; their "After the run" notes say so.
+
+**Commit order, stated plainly.** For modules C, G, B and F the log entries were committed before the results of their rounds (see `git log`). For modules A and D this is not so:
+the entries were drafted on 2026-11-16 before the first run, but the first commit of this log (2026-11-19 09:55) is later than the commit of the results (2026-11-19 09:52).
+The commit history alone therefore cannot show that the prediction text was fixed before the run; the "After the run" notes are marked as written afterwards, and we make no stronger claim.
 
 Master dataset: master_release_v1. Group seed 41 (so the sample positions are 41 mod 7 = 6, 13, 20, ...).
 Time unit: seconds on one core, median of 5 runs after one discarded warm-up run.
@@ -209,7 +216,7 @@ In the first laptop run alone it was 24 hits and 7 misses (1.1, 1.2, 1.3, 2.2, 3
 - **Caused by speed and constants of the machine:** 1.3 (the n = 6400 run changed speed during the run), 2.2 (round 2 ran in the slow state), 4.2 (my 70 ns per comparison against about 40 ns measured). Moving from the first to the repeated run turned 1.1, 1.2 and 3.5 into hits, which supports the explanation by machine speed. Predictions of counts, memory and quality
   (1.5, 1.6, 2.1, 3.3, 3.7, 3.10, 1.10 to 1.13) were close or exact in every run on both machines.
 - **Weak hits:** some tolerances (1.4, 1.9, 3.4, 3.11) were wide enough to hit without much understanding; 3.4 is a hit with a relative error of 71 %.
-- **Still open:** rounds 2 and 4 should be repeated in the same power state as rounds 1 and 3; 2.2 and 4.3 are the two predictions that this is likely to change.
+- **Not repeated:** rounds 2 and 4 come from the first, slower run and were not repeated in the better power state; predictions 2.2 and 4.3 are the two that this is likely to affect.
 - **What I would do differently:** predict ratios and operation counts, and calibrate any absolute time on the same machine and in the same power mode before predicting it; run every timing round with the laptop connected to power in best performance mode, and run the longest sizes more than once.
 
 

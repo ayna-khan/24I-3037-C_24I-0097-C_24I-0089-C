@@ -3,19 +3,21 @@
 Group 41: Ayna Khan (24I-0097-C), Dur E Adan (24I-3037-C), Hamza Sardar (24I-0089-C).
 Repository: see `repository.txt`.
 
-**Status of this README.** The sections for modules A (relief inventory), D (emergency queue), C (rescue scheduling) and G (chains and cuts) are complete.
-Modules B/F, the loader, campaign, CLI and local backend have now been added by Hamza. The campaign now implements the official calendar from Project Statement section 7.4 (page 7); five master cases and their baselines have been verified. The failure-mode list of section 9 is still the draft of Ayna.
+**Status.** All seven modules are implemented, tested and measured: A (relief inventory), B (route planning), C (rescue scheduling), D (emergency queue),
+F (network planning) and G (chains and cuts). The official seven-day campaign of Project Statement section 7.4 connects A, B, C and D every day and F and G on day 7.
+The report is `finalReport/report.pdf` (source `finalReport/report.tex`, figures in `report-figures/`). A local interface, the Lifeline Gazette, is described in section 14.
 
 ## 1. Setup and dependencies
 
 - Python 3.10 or newer (developed with 3.13; modules C and G with 3.14). The decision modules, the tests and the experiments use the standard library only.
-- `matplotlib` (plots only): `pip install matplotlib`.
+- `matplotlib` (plots only): `pip install -r requirements.txt` (the file lists only `matplotlib`).
 - Library use that the statement asks us to document: `csv` (reading the master dataset), `tracemalloc` (memory measurement),
   `matplotlib` (plots), `unittest` (tests). The test references use the built-in `sorted` to check module D; the shipped algorithms
   never call a library sort: the sorting that modules A, C and D need is our own merge sort (`src/sorting.py`). The references of C and G use `sorted`, `itertools.combinations`,
   `functools.lru_cache` and `fractions.Fraction`; the shipped code of G uses `threading` and `sys.setrecursionlimit` only to run its memoised recursion safely (section 5).
-- Master dataset: `master_release_v1` (release of 2026-11-12, 3,622 cases from 75 groups). Download it from the course link, keep the
-  folder anywhere, and check it with `CHECKSUMS.txt`. The code takes its location as an argument; it is not copied into the repository.
+- Master dataset: `master_release_v1` (release of 2026-11-12, 3,622 cases from 75 groups). The CSV files (342 MB together) are too large for the submission, so this repository holds only `MASTER/README.md` and `MASTER/CHECKSUMS.txt`.
+  Download the release from the course link, copy its 20 CSV files into the `MASTER/` folder (or keep them anywhere and pass that folder as `--master`),
+  and check them with `python -m src.cli --master MASTER verify`. The code takes the location as an argument.
 
 ## 2. How to run
 
@@ -58,13 +60,15 @@ src/        models.py (data types, errors)   measure.py (timing, memory, fits)  
             network.py  loader.py  validation.py  campaign.py  cli.py  backend.py  server.py
             modules/routes.py (B)  modules/networkplan.py (F)
 frontend/   server.py (pages and API on one origin)   static/ (index.html, style.css, draw.js, app.js)
-calendars/  official.json (section 7.4, default)  example.json (historical custom example)
+calendars/  official.json (section 7.4, the calendar used by the CLI, the backend and the frontend)
+MASTER/     README.md and CHECKSUMS.txt only; put the master CSV files here
+finalReport/ (report.tex, report.pdf)  report-figures/  requirements.txt  results/user-interface/ (three pages of the interface)
 tests/      testinventory.py  testqueue.py  testmeasure.py  testfaultinjection.py   testrescue.py  testfaultinjectionC.py   testchains.py  testfaultinjectionG.py
             reference/ (independent reference methods, never imported by src)   fixtures/ (small samples of the master data)
 experiments/ runAD.py  analyzeAD.py  predictionsAD.py  sampleAD.py  mastersample.py   runC.py  analyzeC.py  predictionsC.py  sampleC.py   runG.py  analyzeG.py  predictionsG.py  sampleG.py
 results/    results.csv  plots/  quality-A.csv  quality-D.csv  quality-C.csv  quality-G.csv  fits-AD.md  fits-C.md  fits-G.md  comparison-AD.md  comparison-C.md  comparison-G.md
             fault-injection-*.txt  predictions-vs-measurements-*.md  environment*.json  samples in sample-outputs/
-generator/  validator/  cases.xlsx  approach.pdf  proposal.pdf   (Iteration 1, unchanged)
+generator/  validator/  cases.xlsx  approach/ (approach.pdf)  proposal/ (proposal.pdf)   (Iteration 1, unchanged)
 ```
 
 ## 4. Data, samples and pooling
@@ -191,7 +195,7 @@ Preprocessing is counted separately: module D first checks in one pass that tick
   times are distorted, while operation counts, memory and quality numbers are exact and repeatable. Details and the list of affected predictions are in `prediction_log.md`. Another machine gives other absolute times.
 - **Modules C and G** use the same protocol (`runC.py`, `runG.py`). The numbers of C and G were measured on Adan's laptop: `results/environmentC.json` and `results/environmentG.json` (Windows 10, Intel64 Family 6 Model 142, 8 logical CPUs, CPython 3.14.6, one thread, 5 timed runs after 1 warm-up).
   The charger and best-performance state of that laptop could not be verified and the rounds were not repeated; some runs have a large IQR (up to 30 % of the median, and the memoised chain at n = 40 is an outlier), see the "After the run" notes. The memoised recursion of G uses a helper thread with a large stack only to avoid a stack overflow; the computation stays single-threaded.
-- Prediction log: `prediction_log.md` (entries written and committed before each round; "After the run" notes written afterwards). It holds the entries of Ayna (A, D) and of Adan (C, G; sections "Module C" and "Module G"); the ids of C and G start with C and G.
+- Prediction log: `prediction_log.md` (entries written before each round; "After the run" notes written afterwards; the log itself says where the commit order does not show this). It holds the entries of Ayna (A, D) and of Adan (C, G; sections "Module C" and "Module G"); the ids of C and G start with C and G.
 
 ## 8. Results at a glance (modules A, C, D and G)
 
@@ -214,6 +218,10 @@ Full tables: `results/comparison-AD.md`, `results/comparison-C.md`, `results/com
 | G | G-drum-L, 63 to 2000 | DP slope 2.03 +- 0.10, memoised recursion 2.02 +- 0.05 (a recursion 2,002 calls deep), greedy cut 1.16 +- 0.03; at L = 2000 DP 0.35 s, recursion 1.17 s, greedy 13.8 ms |
 | G | G-small-chain, G-small-drum | brute force enumerates exactly Catalan(n-1) bracketings and 2^(L-1) cuts (growth 3.24 per matrix, 2.0 per unit of length); the DP is 3,900 times faster at n = 12 and 13,400 times at L = 20; dp, memo and brute return the same answer at every size |
 | G | quality (62 cases) | the DP price equals the claim in 20 of 20 tier S cases; the greedy cut is optimal in 61 of 62 cases (worst 0.977 of the optimum, tier X case 15-49); multiplying from left to right costs 4.5 (S), 15.8 (M), 16.9 (L) and 14.9 (X) times the optimum on average |
+
+| B | B-scale-V, 16 to 1024 locations | heap Dijkstra and Bellman-Ford agree on the cost in all 867 sampled target and wave checks; at 1024 locations Dijkstra 11.8 ms, Bellman-Ford 16.7 ms, BFS 10.2 ms; BFS finds a route up to 20 times as expensive as the best one |
+| F | F-scale-V, 16 to 1024 locations | Kruskal and Prim give the same forest cost in all 289 checks; at 1024 locations Kruskal 17.0 ms, Prim 19.0 ms (ratio 1.11) |
+| Campaign | five cases, three policies, seven days | 105 daily records, every recorded invariant passed; the greedy loading delivers 41 % less than the exact one on trap case 4-47 (712 against 1200); the simple policy leaves urgent alarms waiting 110 to 387 ticks on average against 0.07 to 0.17 for ours (`results/campaign-comparison.md`) |
 
 ## 9. Recommendation for the lead designer (Problem N)
 
@@ -264,15 +272,26 @@ Full tables: `results/comparison-AD.md`, `results/comparison-C.md`, `results/com
 
 - **B: ship heap Dijkstra**, with BFS for reachability and hop count. In `B-scale-V`, seven sizes (16 to 1024), the largest Dijkstra run took 11.78 ms versus 16.69 ms for Bellman-Ford. All 867 sampled target/wave comparisons agree on shortest cost; BFS costs up to 20 times the optimum. Assumption: positive step costs and sparse networks. Negative weights invalidate Dijkstra; validation rejects them. Monitor edge signs and E/V before selecting the method. The early-stopping Bellman-Ford baseline can be competitive on small, favourably ordered maps.
 - **F: ship Kruskal**, with heap Prim as the check. In `F-scale-V`, the largest runs took 17.04 ms (Kruskal) and 18.99 ms (Prim), a small difference specific to this network. All 289 sampled wave-state forest comparisons agree. Assumption: sparse maps; for dense maps consider array Prim. Monitor E/V, memory and the measured crossover rather than claiming Kruskal always wins.
-- Full evidence and failure-mode contribution for Ayna: `results/comparison-BF.md`, `fits-BF.md`, `quality-BF.csv`, `plots/captions-BF.md`. Growth uses connected prefixes of one sampled real L graph, not independent graphs or pooled networks. Times are one-machine/session measurements with unverified power state; seven sizes do not establish a universal exponent. No five-minute DNF is claimed at these sizes.
+- Full evidence and failure-mode paragraph: `results/comparison-BF.md`, `fits-BF.md`, `quality-BF.csv`, `plots/captions-BF.md`. Growth uses connected prefixes of one sampled real L graph, not independent graphs or pooled networks. Times are one-machine/session measurements with unverified power state; seven sizes do not establish a universal exponent. No five-minute DNF is claimed at these sizes.
 
 ### The three failure modes of the whole engine that worry us most (ranked)
 
-**TO BE FILLED BY AYNA AFTER ALL MODULES ARE MEASURED** (the draft below is from modules A and D only; the final list must use the other modules too).
+We rank them by what would hurt a relief operation most and by how little warning we would get.
 
-1. Cost of module A when the capacity or the number of crates is much larger than in the data: the table has `n * W` cells and `n * W` bytes; there is no safety net other than the deadline.
-2. A backlog of alarms that never shrinks when the alarm rate stays above one per tick: the urgency order keeps priority 9 and 10 alarms fast, but low-priority alarms wait without bound (the longest wait was 2023 ticks for 2258 alarms in one tier L case).
-3. Results that depend on our reading of the statement: how pools get their capacity, which tie rule is chosen among equal-value loads, and what "master order" means for samples.
+1. **A decision method that quietly becomes too slow on a bigger case.** Module A fills `n * W` cells (31 s at 6400 crates, one byte per cell in memory), the matrix chain of module G is cubic
+   (about 13 s at 640 matrices; an estimated 7 minutes at 2000, not run) and the plain `O(n^2)` baselines of C and D do not finish in 300 s at 200,000 windows or 256,000 alarms.
+   The engine has a deadline and a `TimeBudgetExceeded` status, but a deadline only tells us after the time is gone. **Guard:** compute `n * min(W, total weight)`, `(n^3 - n) / 6` or `L (L + 1) / 2`
+   before the run, compare it with the budget, and fall back to the greedy rule that the recommendations name for each module.
+2. **Dispatching on stale or invalid road data.** Dijkstra is only correct for positive costs, and a road closure that is not refreshed sends a vehicle towards a location the flood has cut off. In our campaign,
+   days 6 and 7 close the union of all waves and between one and six days per case have an unreachable destination (2-40 has six); the engine reports these days as skipped instead of inventing a route.
+   Trap 48 shows the other side: the fewest-roads route costs 5.3 times the cheapest (64 against 12), so choosing the method by habit is itself a failure. **Guard:** validation rejects negative or zero costs and
+   unknown closure references; the campaign records the resolved closures for every day.
+3. **Low-priority alarms that wait without bound.** The urgency order keeps priority 9 and 10 alarms at 0.07 to 0.17 ticks of mean wait in the campaign (1.5 ticks on tier L of module D), but when more alarms arrive
+   than can be answered the rest queue up: the longest wait was 2023 ticks for 2258 alarms in one tier L case, and the all-alarms mean wait is no better than first-come-first-served. **Guard:** report the backlog
+   in every plan and add capacity, not a cleverer queue, when it keeps growing.
+
+Two weaker risks sit behind these: our reading of the statement (how pools get their capacity, which tie rule applies among equal loads, what "master order" means for samples)
+and the fact that all timings come from two laptops, so absolute times will differ on another machine.
 
 ## 10. Known limitations
 
@@ -287,6 +306,9 @@ Full tables: `results/comparison-AD.md`, `results/comparison-C.md`, `results/com
   The measurements of C and G come from one run on one laptop whose power state could not be verified; some IQR values are large (the memoised chain at n = 40, the DP at n = 320). The pools of windows never overlap across joined cases (shifted by 1440 minutes), so no experiment has thousands of windows inside one day.
   The drum experiments use prefixes of one real price table (case 12-47); the quality numbers of the greedy cut are specific to price tables of this shape. Chains have no claim in the master data, so the chain optimum is checked only against brute force and an independent reference.
   The tie rules of C (set of equal total) and of dpquad and brute force are weaker than those of greedy and dp; module G has full tie rules. `rescue.available_on_day` raises an exception for a bad day or id (it returns a list); every other entry point returns a status.
+- **Modules B, F and the campaign.** The growth experiments use seven nested prefixes of one real network (connected, from case 10-40), not seven independent graphs, and the edge density changes with the size; the timings of B and F
+  come from one machine and session with an unverified power state, and no five-minute DNF is claimed for them. The quality checks cover the sampled cases (62 cases, 867 route checks, 289 forest checks), not the whole release.
+  The campaign runs are correctness and quality runs, not timing experiments, and use five cases; the local server handles one request at a time and binds to 127.0.0.1 only.
 - Defects in the master dataset: none found in the sampled cases used by modules A and D (their tier S optima matched the claims in 20 of 20 cases; the same for the windows and drums of C and G, whose tier S optima matched the claims in 20 of 20 cases); we did not check the whole master dataset.
 
 ## 11. Changes after the proposal
@@ -307,19 +329,14 @@ Full tables: `results/comparison-AD.md`, `results/comparison-C.md`, `results/com
 - S. Martello, P. Toth, *Knapsack Problems: Algorithms and Computer Implementations*, Wiley, 1990: greedy ratio rule and its worst cases.
 - Course project statement (Project Statement, LIFELINE) and the master dataset `master_release_v1`.
 
-## 13. Hamza's integration, backend and report handoff
+## 13. Integration: loader, campaign and backend (Hamza)
 
-The existing A/C/D/G implementations and result rows were preserved. Hamza's
-results are the B/F rows in `results/results.csv`, the BF files and the official
-campaign artifacts. Teammate implementations and 169 existing result rows are preserved.
-`hamza_work.md` lists the deliverables and remaining handoff decisions.
+Modules B and F, the loader, the seven-day campaign, the command line and the backend API are Hamza's work; modules A, C, D and G were not changed by it.
+The B/F rows of `results/results.csv` and the campaign files are described below.
 
 ### Campaign and official calendar
 
-The original Project Statement is now available. `calendars/official.json`
-implements section 7.4, page 7, and is the default for the CLI and backend.
-`calendars/example.json` remains a labelled historical custom example; the
-old campaign-example output is historical and is not official evidence.
+`calendars/official.json` implements section 7.4, page 7, and is the default for the CLI, the backend and the frontend.
 
 | Day | Change applied to base data | Blocked roads | Destination |
 |---|---|---|---|
@@ -429,44 +446,23 @@ or add policy="baseline"/"simple" or a custom calendar.
 Example POST `/route` body: `{"case_id":"41-00","target":7,"blocked":[]}`.
 Errors return JSON with HTTP 422, unknown paths 404. The server is a local,
 single-request-at-a-time adapter; use the Python functions or a same-origin dev
-proxy from the frontend. No frontend was replaced or built here.
+proxy from the frontend.
 
-### Evidence for the final report
+### Where the evidence of B, F and the campaign lies
 
-- `results/comparison-BF.md`, `fits-BF.csv`, `fits-BF.md`, `quality-BF.csv`:
-  result tables, recommendations, assumptions and failure-mode paragraph.
+- `results/comparison-BF.md`, `fits-BF.csv`, `fits-BF.md`, `quality-BF.csv`: result tables, recommendations, assumptions and the failure-mode paragraph.
 - `results/plots/B-*.png`, `F-*.png`, `captions-BF.md`: six figures, captions and timing limits.
-- `results/predictions-vs-measurements-BF.md`: pre-run predictions versus outcomes.
-- `results/fault-injection-BF.txt`: 15 seeded faults caught in disposable copies;
-  one deliberately broken relaxation loops and is caught by a five-second timeout.
-- `results/test-summary-BF.txt`: final unit/integration/HTTP test run.
-- `results/campaign-comparison.md`, `campaign-daily.csv`, `campaign-summary.csv`
-  and `campaign/*.json`: official daily outcomes and baseline comparisons.
+- `results/predictions-vs-measurements-BF.md`: predictions against outcomes.
+- `results/fault-injection-BF.txt`: 15 seeded faults caught in disposable copies; one deliberately broken relaxation loops and is caught by a five-second timeout.
+- `results/test-summary-BF.txt`: the unit, integration and HTTP test run.
+- `results/campaign-comparison.md`, `campaign-daily.csv`, `campaign-summary.csv` and `campaign/*.json`: official daily outcomes and baseline comparisons.
 - `results/sample-outputs/campaign-official.txt`: readable program output.
-- `results/plots/campaign-*.png`, `captions-campaign.md`: three report figures.
-- `results/predictions-vs-measurements-campaign.md`: official-campaign predictions.
-- The earlier campaign-example.json remains historical, explicitly nonofficial evidence.
-
-Ayna still owns `report.pdf` and the ranked final failure modes; Adan owns the
-frontend. Their output files were not rewritten. The handoff and reproducible commands
-above accompany the B/F and campaign implementation.
-
-
-### Completion and remaining team work
-
-Hamza's modules B/F, their unit/reference tests and seven-size experiments,
-the shared loader/validation, official seven-day coordinator/CLI, backend/API,
-output invariants, 15 fault injections and report-ready tables/plots/test
-summary are complete. B/F round 2 separates preprocessing counts, reports fit
-confidence intervals/R-squared and numerical prediction relative errors.
-
-No calendar configuration remains for Ayna. She incorporates the supplied
-B/F and campaign evidence into report.pdf and finalizes her ranked failure
-modes. Adan connects his frontend to the documented API. The group performs
-the final demo and submission packaging. Their report/frontend files and the
-unrelated local proposal changes were not overwritten.
+- `results/plots/campaign-*.png`, `captions-campaign.md`: three figures.
+- `results/predictions-vs-measurements-campaign.md`: predictions for the official campaign.
 
 ## 14. Interface: The Lifeline Gazette (Adan)
+
+Screenshots: `results/user-interface/gazette-daily-edition.png`, `gazette-week-in-review.png` and `gazette-map-room.png`.
 
 `python -m frontend --master MASTER --open` serves the interface at `http://127.0.0.1:8000/` (change with `--port`; do not run
 `src.server` on the same port at the same time). It needs only the Python standard library and a browser; the fonts come from

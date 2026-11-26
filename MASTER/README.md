@@ -64,3 +64,8 @@ one_case = crates[crates.case_id == '16-07']
 ```
 
 Report problems with the dataset to the course TAs, quoting the release version and the case_id.
+
+## Note for this repository
+
+The 20 CSV files (342 MB) are not part of the submission. Copy them from the course release into this folder, or pass their folder as `--master`.
+Check the copy with `python -m src.cli --master MASTER verify`.

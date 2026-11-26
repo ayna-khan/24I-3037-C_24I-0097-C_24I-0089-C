@@ -43,4 +43,4 @@ F/G run in the day-7 planning review; A/B/C/D interact daily. No aggregate score
 - sample-outputs/campaign-official.txt: readable output from the program.
 - plots/campaign-values.png, campaign-urgent-wait.png, campaign-difficult.png and captions-campaign.md.
 - test-summary-BF.txt and fault-injection-BF.txt: automated evidence.
-- Ayna incorporates these figures/tables into report.pdf; Adan uses the existing backend API.
+- The figures and tables are used in `report.pdf`; the frontend reads the same results through the backend API.

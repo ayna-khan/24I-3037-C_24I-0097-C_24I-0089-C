@@ -80,7 +80,7 @@ def run_fault(workdir, original, fault):
 
 def run_all():
     with open(os.path.join(ROOT, TARGET), encoding="utf-8", newline="") as f:
-        original = f.read()
+        original = f.read().replace("\r\n", "\n")   # a Windows checkout has CRLF, the planted texts use LF
     results = []
     with tempfile.TemporaryDirectory() as tmp:
         copy_repository(tmp)
