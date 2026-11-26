@@ -66,8 +66,11 @@ def adjacency(nodes, roads, blocked, ops):
         if r.road_no not in blocked:
             adj[r.u].append((r.v, r))
             adj[r.v].append((r.u, r))
+    preprocessing = {'comparisons': 0, 'moves': 0}
     for v in adj:
-        adj[v] = ordered(adj[v], lambda pair: (pair[0], pair[1].road_no), ops)
+        adj[v] = ordered(adj[v], lambda pair: (pair[0], pair[1].road_no), preprocessing)
+    ops['pre_comparisons'] = ops.get('pre_comparisons', 0) + preprocessing['comparisons']
+    ops['pre_moves'] = ops.get('pre_moves', 0) + preprocessing['moves']
     return adj
 
 
@@ -119,4 +122,5 @@ class Heap:
 
 
 def counts():
-    return dict(comparisons=0, moves=0, edge_tests=0, relaxations=0, finds=0)
+    return dict(comparisons=0, moves=0, edge_tests=0, relaxations=0, finds=0,
+                pre_comparisons=0, pre_moves=0)

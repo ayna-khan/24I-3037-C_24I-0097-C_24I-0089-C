@@ -1,0 +1,6361 @@
+{
+  "master_version": "master_release_v1",
+  "case_input": {
+    "metadata": {
+      "case_id": "1-06",
+      "group_seed": 1,
+      "case_no": 6,
+      "tier": "S",
+      "scenario": 1,
+      "capacity": 82,
+      "target_0": 4,
+      "target_1": 3,
+      "target_2": 1,
+      "edit_bound": 3,
+      "tour_length": 3058,
+      "sensor_nodes": 6,
+      "sensor_k": 2,
+      "safety_vars": 12,
+      "rations_target": 303,
+      "group_no": "1",
+      "orig_case_id": "1-06"
+    },
+    "locations": [
+      [
+        0,
+        "D",
+        0
+      ],
+      [
+        1,
+        "H",
+        2
+      ],
+      [
+        2,
+        "J",
+        4
+      ],
+      [
+        3,
+        "S",
+        4
+      ],
+      [
+        4,
+        "S",
+        1
+      ],
+      [
+        5,
+        "S",
+        1
+      ],
+      [
+        6,
+        "J",
+        4
+      ]
+    ],
+    "roads": [
+      [
+        0,
+        0,
+        1,
+        9,
+        16
+      ],
+      [
+        1,
+        0,
+        2,
+        36,
+        27
+      ],
+      [
+        2,
+        0,
+        3,
+        29,
+        38
+      ],
+      [
+        3,
+        0,
+        5,
+        57,
+        89
+      ],
+      [
+        4,
+        1,
+        5,
+        54,
+        67
+      ],
+      [
+        5,
+        1,
+        6,
+        8,
+        25
+      ],
+      [
+        6,
+        3,
+        4,
+        50,
+        57
+      ],
+      [
+        7,
+        3,
+        6,
+        44,
+        36
+      ]
+    ],
+    "waves": {
+      "0": [
+        3
+      ],
+      "1": [
+        0
+      ],
+      "2": [
+        2
+      ]
+    },
+    "crates": [
+      [
+        1,
+        1,
+        3,
+        62,
+        886,
+        84410438
+      ],
+      [
+        2,
+        1,
+        4,
+        89,
+        140,
+        75498347
+      ],
+      [
+        3,
+        0,
+        14,
+        97,
+        384,
+        92215044
+      ],
+      [
+        4,
+        0,
+        5,
+        49,
+        839,
+        34052858
+      ],
+      [
+        5,
+        3,
+        6,
+        16,
+        565,
+        52117982
+      ],
+      [
+        6,
+        3,
+        20,
+        74,
+        646,
+        81663741
+      ],
+      [
+        7,
+        0,
+        4,
+        41,
+        912,
+        23616363
+      ],
+      [
+        8,
+        0,
+        19,
+        22,
+        118,
+        75588648
+      ],
+      [
+        9,
+        1,
+        5,
+        68,
+        215,
+        25981765
+      ],
+      [
+        10,
+        4,
+        9,
+        89,
+        286,
+        92254262
+      ],
+      [
+        11,
+        0,
+        10,
+        99,
+        648,
+        21287152
+      ],
+      [
+        12,
+        0,
+        11,
+        39,
+        12,
+        75308610
+      ],
+      [
+        13,
+        0,
+        8,
+        49,
+        504,
+        68943550
+      ],
+      [
+        14,
+        1,
+        11,
+        81,
+        946,
+        79216273
+      ],
+      [
+        15,
+        0,
+        6,
+        34,
+        461,
+        52024040
+      ],
+      [
+        16,
+        0,
+        16,
+        13,
+        530,
+        76883272
+      ],
+      [
+        17,
+        1,
+        16,
+        21,
+        978,
+        87063362
+      ],
+      [
+        18,
+        0,
+        9,
+        64,
+        502,
+        86096481
+      ],
+      [
+        19,
+        0,
+        3,
+        68,
+        892,
+        47103034
+      ]
+    ],
+    "alarms": [
+      [
+        1,
+        0,
+        1
+      ],
+      [
+        2,
+        0,
+        10
+      ],
+      [
+        3,
+        0,
+        5
+      ],
+      [
+        4,
+        0,
+        6
+      ],
+      [
+        5,
+        1,
+        5
+      ],
+      [
+        6,
+        2,
+        2
+      ],
+      [
+        7,
+        3,
+        2
+      ],
+      [
+        8,
+        3,
+        1
+      ],
+      [
+        9,
+        4,
+        5
+      ],
+      [
+        10,
+        5,
+        1
+      ],
+      [
+        11,
+        6,
+        3
+      ],
+      [
+        12,
+        8,
+        10
+      ],
+      [
+        13,
+        8,
+        1
+      ]
+    ],
+    "windows": [
+      [
+        1,
+        666,
+        804,
+        11
+      ],
+      [
+        2,
+        804,
+        1185,
+        62
+      ],
+      [
+        3,
+        24,
+        90,
+        47
+      ],
+      [
+        4,
+        90,
+        260,
+        25
+      ],
+      [
+        5,
+        633,
+        984,
+        10
+      ],
+      [
+        6,
+        553,
+        827,
+        14
+      ],
+      [
+        7,
+        1135,
+        1191,
+        94
+      ],
+      [
+        8,
+        686,
+        704,
+        70
+      ],
+      [
+        9,
+        1110,
+        1281,
+        72
+      ],
+      [
+        10,
+        613,
+        1077,
+        100
+      ],
+      [
+        11,
+        1174,
+        1295,
+        68
+      ],
+      [
+        12,
+        427,
+        650,
+        63
+      ],
+      [
+        13,
+        542,
+        550,
+        16
+      ],
+      [
+        14,
+        760,
+        1125,
+        54
+      ],
+      [
+        15,
+        886,
+        1298,
+        52
+      ],
+      [
+        16,
+        317,
+        436,
+        85
+      ]
+    ],
+    "dims": [
+      50,
+      89,
+      43,
+      36,
+      83
+    ],
+    "prices": [
+      1,
+      22,
+      21,
+      12,
+      10,
+      6,
+      30,
+      19,
+      23,
+      40,
+      33,
+      27,
+      32
+    ]
+  },
+  "calendar": {
+    "name": "Official LIFELINE calendar - Project Statement section 7.4, page 7",
+    "note": "Daily changes start from the base case. Wave indices are zero-based positions in sorted wave labels, wrapping modulo the number of waves. Only days 6 and 7 retain the union of every wave. Stock resets each day; no extra expiry rule is prescribed.",
+    "inventory_mode": "daily",
+    "closure_mode": "daily",
+    "days": [
+      {
+        "day": 1,
+        "event": "Normal",
+        "target_key": "target_0"
+      },
+      {
+        "day": 2,
+        "event": "Storm",
+        "target_key": "target_1",
+        "wave_indices": [
+          0
+        ],
+        "minutes_ratio": [
+          3,
+          2
+        ],
+        "multipliers": {
+          "3": 2
+        },
+        "extra_alarms": [
+          [
+            0,
+            9
+          ]
+        ]
+      },
+      {
+        "day": 3,
+        "event": "Food shortage",
+        "target_key": "target_2",
+        "wave_indices": [
+          1
+        ],
+        "multipliers": {
+          "0": 2
+        }
+      },
+      {
+        "day": 4,
+        "event": "Dangerous area",
+        "target_key": "target_0",
+        "wave_indices": [
+          2
+        ],
+        "penalty_threshold": 2,
+        "penalty_multiplier": 2
+      },
+      {
+        "day": 5,
+        "event": "Medical emergency",
+        "target_key": "target_1",
+        "wave_indices": [
+          3
+        ],
+        "multipliers": {
+          "2": 3
+        },
+        "extra_alarms": [
+          [
+            0,
+            10
+          ]
+        ]
+      },
+      {
+        "day": 6,
+        "event": "Flood",
+        "target_key": "target_2",
+        "all_waves": true
+      },
+      {
+        "day": 7,
+        "event": "Evacuation",
+        "target_key": "target_0",
+        "all_waves": true,
+        "load": false,
+        "evacuation": true,
+        "review": true
+      }
+    ]
+  },
+  "policies": {
+    "optimized": {
+      "case_id": "1-06",
+      "calendar": {
+        "name": "Official LIFELINE calendar - Project Statement section 7.4, page 7",
+        "note": "Daily changes start from the base case. Wave indices are zero-based positions in sorted wave labels, wrapping modulo the number of waves. Only days 6 and 7 retain the union of every wave. Stock resets each day; no extra expiry rule is prescribed.",
+        "inventory_mode": "daily",
+        "closure_mode": "daily",
+        "days": [
+          {
+            "day": 1,
+            "event": "Normal",
+            "target_key": "target_0"
+          },
+          {
+            "day": 2,
+            "event": "Storm",
+            "target_key": "target_1",
+            "wave_indices": [
+              0
+            ],
+            "minutes_ratio": [
+              3,
+              2
+            ],
+            "multipliers": {
+              "3": 2
+            },
+            "extra_alarms": [
+              [
+                0,
+                9
+              ]
+            ]
+          },
+          {
+            "day": 3,
+            "event": "Food shortage",
+            "target_key": "target_2",
+            "wave_indices": [
+              1
+            ],
+            "multipliers": {
+              "0": 2
+            }
+          },
+          {
+            "day": 4,
+            "event": "Dangerous area",
+            "target_key": "target_0",
+            "wave_indices": [
+              2
+            ],
+            "penalty_threshold": 2,
+            "penalty_multiplier": 2
+          },
+          {
+            "day": 5,
+            "event": "Medical emergency",
+            "target_key": "target_1",
+            "wave_indices": [
+              3
+            ],
+            "multipliers": {
+              "2": 3
+            },
+            "extra_alarms": [
+              [
+                0,
+                10
+              ]
+            ]
+          },
+          {
+            "day": 6,
+            "event": "Flood",
+            "target_key": "target_2",
+            "all_waves": true
+          },
+          {
+            "day": 7,
+            "event": "Evacuation",
+            "target_key": "target_0",
+            "all_waves": true,
+            "load": false,
+            "evacuation": true,
+            "review": true
+          }
+        ]
+      },
+      "policy": "optimized",
+      "days": [
+        {
+          "day": 1,
+          "event": "Normal",
+          "target": 4,
+          "closed_roads": [],
+          "route": {
+            "status": "OK",
+            "source": 0,
+            "target": 4,
+            "path": [
+              0,
+              3,
+              4
+            ],
+            "road_ids": [
+              2,
+              6
+            ],
+            "cost": 84,
+            "reachable": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6
+            ],
+            "distances": {
+              "0": 0,
+              "1": 11,
+              "2": 40,
+              "3": 33,
+              "4": 84,
+              "5": 58,
+              "6": 23
+            },
+            "fewest_path": [
+              0,
+              3,
+              4
+            ],
+            "fewest_cost": 84,
+            "ops": {
+              "comparisons": 22,
+              "moves": 46,
+              "edge_tests": 32,
+              "relaxations": 6,
+              "finds": 0,
+              "pre_comparisons": 12,
+              "pre_moves": 24
+            },
+            "note": ""
+          },
+          "load": {
+            "status": "OK",
+            "selected": [
+              1,
+              2,
+              3,
+              4,
+              7,
+              9,
+              10,
+              11,
+              13,
+              14,
+              15,
+              19
+            ],
+            "total_weight": 82,
+            "total_value": 826,
+            "ops": {
+              "items_examined": 19,
+              "cells": 1398,
+              "calls": 1
+            },
+            "note": ""
+          },
+          "trip_made": true,
+          "trip_kind": "delivery",
+          "dispatch_status": "OK",
+          "rescue": {
+            "status": "OK",
+            "chosen": [
+              3,
+              7,
+              10,
+              13,
+              16
+            ],
+            "total": 342,
+            "ops": {
+              "comparisons": 34,
+              "moves": 52,
+              "probes": 33,
+              "items_examined": 13,
+              "cells": 13,
+              "subsets": 0,
+              "calls": 1,
+              "pre": {
+                "items_examined": 13,
+                "pair_tests": 0
+              }
+            },
+            "note": ""
+          },
+          "alarms": {
+            "status": "OK",
+            "releases": [
+              [
+                2,
+                0
+              ],
+              [
+                4,
+                1
+              ],
+              [
+                3,
+                2
+              ],
+              [
+                5,
+                3
+              ],
+              [
+                9,
+                4
+              ],
+              [
+                6,
+                5
+              ],
+              [
+                11,
+                6
+              ],
+              [
+                7,
+                7
+              ],
+              [
+                12,
+                8
+              ],
+              [
+                1,
+                9
+              ],
+              [
+                8,
+                10
+              ],
+              [
+                10,
+                11
+              ],
+              [
+                13,
+                12
+              ]
+            ],
+            "max_backlog": 5,
+            "total_wait": 38,
+            "max_wait": 9,
+            "ops": {
+              "comparisons": 43,
+              "moves": 47,
+              "pushes": 13,
+              "pops": 13,
+              "pre": {
+                "comparisons": 12,
+                "moves": 0
+              }
+            },
+            "note": ""
+          },
+          "alarm_metrics": {
+            "urgent_count": 2,
+            "urgent_wait": 0,
+            "urgent_max_wait": 0
+          },
+          "checks": {
+            "reachability": true,
+            "route_open_roads_and_cost": true,
+            "capacity_and_load_value": true,
+            "rescue_availability_compatibility_and_total": true,
+            "alarm_order_and_release_ticks": true
+          },
+          "input": {
+            "base_case": "1-06",
+            "source": 0,
+            "target": 4,
+            "capacity": 82,
+            "resolved_wave_labels": [],
+            "all_waves": false,
+            "changed_minutes": {},
+            "changed_penalties": {},
+            "multipliers": {},
+            "eligible_crate_ids": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10,
+              11,
+              12,
+              13,
+              14,
+              15,
+              16,
+              17,
+              18,
+              19
+            ],
+            "available_window_ids": [
+              1,
+              2,
+              3,
+              5,
+              6,
+              7,
+              8,
+              10,
+              11,
+              12,
+              13,
+              15,
+              16
+            ],
+            "objective": "value",
+            "extra_alarms": [],
+            "counts": {
+              "locations": 7,
+              "roads": 8,
+              "crates": 19,
+              "windows": 13,
+              "alarms": 13
+            }
+          },
+          "methods": {
+            "A": "dp",
+            "B": "dijkstra",
+            "C": "dp",
+            "D": "heap"
+          }
+        },
+        {
+          "day": 2,
+          "event": "Storm",
+          "target": 3,
+          "closed_roads": [
+            3
+          ],
+          "route": {
+            "status": "OK",
+            "source": 0,
+            "target": 3,
+            "path": [
+              0,
+              3
+            ],
+            "road_ids": [
+              2
+            ],
+            "cost": 48,
+            "reachable": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6
+            ],
+            "distances": {
+              "0": 0,
+              "1": 16,
+              "2": 58,
+              "3": 48,
+              "4": 124,
+              "5": 98,
+              "6": 32
+            },
+            "fewest_path": [
+              0,
+              3
+            ],
+            "fewest_cost": 48,
+            "ops": {
+              "comparisons": 21,
+              "moves": 45,
+              "edge_tests": 28,
+              "relaxations": 6,
+              "finds": 0,
+              "pre_comparisons": 10,
+              "pre_moves": 20
+            },
+            "note": ""
+          },
+          "load": {
+            "status": "OK",
+            "selected": [
+              1,
+              2,
+              4,
+              6,
+              7,
+              9,
+              10,
+              11,
+              13,
+              14,
+              19
+            ],
+            "total_weight": 82,
+            "total_value": 843,
+            "ops": {
+              "items_examined": 19,
+              "cells": 1398,
+              "calls": 1
+            },
+            "note": ""
+          },
+          "trip_made": true,
+          "trip_kind": "delivery",
+          "dispatch_status": "OK",
+          "rescue": {
+            "status": "OK",
+            "chosen": [
+              4,
+              7,
+              10,
+              16
+            ],
+            "total": 304,
+            "ops": {
+              "comparisons": 33,
+              "moves": 52,
+              "probes": 32,
+              "items_examined": 13,
+              "cells": 13,
+              "subsets": 0,
+              "calls": 1,
+              "pre": {
+                "items_examined": 13,
+                "pair_tests": 0
+              }
+            },
+            "note": ""
+          },
+          "alarms": {
+            "status": "OK",
+            "releases": [
+              [
+                2,
+                0
+              ],
+              [
+                14,
+                1
+              ],
+              [
+                4,
+                2
+              ],
+              [
+                3,
+                3
+              ],
+              [
+                5,
+                4
+              ],
+              [
+                9,
+                5
+              ],
+              [
+                11,
+                6
+              ],
+              [
+                6,
+                7
+              ],
+              [
+                12,
+                8
+              ],
+              [
+                7,
+                9
+              ],
+              [
+                1,
+                10
+              ],
+              [
+                8,
+                11
+              ],
+              [
+                10,
+                12
+              ],
+              [
+                13,
+                13
+              ]
+            ],
+            "max_backlog": 6,
+            "total_wait": 51,
+            "max_wait": 10,
+            "ops": {
+              "comparisons": 49,
+              "moves": 50,
+              "pushes": 14,
+              "pops": 14,
+              "pre": {
+                "comparisons": 44,
+                "moves": 56
+              }
+            },
+            "note": ""
+          },
+          "alarm_metrics": {
+            "urgent_count": 3,
+            "urgent_wait": 1,
+            "urgent_max_wait": 1
+          },
+          "checks": {
+            "reachability": true,
+            "route_open_roads_and_cost": true,
+            "capacity_and_load_value": true,
+            "rescue_availability_compatibility_and_total": true,
+            "alarm_order_and_release_ticks": true
+          },
+          "input": {
+            "base_case": "1-06",
+            "source": 0,
+            "target": 3,
+            "capacity": 82,
+            "resolved_wave_labels": [
+              0
+            ],
+            "all_waves": false,
+            "changed_minutes": {
+              "0": 14,
+              "1": 54,
+              "2": 44,
+              "3": 86,
+              "4": 81,
+              "5": 12,
+              "6": 75,
+              "7": 66
+            },
+            "changed_penalties": {},
+            "multipliers": {
+              "3": 2
+            },
+            "eligible_crate_ids": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10,
+              11,
+              12,
+              13,
+              14,
+              15,
+              16,
+              17,
+              18,
+              19
+            ],
+            "available_window_ids": [
+              1,
+              2,
+              4,
+              5,
+              6,
+              7,
+              9,
+              10,
+              11,
+              12,
+              14,
+              15,
+              16
+            ],
+            "objective": "value",
+            "extra_alarms": [
+              {
+                "alarm_id": 14,
+                "tick": 0,
+                "priority": 9
+              }
+            ],
+            "counts": {
+              "locations": 7,
+              "roads": 8,
+              "crates": 19,
+              "windows": 13,
+              "alarms": 14
+            }
+          },
+          "methods": {
+            "A": "dp",
+            "B": "dijkstra",
+            "C": "dp",
+            "D": "heap"
+          }
+        },
+        {
+          "day": 3,
+          "event": "Food shortage",
+          "target": 1,
+          "closed_roads": [
+            0
+          ],
+          "route": {
+            "status": "OK",
+            "source": 0,
+            "target": 1,
+            "path": [
+              0,
+              3,
+              6,
+              1
+            ],
+            "road_ids": [
+              2,
+              7,
+              5
+            ],
+            "cost": 91,
+            "reachable": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6
+            ],
+            "distances": {
+              "0": 0,
+              "1": 91,
+              "2": 40,
+              "3": 33,
+              "4": 84,
+              "5": 58,
+              "6": 81
+            },
+            "fewest_path": [
+              0,
+              5,
+              1
+            ],
+            "fewest_cost": 114,
+            "ops": {
+              "comparisons": 24,
+              "moves": 48,
+              "edge_tests": 28,
+              "relaxations": 7,
+              "finds": 0,
+              "pre_comparisons": 9,
+              "pre_moves": 18
+            },
+            "note": ""
+          },
+          "load": {
+            "status": "OK",
+            "selected": [
+              1,
+              2,
+              3,
+              4,
+              7,
+              9,
+              10,
+              11,
+              13,
+              15,
+              18,
+              19
+            ],
+            "total_weight": 80,
+            "total_value": 1310,
+            "ops": {
+              "items_examined": 19,
+              "cells": 1398,
+              "calls": 1
+            },
+            "note": ""
+          },
+          "trip_made": true,
+          "trip_kind": "delivery",
+          "dispatch_status": "OK",
+          "rescue": {
+            "status": "OK",
+            "chosen": [
+              3,
+              4,
+              8,
+              11,
+              13,
+              14,
+              16
+            ],
+            "total": 365,
+            "ops": {
+              "comparisons": 32,
+              "moves": 52,
+              "probes": 33,
+              "items_examined": 13,
+              "cells": 13,
+              "subsets": 0,
+              "calls": 1,
+              "pre": {
+                "items_examined": 13,
+                "pair_tests": 0
+              }
+            },
+            "note": ""
+          },
+          "alarms": {
+            "status": "OK",
+            "releases": [
+              [
+                2,
+                0
+              ],
+              [
+                4,
+                1
+              ],
+              [
+                3,
+                2
+              ],
+              [
+                5,
+                3
+              ],
+              [
+                9,
+                4
+              ],
+              [
+                6,
+                5
+              ],
+              [
+                11,
+                6
+              ],
+              [
+                7,
+                7
+              ],
+              [
+                12,
+                8
+              ],
+              [
+                1,
+                9
+              ],
+              [
+                8,
+                10
+              ],
+              [
+                10,
+                11
+              ],
+              [
+                13,
+                12
+              ]
+            ],
+            "max_backlog": 5,
+            "total_wait": 38,
+            "max_wait": 9,
+            "ops": {
+              "comparisons": 43,
+              "moves": 47,
+              "pushes": 13,
+              "pops": 13,
+              "pre": {
+                "comparisons": 12,
+                "moves": 0
+              }
+            },
+            "note": ""
+          },
+          "alarm_metrics": {
+            "urgent_count": 2,
+            "urgent_wait": 0,
+            "urgent_max_wait": 0
+          },
+          "checks": {
+            "reachability": true,
+            "route_open_roads_and_cost": true,
+            "capacity_and_load_value": true,
+            "rescue_availability_compatibility_and_total": true,
+            "alarm_order_and_release_ticks": true
+          },
+          "input": {
+            "base_case": "1-06",
+            "source": 0,
+            "target": 1,
+            "capacity": 82,
+            "resolved_wave_labels": [
+              1
+            ],
+            "all_waves": false,
+            "changed_minutes": {},
+            "changed_penalties": {},
+            "multipliers": {
+              "0": 2
+            },
+            "eligible_crate_ids": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10,
+              11,
+              12,
+              13,
+              14,
+              15,
+              16,
+              17,
+              18,
+              19
+            ],
+            "available_window_ids": [
+              1,
+              3,
+              4,
+              5,
+              6,
+              8,
+              9,
+              10,
+              11,
+              13,
+              14,
+              15,
+              16
+            ],
+            "objective": "value",
+            "extra_alarms": [],
+            "counts": {
+              "locations": 7,
+              "roads": 8,
+              "crates": 19,
+              "windows": 13,
+              "alarms": 13
+            }
+          },
+          "methods": {
+            "A": "dp",
+            "B": "dijkstra",
+            "C": "dp",
+            "D": "heap"
+          }
+        },
+        {
+          "day": 4,
+          "event": "Dangerous area",
+          "target": 4,
+          "closed_roads": [
+            2
+          ],
+          "route": {
+            "status": "OK",
+            "source": 0,
+            "target": 4,
+            "path": [
+              0,
+              1,
+              6,
+              3,
+              4
+            ],
+            "road_ids": [
+              0,
+              5,
+              7,
+              6
+            ],
+            "cost": 132,
+            "reachable": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6
+            ],
+            "distances": {
+              "0": 0,
+              "1": 13,
+              "2": 44,
+              "3": 81,
+              "4": 132,
+              "5": 58,
+              "6": 29
+            },
+            "fewest_path": [
+              0,
+              1,
+              6,
+              3,
+              4
+            ],
+            "fewest_cost": 132,
+            "ops": {
+              "comparisons": 20,
+              "moves": 42,
+              "edge_tests": 28,
+              "relaxations": 6,
+              "finds": 0,
+              "pre_comparisons": 9,
+              "pre_moves": 18
+            },
+            "note": ""
+          },
+          "load": {
+            "status": "OK",
+            "selected": [
+              1,
+              2,
+              3,
+              4,
+              7,
+              9,
+              10,
+              11,
+              13,
+              14,
+              15,
+              19
+            ],
+            "total_weight": 82,
+            "total_value": 826,
+            "ops": {
+              "items_examined": 19,
+              "cells": 1398,
+              "calls": 1
+            },
+            "note": ""
+          },
+          "trip_made": true,
+          "trip_kind": "delivery",
+          "dispatch_status": "OK",
+          "rescue": {
+            "status": "OK",
+            "chosen": [
+              3,
+              4,
+              7,
+              8,
+              12,
+              14
+            ],
+            "total": 353,
+            "ops": {
+              "comparisons": 31,
+              "moves": 48,
+              "probes": 28,
+              "items_examined": 12,
+              "cells": 12,
+              "subsets": 0,
+              "calls": 1,
+              "pre": {
+                "items_examined": 12,
+                "pair_tests": 0
+              }
+            },
+            "note": ""
+          },
+          "alarms": {
+            "status": "OK",
+            "releases": [
+              [
+                2,
+                0
+              ],
+              [
+                4,
+                1
+              ],
+              [
+                3,
+                2
+              ],
+              [
+                5,
+                3
+              ],
+              [
+                9,
+                4
+              ],
+              [
+                6,
+                5
+              ],
+              [
+                11,
+                6
+              ],
+              [
+                7,
+                7
+              ],
+              [
+                12,
+                8
+              ],
+              [
+                1,
+                9
+              ],
+              [
+                8,
+                10
+              ],
+              [
+                10,
+                11
+              ],
+              [
+                13,
+                12
+              ]
+            ],
+            "max_backlog": 5,
+            "total_wait": 38,
+            "max_wait": 9,
+            "ops": {
+              "comparisons": 43,
+              "moves": 47,
+              "pushes": 13,
+              "pops": 13,
+              "pre": {
+                "comparisons": 12,
+                "moves": 0
+              }
+            },
+            "note": ""
+          },
+          "alarm_metrics": {
+            "urgent_count": 2,
+            "urgent_wait": 0,
+            "urgent_max_wait": 0
+          },
+          "checks": {
+            "reachability": true,
+            "route_open_roads_and_cost": true,
+            "capacity_and_load_value": true,
+            "rescue_availability_compatibility_and_total": true,
+            "alarm_order_and_release_ticks": true
+          },
+          "input": {
+            "base_case": "1-06",
+            "source": 0,
+            "target": 4,
+            "capacity": 82,
+            "resolved_wave_labels": [
+              2
+            ],
+            "all_waves": false,
+            "changed_minutes": {},
+            "changed_penalties": {
+              "1": 4,
+              "2": 8,
+              "3": 8,
+              "6": 8
+            },
+            "multipliers": {},
+            "eligible_crate_ids": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10,
+              11,
+              12,
+              13,
+              14,
+              15,
+              16,
+              17,
+              18,
+              19
+            ],
+            "available_window_ids": [
+              2,
+              3,
+              4,
+              5,
+              7,
+              8,
+              9,
+              10,
+              12,
+              13,
+              14,
+              15
+            ],
+            "objective": "value",
+            "extra_alarms": [],
+            "counts": {
+              "locations": 7,
+              "roads": 8,
+              "crates": 19,
+              "windows": 12,
+              "alarms": 13
+            }
+          },
+          "methods": {
+            "A": "dp",
+            "B": "dijkstra",
+            "C": "dp",
+            "D": "heap"
+          }
+        },
+        {
+          "day": 5,
+          "event": "Medical emergency",
+          "target": 3,
+          "closed_roads": [
+            3
+          ],
+          "route": {
+            "status": "OK",
+            "source": 0,
+            "target": 3,
+            "path": [
+              0,
+              3
+            ],
+            "road_ids": [
+              2
+            ],
+            "cost": 33,
+            "reachable": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6
+            ],
+            "distances": {
+              "0": 0,
+              "1": 11,
+              "2": 40,
+              "3": 33,
+              "4": 84,
+              "5": 66,
+              "6": 23
+            },
+            "fewest_path": [
+              0,
+              3
+            ],
+            "fewest_cost": 33,
+            "ops": {
+              "comparisons": 21,
+              "moves": 45,
+              "edge_tests": 28,
+              "relaxations": 6,
+              "finds": 0,
+              "pre_comparisons": 10,
+              "pre_moves": 20
+            },
+            "note": ""
+          },
+          "load": {
+            "status": "OK",
+            "selected": [
+              1,
+              2,
+              3,
+              4,
+              7,
+              9,
+              10,
+              11,
+              13,
+              14,
+              15,
+              19
+            ],
+            "total_weight": 82,
+            "total_value": 826,
+            "ops": {
+              "items_examined": 19,
+              "cells": 1398,
+              "calls": 1
+            },
+            "note": ""
+          },
+          "trip_made": true,
+          "trip_kind": "delivery",
+          "dispatch_status": "OK",
+          "rescue": {
+            "status": "OK",
+            "chosen": [
+              3,
+              4,
+              7,
+              8,
+              13,
+              14,
+              16
+            ],
+            "total": 391,
+            "ops": {
+              "comparisons": 33,
+              "moves": 52,
+              "probes": 29,
+              "items_examined": 13,
+              "cells": 13,
+              "subsets": 0,
+              "calls": 1,
+              "pre": {
+                "items_examined": 13,
+                "pair_tests": 0
+              }
+            },
+            "note": ""
+          },
+          "alarms": {
+            "status": "OK",
+            "releases": [
+              [
+                2,
+                0
+              ],
+              [
+                14,
+                1
+              ],
+              [
+                4,
+                2
+              ],
+              [
+                3,
+                3
+              ],
+              [
+                5,
+                4
+              ],
+              [
+                9,
+                5
+              ],
+              [
+                11,
+                6
+              ],
+              [
+                6,
+                7
+              ],
+              [
+                12,
+                8
+              ],
+              [
+                7,
+                9
+              ],
+              [
+                1,
+                10
+              ],
+              [
+                8,
+                11
+              ],
+              [
+                10,
+                12
+              ],
+              [
+                13,
+                13
+              ]
+            ],
+            "max_backlog": 6,
+            "total_wait": 51,
+            "max_wait": 10,
+            "ops": {
+              "comparisons": 49,
+              "moves": 50,
+              "pushes": 14,
+              "pops": 14,
+              "pre": {
+                "comparisons": 44,
+                "moves": 56
+              }
+            },
+            "note": ""
+          },
+          "alarm_metrics": {
+            "urgent_count": 3,
+            "urgent_wait": 1,
+            "urgent_max_wait": 1
+          },
+          "checks": {
+            "reachability": true,
+            "route_open_roads_and_cost": true,
+            "capacity_and_load_value": true,
+            "rescue_availability_compatibility_and_total": true,
+            "alarm_order_and_release_ticks": true
+          },
+          "input": {
+            "base_case": "1-06",
+            "source": 0,
+            "target": 3,
+            "capacity": 82,
+            "resolved_wave_labels": [
+              0
+            ],
+            "all_waves": false,
+            "changed_minutes": {},
+            "changed_penalties": {},
+            "multipliers": {
+              "2": 3
+            },
+            "eligible_crate_ids": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10,
+              11,
+              12,
+              13,
+              14,
+              15,
+              16,
+              17,
+              18,
+              19
+            ],
+            "available_window_ids": [
+              1,
+              2,
+              3,
+              4,
+              6,
+              7,
+              8,
+              9,
+              11,
+              12,
+              13,
+              14,
+              16
+            ],
+            "objective": "value",
+            "extra_alarms": [
+              {
+                "alarm_id": 14,
+                "tick": 0,
+                "priority": 10
+              }
+            ],
+            "counts": {
+              "locations": 7,
+              "roads": 8,
+              "crates": 19,
+              "windows": 13,
+              "alarms": 14
+            }
+          },
+          "methods": {
+            "A": "dp",
+            "B": "dijkstra",
+            "C": "dp",
+            "D": "heap"
+          }
+        },
+        {
+          "day": 6,
+          "event": "Flood",
+          "target": 1,
+          "closed_roads": [
+            0,
+            2,
+            3
+          ],
+          "route": {
+            "status": "NO_ROUTE",
+            "source": 0,
+            "target": 1,
+            "path": [],
+            "road_ids": [],
+            "cost": null,
+            "reachable": [
+              0,
+              2
+            ],
+            "distances": {
+              "0": 0,
+              "1": null,
+              "2": 40,
+              "3": null,
+              "4": null,
+              "5": null,
+              "6": null
+            },
+            "fewest_path": [],
+            "fewest_cost": null,
+            "ops": {
+              "comparisons": 1,
+              "moves": 6,
+              "edge_tests": 4,
+              "relaxations": 1,
+              "finds": 0,
+              "pre_comparisons": 3,
+              "pre_moves": 6
+            },
+            "note": ""
+          },
+          "load": null,
+          "trip_made": false,
+          "trip_kind": "delivery",
+          "dispatch_status": "NO_ROUTE",
+          "rescue": {
+            "status": "OK",
+            "chosen": [
+              3,
+              7,
+              10,
+              13,
+              16
+            ],
+            "total": 342,
+            "ops": {
+              "comparisons": 34,
+              "moves": 52,
+              "probes": 33,
+              "items_examined": 13,
+              "cells": 13,
+              "subsets": 0,
+              "calls": 1,
+              "pre": {
+                "items_examined": 13,
+                "pair_tests": 0
+              }
+            },
+            "note": ""
+          },
+          "alarms": {
+            "status": "OK",
+            "releases": [
+              [
+                2,
+                0
+              ],
+              [
+                4,
+                1
+              ],
+              [
+                3,
+                2
+              ],
+              [
+                5,
+                3
+              ],
+              [
+                9,
+                4
+              ],
+              [
+                6,
+                5
+              ],
+              [
+                11,
+                6
+              ],
+              [
+                7,
+                7
+              ],
+              [
+                12,
+                8
+              ],
+              [
+                1,
+                9
+              ],
+              [
+                8,
+                10
+              ],
+              [
+                10,
+                11
+              ],
+              [
+                13,
+                12
+              ]
+            ],
+            "max_backlog": 5,
+            "total_wait": 38,
+            "max_wait": 9,
+            "ops": {
+              "comparisons": 43,
+              "moves": 47,
+              "pushes": 13,
+              "pops": 13,
+              "pre": {
+                "comparisons": 12,
+                "moves": 0
+              }
+            },
+            "note": ""
+          },
+          "alarm_metrics": {
+            "urgent_count": 2,
+            "urgent_wait": 0,
+            "urgent_max_wait": 0
+          },
+          "checks": {
+            "reachability": true,
+            "route_open_roads_and_cost": true,
+            "capacity_and_load_value": true,
+            "rescue_availability_compatibility_and_total": true,
+            "alarm_order_and_release_ticks": true
+          },
+          "input": {
+            "base_case": "1-06",
+            "source": 0,
+            "target": 1,
+            "capacity": 82,
+            "resolved_wave_labels": [],
+            "all_waves": true,
+            "changed_minutes": {},
+            "changed_penalties": {},
+            "multipliers": {},
+            "eligible_crate_ids": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10,
+              11,
+              12,
+              13,
+              14,
+              15,
+              16,
+              17,
+              18,
+              19
+            ],
+            "available_window_ids": [
+              1,
+              2,
+              3,
+              5,
+              6,
+              7,
+              8,
+              10,
+              11,
+              12,
+              13,
+              15,
+              16
+            ],
+            "objective": "value",
+            "extra_alarms": [],
+            "counts": {
+              "locations": 7,
+              "roads": 8,
+              "crates": 19,
+              "windows": 13,
+              "alarms": 13
+            }
+          },
+          "methods": {
+            "A": "dp",
+            "B": "dijkstra",
+            "C": "dp",
+            "D": "heap"
+          }
+        },
+        {
+          "day": 7,
+          "event": "Evacuation",
+          "target": 4,
+          "closed_roads": [
+            0,
+            2,
+            3
+          ],
+          "route": {
+            "status": "NO_ROUTE",
+            "source": 0,
+            "target": 4,
+            "path": [],
+            "road_ids": [],
+            "cost": null,
+            "reachable": [
+              0,
+              2
+            ],
+            "distances": {
+              "0": 0,
+              "1": null,
+              "2": 40,
+              "3": null,
+              "4": null,
+              "5": null,
+              "6": null
+            },
+            "fewest_path": [],
+            "fewest_cost": null,
+            "ops": {
+              "comparisons": 1,
+              "moves": 6,
+              "edge_tests": 4,
+              "relaxations": 1,
+              "finds": 0,
+              "pre_comparisons": 3,
+              "pre_moves": 6
+            },
+            "note": ""
+          },
+          "load": null,
+          "trip_made": false,
+          "trip_kind": "evacuation",
+          "dispatch_status": "NO_ROUTE",
+          "rescue": {
+            "status": "OK",
+            "chosen": [
+              4,
+              7,
+              10,
+              16
+            ],
+            "total": 304,
+            "ops": {
+              "comparisons": 33,
+              "moves": 52,
+              "probes": 32,
+              "items_examined": 13,
+              "cells": 13,
+              "subsets": 0,
+              "calls": 1,
+              "pre": {
+                "items_examined": 13,
+                "pair_tests": 0
+              }
+            },
+            "note": ""
+          },
+          "alarms": {
+            "status": "OK",
+            "releases": [
+              [
+                2,
+                0
+              ],
+              [
+                4,
+                1
+              ],
+              [
+                3,
+                2
+              ],
+              [
+                5,
+                3
+              ],
+              [
+                9,
+                4
+              ],
+              [
+                6,
+                5
+              ],
+              [
+                11,
+                6
+              ],
+              [
+                7,
+                7
+              ],
+              [
+                12,
+                8
+              ],
+              [
+                1,
+                9
+              ],
+              [
+                8,
+                10
+              ],
+              [
+                10,
+                11
+              ],
+              [
+                13,
+                12
+              ]
+            ],
+            "max_backlog": 5,
+            "total_wait": 38,
+            "max_wait": 9,
+            "ops": {
+              "comparisons": 43,
+              "moves": 47,
+              "pushes": 13,
+              "pops": 13,
+              "pre": {
+                "comparisons": 12,
+                "moves": 0
+              }
+            },
+            "note": ""
+          },
+          "alarm_metrics": {
+            "urgent_count": 2,
+            "urgent_wait": 0,
+            "urgent_max_wait": 0
+          },
+          "checks": {
+            "reachability": true,
+            "route_open_roads_and_cost": true,
+            "capacity_and_load_value": true,
+            "rescue_availability_compatibility_and_total": true,
+            "alarm_order_and_release_ticks": true,
+            "cable_tree_connects_hq_component": true,
+            "chain_bracketing_cost": true,
+            "drum_length_and_price": true
+          },
+          "input": {
+            "base_case": "1-06",
+            "source": 0,
+            "target": 4,
+            "capacity": 82,
+            "resolved_wave_labels": [],
+            "all_waves": true,
+            "changed_minutes": {},
+            "changed_penalties": {},
+            "multipliers": {},
+            "eligible_crate_ids": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10,
+              11,
+              12,
+              13,
+              14,
+              15,
+              16,
+              17,
+              18,
+              19
+            ],
+            "available_window_ids": [
+              1,
+              2,
+              4,
+              5,
+              6,
+              7,
+              9,
+              10,
+              11,
+              12,
+              14,
+              15,
+              16
+            ],
+            "objective": "value",
+            "extra_alarms": [],
+            "counts": {
+              "locations": 7,
+              "roads": 8,
+              "crates": 19,
+              "windows": 13,
+              "alarms": 13
+            }
+          },
+          "methods": {
+            "A": "dp",
+            "B": "dijkstra",
+            "C": "dp",
+            "D": "heap",
+            "F": "kruskal",
+            "G_chain": "dp",
+            "G_drum": "dp"
+          },
+          "network": {
+            "status": "OK",
+            "road_ids": [
+              1
+            ],
+            "cost": 27,
+            "components": [
+              [
+                0,
+                2
+              ]
+            ],
+            "ops": {
+              "comparisons": 1,
+              "moves": 2,
+              "edge_tests": 1,
+              "relaxations": 0,
+              "finds": 5,
+              "pre_comparisons": 0,
+              "pre_moves": 0
+            },
+            "note": ""
+          },
+          "chain": {
+            "status": "OK",
+            "bracketing": "(((A1 A2) A3) A4)",
+            "cost": 418150,
+            "ops": {
+              "comparisons": 0,
+              "moves": 0,
+              "items_examined": 0,
+              "cells": 6,
+              "candidates": 10,
+              "enumerated": 0,
+              "calls": 1,
+              "pre": {
+                "items_examined": 5
+              }
+            },
+            "note": ""
+          },
+          "drum": {
+            "status": "OK",
+            "pieces": [
+              1,
+              2,
+              2,
+              2,
+              2,
+              2,
+              2
+            ],
+            "price": 133,
+            "ops": {
+              "comparisons": 0,
+              "moves": 0,
+              "items_examined": 0,
+              "cells": 13,
+              "candidates": 91,
+              "enumerated": 0,
+              "calls": 1,
+              "pre": {
+                "items_examined": 13
+              }
+            },
+            "note": ""
+          }
+        }
+      ],
+      "summary": {
+        "delivered_value": 4631,
+        "route_cost": 388,
+        "evacuation_cost": null,
+        "unreachable_days": 2,
+        "rescue_total": 2401,
+        "alarm_wait": 292,
+        "urgent_mean_wait": 0.125
+      }
+    },
+    "baseline": {
+      "case_id": "1-06",
+      "calendar": {
+        "name": "Official LIFELINE calendar - Project Statement section 7.4, page 7",
+        "note": "Daily changes start from the base case. Wave indices are zero-based positions in sorted wave labels, wrapping modulo the number of waves. Only days 6 and 7 retain the union of every wave. Stock resets each day; no extra expiry rule is prescribed.",
+        "inventory_mode": "daily",
+        "closure_mode": "daily",
+        "days": [
+          {
+            "day": 1,
+            "event": "Normal",
+            "target_key": "target_0"
+          },
+          {
+            "day": 2,
+            "event": "Storm",
+            "target_key": "target_1",
+            "wave_indices": [
+              0
+            ],
+            "minutes_ratio": [
+              3,
+              2
+            ],
+            "multipliers": {
+              "3": 2
+            },
+            "extra_alarms": [
+              [
+                0,
+                9
+              ]
+            ]
+          },
+          {
+            "day": 3,
+            "event": "Food shortage",
+            "target_key": "target_2",
+            "wave_indices": [
+              1
+            ],
+            "multipliers": {
+              "0": 2
+            }
+          },
+          {
+            "day": 4,
+            "event": "Dangerous area",
+            "target_key": "target_0",
+            "wave_indices": [
+              2
+            ],
+            "penalty_threshold": 2,
+            "penalty_multiplier": 2
+          },
+          {
+            "day": 5,
+            "event": "Medical emergency",
+            "target_key": "target_1",
+            "wave_indices": [
+              3
+            ],
+            "multipliers": {
+              "2": 3
+            },
+            "extra_alarms": [
+              [
+                0,
+                10
+              ]
+            ]
+          },
+          {
+            "day": 6,
+            "event": "Flood",
+            "target_key": "target_2",
+            "all_waves": true
+          },
+          {
+            "day": 7,
+            "event": "Evacuation",
+            "target_key": "target_0",
+            "all_waves": true,
+            "load": false,
+            "evacuation": true,
+            "review": true
+          }
+        ]
+      },
+      "policy": "baseline",
+      "days": [
+        {
+          "day": 1,
+          "event": "Normal",
+          "target": 4,
+          "closed_roads": [],
+          "route": {
+            "status": "OK",
+            "source": 0,
+            "target": 4,
+            "path": [
+              0,
+              3,
+              4
+            ],
+            "road_ids": [
+              2,
+              6
+            ],
+            "cost": 84,
+            "reachable": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6
+            ],
+            "distances": {
+              "0": 0,
+              "1": 11,
+              "2": 40,
+              "3": 33,
+              "4": 84,
+              "5": 58,
+              "6": 23
+            },
+            "fewest_path": [
+              0,
+              3,
+              4
+            ],
+            "fewest_cost": 84,
+            "ops": {
+              "comparisons": 21,
+              "moves": 42,
+              "edge_tests": 48,
+              "relaxations": 6,
+              "finds": 0,
+              "pre_comparisons": 12,
+              "pre_moves": 24
+            },
+            "note": ""
+          },
+          "load": {
+            "status": "OK",
+            "selected": [
+              1,
+              2,
+              3,
+              4,
+              7,
+              9,
+              10,
+              11,
+              14,
+              18,
+              19
+            ],
+            "total_weight": 77,
+            "total_value": 807,
+            "ops": {
+              "items_examined": 38,
+              "comparisons": 64,
+              "moves": 95,
+              "calls": 1
+            },
+            "note": ""
+          },
+          "trip_made": true,
+          "trip_kind": "delivery",
+          "dispatch_status": "OK",
+          "rescue": {
+            "status": "OK",
+            "chosen": [
+              3,
+              7,
+              10,
+              13,
+              16
+            ],
+            "total": 342,
+            "ops": {
+              "comparisons": 34,
+              "moves": 52,
+              "probes": 0,
+              "items_examined": 78,
+              "cells": 13,
+              "subsets": 0,
+              "calls": 1,
+              "pre": {
+                "items_examined": 13,
+                "pair_tests": 0
+              }
+            },
+            "note": ""
+          },
+          "alarms": {
+            "status": "OK",
+            "releases": [
+              [
+                2,
+                0
+              ],
+              [
+                4,
+                1
+              ],
+              [
+                3,
+                2
+              ],
+              [
+                5,
+                3
+              ],
+              [
+                9,
+                4
+              ],
+              [
+                6,
+                5
+              ],
+              [
+                11,
+                6
+              ],
+              [
+                7,
+                7
+              ],
+              [
+                12,
+                8
+              ],
+              [
+                1,
+                9
+              ],
+              [
+                8,
+                10
+              ],
+              [
+                10,
+                11
+              ],
+              [
+                13,
+                12
+              ]
+            ],
+            "max_backlog": 5,
+            "total_wait": 38,
+            "max_wait": 9,
+            "ops": {
+              "comparisons": 38,
+              "moves": 26,
+              "pushes": 13,
+              "pops": 13,
+              "pre": {
+                "comparisons": 12,
+                "moves": 0
+              }
+            },
+            "note": ""
+          },
+          "alarm_metrics": {
+            "urgent_count": 2,
+            "urgent_wait": 0,
+            "urgent_max_wait": 0
+          },
+          "checks": {
+            "reachability": true,
+            "route_open_roads_and_cost": true,
+            "capacity_and_load_value": true,
+            "rescue_availability_compatibility_and_total": true,
+            "alarm_order_and_release_ticks": true
+          },
+          "input": {
+            "base_case": "1-06",
+            "source": 0,
+            "target": 4,
+            "capacity": 82,
+            "resolved_wave_labels": [],
+            "all_waves": false,
+            "changed_minutes": {},
+            "changed_penalties": {},
+            "multipliers": {},
+            "eligible_crate_ids": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10,
+              11,
+              12,
+              13,
+              14,
+              15,
+              16,
+              17,
+              18,
+              19
+            ],
+            "available_window_ids": [
+              1,
+              2,
+              3,
+              5,
+              6,
+              7,
+              8,
+              10,
+              11,
+              12,
+              13,
+              15,
+              16
+            ],
+            "objective": "value",
+            "extra_alarms": [],
+            "counts": {
+              "locations": 7,
+              "roads": 8,
+              "crates": 19,
+              "windows": 13,
+              "alarms": 13
+            }
+          },
+          "methods": {
+            "A": "greedy",
+            "B": "bellman",
+            "C": "dpquad",
+            "D": "scan"
+          }
+        },
+        {
+          "day": 2,
+          "event": "Storm",
+          "target": 3,
+          "closed_roads": [
+            3
+          ],
+          "route": {
+            "status": "OK",
+            "source": 0,
+            "target": 3,
+            "path": [
+              0,
+              3
+            ],
+            "road_ids": [
+              2
+            ],
+            "cost": 48,
+            "reachable": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6
+            ],
+            "distances": {
+              "0": 0,
+              "1": 16,
+              "2": 58,
+              "3": 48,
+              "4": 124,
+              "5": 98,
+              "6": 32
+            },
+            "fewest_path": [
+              0,
+              3
+            ],
+            "fewest_cost": 48,
+            "ops": {
+              "comparisons": 21,
+              "moves": 42,
+              "edge_tests": 42,
+              "relaxations": 6,
+              "finds": 0,
+              "pre_comparisons": 10,
+              "pre_moves": 20
+            },
+            "note": ""
+          },
+          "load": {
+            "status": "OK",
+            "selected": [
+              1,
+              2,
+              4,
+              6,
+              7,
+              9,
+              10,
+              11,
+              13,
+              14,
+              19
+            ],
+            "total_weight": 82,
+            "total_value": 843,
+            "ops": {
+              "items_examined": 38,
+              "comparisons": 65,
+              "moves": 95,
+              "calls": 1
+            },
+            "note": ""
+          },
+          "trip_made": true,
+          "trip_kind": "delivery",
+          "dispatch_status": "OK",
+          "rescue": {
+            "status": "OK",
+            "chosen": [
+              4,
+              7,
+              10,
+              16
+            ],
+            "total": 304,
+            "ops": {
+              "comparisons": 33,
+              "moves": 52,
+              "probes": 0,
+              "items_examined": 78,
+              "cells": 13,
+              "subsets": 0,
+              "calls": 1,
+              "pre": {
+                "items_examined": 13,
+                "pair_tests": 0
+              }
+            },
+            "note": ""
+          },
+          "alarms": {
+            "status": "OK",
+            "releases": [
+              [
+                2,
+                0
+              ],
+              [
+                14,
+                1
+              ],
+              [
+                4,
+                2
+              ],
+              [
+                3,
+                3
+              ],
+              [
+                5,
+                4
+              ],
+              [
+                9,
+                5
+              ],
+              [
+                11,
+                6
+              ],
+              [
+                6,
+                7
+              ],
+              [
+                12,
+                8
+              ],
+              [
+                7,
+                9
+              ],
+              [
+                1,
+                10
+              ],
+              [
+                8,
+                11
+              ],
+              [
+                10,
+                12
+              ],
+              [
+                13,
+                13
+              ]
+            ],
+            "max_backlog": 6,
+            "total_wait": 51,
+            "max_wait": 10,
+            "ops": {
+              "comparisons": 51,
+              "moves": 28,
+              "pushes": 14,
+              "pops": 14,
+              "pre": {
+                "comparisons": 44,
+                "moves": 56
+              }
+            },
+            "note": ""
+          },
+          "alarm_metrics": {
+            "urgent_count": 3,
+            "urgent_wait": 1,
+            "urgent_max_wait": 1
+          },
+          "checks": {
+            "reachability": true,
+            "route_open_roads_and_cost": true,
+            "capacity_and_load_value": true,
+            "rescue_availability_compatibility_and_total": true,
+            "alarm_order_and_release_ticks": true
+          },
+          "input": {
+            "base_case": "1-06",
+            "source": 0,
+            "target": 3,
+            "capacity": 82,
+            "resolved_wave_labels": [
+              0
+            ],
+            "all_waves": false,
+            "changed_minutes": {
+              "0": 14,
+              "1": 54,
+              "2": 44,
+              "3": 86,
+              "4": 81,
+              "5": 12,
+              "6": 75,
+              "7": 66
+            },
+            "changed_penalties": {},
+            "multipliers": {
+              "3": 2
+            },
+            "eligible_crate_ids": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10,
+              11,
+              12,
+              13,
+              14,
+              15,
+              16,
+              17,
+              18,
+              19
+            ],
+            "available_window_ids": [
+              1,
+              2,
+              4,
+              5,
+              6,
+              7,
+              9,
+              10,
+              11,
+              12,
+              14,
+              15,
+              16
+            ],
+            "objective": "value",
+            "extra_alarms": [
+              {
+                "alarm_id": 14,
+                "tick": 0,
+                "priority": 9
+              }
+            ],
+            "counts": {
+              "locations": 7,
+              "roads": 8,
+              "crates": 19,
+              "windows": 13,
+              "alarms": 14
+            }
+          },
+          "methods": {
+            "A": "greedy",
+            "B": "bellman",
+            "C": "dpquad",
+            "D": "scan"
+          }
+        },
+        {
+          "day": 3,
+          "event": "Food shortage",
+          "target": 1,
+          "closed_roads": [
+            0
+          ],
+          "route": {
+            "status": "OK",
+            "source": 0,
+            "target": 1,
+            "path": [
+              0,
+              3,
+              6,
+              1
+            ],
+            "road_ids": [
+              2,
+              7,
+              5
+            ],
+            "cost": 91,
+            "reachable": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6
+            ],
+            "distances": {
+              "0": 0,
+              "1": 91,
+              "2": 40,
+              "3": 33,
+              "4": 84,
+              "5": 58,
+              "6": 81
+            },
+            "fewest_path": [
+              0,
+              5,
+              1
+            ],
+            "fewest_cost": 114,
+            "ops": {
+              "comparisons": 23,
+              "moves": 42,
+              "edge_tests": 40,
+              "relaxations": 7,
+              "finds": 0,
+              "pre_comparisons": 9,
+              "pre_moves": 18
+            },
+            "note": ""
+          },
+          "load": {
+            "status": "OK",
+            "selected": [
+              1,
+              2,
+              3,
+              4,
+              7,
+              9,
+              10,
+              11,
+              13,
+              15,
+              18,
+              19
+            ],
+            "total_weight": 80,
+            "total_value": 1310,
+            "ops": {
+              "items_examined": 38,
+              "comparisons": 66,
+              "moves": 95,
+              "calls": 1
+            },
+            "note": ""
+          },
+          "trip_made": true,
+          "trip_kind": "delivery",
+          "dispatch_status": "OK",
+          "rescue": {
+            "status": "OK",
+            "chosen": [
+              3,
+              4,
+              8,
+              11,
+              13,
+              14,
+              16
+            ],
+            "total": 365,
+            "ops": {
+              "comparisons": 32,
+              "moves": 52,
+              "probes": 0,
+              "items_examined": 78,
+              "cells": 13,
+              "subsets": 0,
+              "calls": 1,
+              "pre": {
+                "items_examined": 13,
+                "pair_tests": 0
+              }
+            },
+            "note": ""
+          },
+          "alarms": {
+            "status": "OK",
+            "releases": [
+              [
+                2,
+                0
+              ],
+              [
+                4,
+                1
+              ],
+              [
+                3,
+                2
+              ],
+              [
+                5,
+                3
+              ],
+              [
+                9,
+                4
+              ],
+              [
+                6,
+                5
+              ],
+              [
+                11,
+                6
+              ],
+              [
+                7,
+                7
+              ],
+              [
+                12,
+                8
+              ],
+              [
+                1,
+                9
+              ],
+              [
+                8,
+                10
+              ],
+              [
+                10,
+                11
+              ],
+              [
+                13,
+                12
+              ]
+            ],
+            "max_backlog": 5,
+            "total_wait": 38,
+            "max_wait": 9,
+            "ops": {
+              "comparisons": 38,
+              "moves": 26,
+              "pushes": 13,
+              "pops": 13,
+              "pre": {
+                "comparisons": 12,
+                "moves": 0
+              }
+            },
+            "note": ""
+          },
+          "alarm_metrics": {
+            "urgent_count": 2,
+            "urgent_wait": 0,
+            "urgent_max_wait": 0
+          },
+          "checks": {
+            "reachability": true,
+            "route_open_roads_and_cost": true,
+            "capacity_and_load_value": true,
+            "rescue_availability_compatibility_and_total": true,
+            "alarm_order_and_release_ticks": true
+          },
+          "input": {
+            "base_case": "1-06",
+            "source": 0,
+            "target": 1,
+            "capacity": 82,
+            "resolved_wave_labels": [
+              1
+            ],
+            "all_waves": false,
+            "changed_minutes": {},
+            "changed_penalties": {},
+            "multipliers": {
+              "0": 2
+            },
+            "eligible_crate_ids": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10,
+              11,
+              12,
+              13,
+              14,
+              15,
+              16,
+              17,
+              18,
+              19
+            ],
+            "available_window_ids": [
+              1,
+              3,
+              4,
+              5,
+              6,
+              8,
+              9,
+              10,
+              11,
+              13,
+              14,
+              15,
+              16
+            ],
+            "objective": "value",
+            "extra_alarms": [],
+            "counts": {
+              "locations": 7,
+              "roads": 8,
+              "crates": 19,
+              "windows": 13,
+              "alarms": 13
+            }
+          },
+          "methods": {
+            "A": "greedy",
+            "B": "bellman",
+            "C": "dpquad",
+            "D": "scan"
+          }
+        },
+        {
+          "day": 4,
+          "event": "Dangerous area",
+          "target": 4,
+          "closed_roads": [
+            2
+          ],
+          "route": {
+            "status": "OK",
+            "source": 0,
+            "target": 4,
+            "path": [
+              0,
+              1,
+              6,
+              3,
+              4
+            ],
+            "road_ids": [
+              0,
+              5,
+              7,
+              6
+            ],
+            "cost": 132,
+            "reachable": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6
+            ],
+            "distances": {
+              "0": 0,
+              "1": 13,
+              "2": 44,
+              "3": 81,
+              "4": 132,
+              "5": 58,
+              "6": 29
+            },
+            "fewest_path": [
+              0,
+              1,
+              6,
+              3,
+              4
+            ],
+            "fewest_cost": 132,
+            "ops": {
+              "comparisons": 24,
+              "moves": 42,
+              "edge_tests": 53,
+              "relaxations": 6,
+              "finds": 0,
+              "pre_comparisons": 9,
+              "pre_moves": 18
+            },
+            "note": ""
+          },
+          "load": {
+            "status": "OK",
+            "selected": [
+              1,
+              2,
+              3,
+              4,
+              7,
+              9,
+              10,
+              11,
+              14,
+              18,
+              19
+            ],
+            "total_weight": 77,
+            "total_value": 807,
+            "ops": {
+              "items_examined": 38,
+              "comparisons": 64,
+              "moves": 95,
+              "calls": 1
+            },
+            "note": ""
+          },
+          "trip_made": true,
+          "trip_kind": "delivery",
+          "dispatch_status": "OK",
+          "rescue": {
+            "status": "OK",
+            "chosen": [
+              3,
+              4,
+              7,
+              8,
+              12,
+              14
+            ],
+            "total": 353,
+            "ops": {
+              "comparisons": 31,
+              "moves": 48,
+              "probes": 0,
+              "items_examined": 66,
+              "cells": 12,
+              "subsets": 0,
+              "calls": 1,
+              "pre": {
+                "items_examined": 12,
+                "pair_tests": 0
+              }
+            },
+            "note": ""
+          },
+          "alarms": {
+            "status": "OK",
+            "releases": [
+              [
+                2,
+                0
+              ],
+              [
+                4,
+                1
+              ],
+              [
+                3,
+                2
+              ],
+              [
+                5,
+                3
+              ],
+              [
+                9,
+                4
+              ],
+              [
+                6,
+                5
+              ],
+              [
+                11,
+                6
+              ],
+              [
+                7,
+                7
+              ],
+              [
+                12,
+                8
+              ],
+              [
+                1,
+                9
+              ],
+              [
+                8,
+                10
+              ],
+              [
+                10,
+                11
+              ],
+              [
+                13,
+                12
+              ]
+            ],
+            "max_backlog": 5,
+            "total_wait": 38,
+            "max_wait": 9,
+            "ops": {
+              "comparisons": 38,
+              "moves": 26,
+              "pushes": 13,
+              "pops": 13,
+              "pre": {
+                "comparisons": 12,
+                "moves": 0
+              }
+            },
+            "note": ""
+          },
+          "alarm_metrics": {
+            "urgent_count": 2,
+            "urgent_wait": 0,
+            "urgent_max_wait": 0
+          },
+          "checks": {
+            "reachability": true,
+            "route_open_roads_and_cost": true,
+            "capacity_and_load_value": true,
+            "rescue_availability_compatibility_and_total": true,
+            "alarm_order_and_release_ticks": true
+          },
+          "input": {
+            "base_case": "1-06",
+            "source": 0,
+            "target": 4,
+            "capacity": 82,
+            "resolved_wave_labels": [
+              2
+            ],
+            "all_waves": false,
+            "changed_minutes": {},
+            "changed_penalties": {
+              "1": 4,
+              "2": 8,
+              "3": 8,
+              "6": 8
+            },
+            "multipliers": {},
+            "eligible_crate_ids": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10,
+              11,
+              12,
+              13,
+              14,
+              15,
+              16,
+              17,
+              18,
+              19
+            ],
+            "available_window_ids": [
+              2,
+              3,
+              4,
+              5,
+              7,
+              8,
+              9,
+              10,
+              12,
+              13,
+              14,
+              15
+            ],
+            "objective": "value",
+            "extra_alarms": [],
+            "counts": {
+              "locations": 7,
+              "roads": 8,
+              "crates": 19,
+              "windows": 12,
+              "alarms": 13
+            }
+          },
+          "methods": {
+            "A": "greedy",
+            "B": "bellman",
+            "C": "dpquad",
+            "D": "scan"
+          }
+        },
+        {
+          "day": 5,
+          "event": "Medical emergency",
+          "target": 3,
+          "closed_roads": [
+            3
+          ],
+          "route": {
+            "status": "OK",
+            "source": 0,
+            "target": 3,
+            "path": [
+              0,
+              3
+            ],
+            "road_ids": [
+              2
+            ],
+            "cost": 33,
+            "reachable": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6
+            ],
+            "distances": {
+              "0": 0,
+              "1": 11,
+              "2": 40,
+              "3": 33,
+              "4": 84,
+              "5": 66,
+              "6": 23
+            },
+            "fewest_path": [
+              0,
+              3
+            ],
+            "fewest_cost": 33,
+            "ops": {
+              "comparisons": 21,
+              "moves": 42,
+              "edge_tests": 42,
+              "relaxations": 6,
+              "finds": 0,
+              "pre_comparisons": 10,
+              "pre_moves": 20
+            },
+            "note": ""
+          },
+          "load": {
+            "status": "OK",
+            "selected": [
+              1,
+              2,
+              3,
+              4,
+              7,
+              9,
+              10,
+              11,
+              14,
+              18,
+              19
+            ],
+            "total_weight": 77,
+            "total_value": 807,
+            "ops": {
+              "items_examined": 38,
+              "comparisons": 64,
+              "moves": 95,
+              "calls": 1
+            },
+            "note": ""
+          },
+          "trip_made": true,
+          "trip_kind": "delivery",
+          "dispatch_status": "OK",
+          "rescue": {
+            "status": "OK",
+            "chosen": [
+              3,
+              4,
+              7,
+              8,
+              13,
+              14,
+              16
+            ],
+            "total": 391,
+            "ops": {
+              "comparisons": 33,
+              "moves": 52,
+              "probes": 0,
+              "items_examined": 78,
+              "cells": 13,
+              "subsets": 0,
+              "calls": 1,
+              "pre": {
+                "items_examined": 13,
+                "pair_tests": 0
+              }
+            },
+            "note": ""
+          },
+          "alarms": {
+            "status": "OK",
+            "releases": [
+              [
+                2,
+                0
+              ],
+              [
+                14,
+                1
+              ],
+              [
+                4,
+                2
+              ],
+              [
+                3,
+                3
+              ],
+              [
+                5,
+                4
+              ],
+              [
+                9,
+                5
+              ],
+              [
+                11,
+                6
+              ],
+              [
+                6,
+                7
+              ],
+              [
+                12,
+                8
+              ],
+              [
+                7,
+                9
+              ],
+              [
+                1,
+                10
+              ],
+              [
+                8,
+                11
+              ],
+              [
+                10,
+                12
+              ],
+              [
+                13,
+                13
+              ]
+            ],
+            "max_backlog": 6,
+            "total_wait": 51,
+            "max_wait": 10,
+            "ops": {
+              "comparisons": 51,
+              "moves": 28,
+              "pushes": 14,
+              "pops": 14,
+              "pre": {
+                "comparisons": 44,
+                "moves": 56
+              }
+            },
+            "note": ""
+          },
+          "alarm_metrics": {
+            "urgent_count": 3,
+            "urgent_wait": 1,
+            "urgent_max_wait": 1
+          },
+          "checks": {
+            "reachability": true,
+            "route_open_roads_and_cost": true,
+            "capacity_and_load_value": true,
+            "rescue_availability_compatibility_and_total": true,
+            "alarm_order_and_release_ticks": true
+          },
+          "input": {
+            "base_case": "1-06",
+            "source": 0,
+            "target": 3,
+            "capacity": 82,
+            "resolved_wave_labels": [
+              0
+            ],
+            "all_waves": false,
+            "changed_minutes": {},
+            "changed_penalties": {},
+            "multipliers": {
+              "2": 3
+            },
+            "eligible_crate_ids": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10,
+              11,
+              12,
+              13,
+              14,
+              15,
+              16,
+              17,
+              18,
+              19
+            ],
+            "available_window_ids": [
+              1,
+              2,
+              3,
+              4,
+              6,
+              7,
+              8,
+              9,
+              11,
+              12,
+              13,
+              14,
+              16
+            ],
+            "objective": "value",
+            "extra_alarms": [
+              {
+                "alarm_id": 14,
+                "tick": 0,
+                "priority": 10
+              }
+            ],
+            "counts": {
+              "locations": 7,
+              "roads": 8,
+              "crates": 19,
+              "windows": 13,
+              "alarms": 14
+            }
+          },
+          "methods": {
+            "A": "greedy",
+            "B": "bellman",
+            "C": "dpquad",
+            "D": "scan"
+          }
+        },
+        {
+          "day": 6,
+          "event": "Flood",
+          "target": 1,
+          "closed_roads": [
+            0,
+            2,
+            3
+          ],
+          "route": {
+            "status": "NO_ROUTE",
+            "source": 0,
+            "target": 1,
+            "path": [],
+            "road_ids": [],
+            "cost": null,
+            "reachable": [
+              0,
+              2
+            ],
+            "distances": {
+              "0": 0,
+              "1": null,
+              "2": 40,
+              "3": null,
+              "4": null,
+              "5": null,
+              "6": null
+            },
+            "fewest_path": [],
+            "fewest_cost": null,
+            "ops": {
+              "comparisons": 12,
+              "moves": 23,
+              "edge_tests": 6,
+              "relaxations": 1,
+              "finds": 0,
+              "pre_comparisons": 3,
+              "pre_moves": 6
+            },
+            "note": ""
+          },
+          "load": null,
+          "trip_made": false,
+          "trip_kind": "delivery",
+          "dispatch_status": "NO_ROUTE",
+          "rescue": {
+            "status": "OK",
+            "chosen": [
+              3,
+              7,
+              10,
+              13,
+              16
+            ],
+            "total": 342,
+            "ops": {
+              "comparisons": 34,
+              "moves": 52,
+              "probes": 0,
+              "items_examined": 78,
+              "cells": 13,
+              "subsets": 0,
+              "calls": 1,
+              "pre": {
+                "items_examined": 13,
+                "pair_tests": 0
+              }
+            },
+            "note": ""
+          },
+          "alarms": {
+            "status": "OK",
+            "releases": [
+              [
+                2,
+                0
+              ],
+              [
+                4,
+                1
+              ],
+              [
+                3,
+                2
+              ],
+              [
+                5,
+                3
+              ],
+              [
+                9,
+                4
+              ],
+              [
+                6,
+                5
+              ],
+              [
+                11,
+                6
+              ],
+              [
+                7,
+                7
+              ],
+              [
+                12,
+                8
+              ],
+              [
+                1,
+                9
+              ],
+              [
+                8,
+                10
+              ],
+              [
+                10,
+                11
+              ],
+              [
+                13,
+                12
+              ]
+            ],
+            "max_backlog": 5,
+            "total_wait": 38,
+            "max_wait": 9,
+            "ops": {
+              "comparisons": 38,
+              "moves": 26,
+              "pushes": 13,
+              "pops": 13,
+              "pre": {
+                "comparisons": 12,
+                "moves": 0
+              }
+            },
+            "note": ""
+          },
+          "alarm_metrics": {
+            "urgent_count": 2,
+            "urgent_wait": 0,
+            "urgent_max_wait": 0
+          },
+          "checks": {
+            "reachability": true,
+            "route_open_roads_and_cost": true,
+            "capacity_and_load_value": true,
+            "rescue_availability_compatibility_and_total": true,
+            "alarm_order_and_release_ticks": true
+          },
+          "input": {
+            "base_case": "1-06",
+            "source": 0,
+            "target": 1,
+            "capacity": 82,
+            "resolved_wave_labels": [],
+            "all_waves": true,
+            "changed_minutes": {},
+            "changed_penalties": {},
+            "multipliers": {},
+            "eligible_crate_ids": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10,
+              11,
+              12,
+              13,
+              14,
+              15,
+              16,
+              17,
+              18,
+              19
+            ],
+            "available_window_ids": [
+              1,
+              2,
+              3,
+              5,
+              6,
+              7,
+              8,
+              10,
+              11,
+              12,
+              13,
+              15,
+              16
+            ],
+            "objective": "value",
+            "extra_alarms": [],
+            "counts": {
+              "locations": 7,
+              "roads": 8,
+              "crates": 19,
+              "windows": 13,
+              "alarms": 13
+            }
+          },
+          "methods": {
+            "A": "greedy",
+            "B": "bellman",
+            "C": "dpquad",
+            "D": "scan"
+          }
+        },
+        {
+          "day": 7,
+          "event": "Evacuation",
+          "target": 4,
+          "closed_roads": [
+            0,
+            2,
+            3
+          ],
+          "route": {
+            "status": "NO_ROUTE",
+            "source": 0,
+            "target": 4,
+            "path": [],
+            "road_ids": [],
+            "cost": null,
+            "reachable": [
+              0,
+              2
+            ],
+            "distances": {
+              "0": 0,
+              "1": null,
+              "2": 40,
+              "3": null,
+              "4": null,
+              "5": null,
+              "6": null
+            },
+            "fewest_path": [],
+            "fewest_cost": null,
+            "ops": {
+              "comparisons": 12,
+              "moves": 23,
+              "edge_tests": 6,
+              "relaxations": 1,
+              "finds": 0,
+              "pre_comparisons": 3,
+              "pre_moves": 6
+            },
+            "note": ""
+          },
+          "load": null,
+          "trip_made": false,
+          "trip_kind": "evacuation",
+          "dispatch_status": "NO_ROUTE",
+          "rescue": {
+            "status": "OK",
+            "chosen": [
+              4,
+              7,
+              10,
+              16
+            ],
+            "total": 304,
+            "ops": {
+              "comparisons": 33,
+              "moves": 52,
+              "probes": 0,
+              "items_examined": 78,
+              "cells": 13,
+              "subsets": 0,
+              "calls": 1,
+              "pre": {
+                "items_examined": 13,
+                "pair_tests": 0
+              }
+            },
+            "note": ""
+          },
+          "alarms": {
+            "status": "OK",
+            "releases": [
+              [
+                2,
+                0
+              ],
+              [
+                4,
+                1
+              ],
+              [
+                3,
+                2
+              ],
+              [
+                5,
+                3
+              ],
+              [
+                9,
+                4
+              ],
+              [
+                6,
+                5
+              ],
+              [
+                11,
+                6
+              ],
+              [
+                7,
+                7
+              ],
+              [
+                12,
+                8
+              ],
+              [
+                1,
+                9
+              ],
+              [
+                8,
+                10
+              ],
+              [
+                10,
+                11
+              ],
+              [
+                13,
+                12
+              ]
+            ],
+            "max_backlog": 5,
+            "total_wait": 38,
+            "max_wait": 9,
+            "ops": {
+              "comparisons": 38,
+              "moves": 26,
+              "pushes": 13,
+              "pops": 13,
+              "pre": {
+                "comparisons": 12,
+                "moves": 0
+              }
+            },
+            "note": ""
+          },
+          "alarm_metrics": {
+            "urgent_count": 2,
+            "urgent_wait": 0,
+            "urgent_max_wait": 0
+          },
+          "checks": {
+            "reachability": true,
+            "route_open_roads_and_cost": true,
+            "capacity_and_load_value": true,
+            "rescue_availability_compatibility_and_total": true,
+            "alarm_order_and_release_ticks": true,
+            "cable_tree_connects_hq_component": true,
+            "chain_bracketing_cost": true,
+            "drum_length_and_price": true
+          },
+          "input": {
+            "base_case": "1-06",
+            "source": 0,
+            "target": 4,
+            "capacity": 82,
+            "resolved_wave_labels": [],
+            "all_waves": true,
+            "changed_minutes": {},
+            "changed_penalties": {},
+            "multipliers": {},
+            "eligible_crate_ids": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10,
+              11,
+              12,
+              13,
+              14,
+              15,
+              16,
+              17,
+              18,
+              19
+            ],
+            "available_window_ids": [
+              1,
+              2,
+              4,
+              5,
+              6,
+              7,
+              9,
+              10,
+              11,
+              12,
+              14,
+              15,
+              16
+            ],
+            "objective": "value",
+            "extra_alarms": [],
+            "counts": {
+              "locations": 7,
+              "roads": 8,
+              "crates": 19,
+              "windows": 13,
+              "alarms": 13
+            }
+          },
+          "methods": {
+            "A": "greedy",
+            "B": "bellman",
+            "C": "dpquad",
+            "D": "scan",
+            "F": "prim",
+            "G_chain": "memo",
+            "G_drum": "memo"
+          },
+          "network": {
+            "status": "OK",
+            "road_ids": [
+              1
+            ],
+            "cost": 27,
+            "components": [
+              [
+                0,
+                2
+              ]
+            ],
+            "ops": {
+              "comparisons": 2,
+              "moves": 8,
+              "edge_tests": 2,
+              "relaxations": 0,
+              "finds": 5,
+              "pre_comparisons": 0,
+              "pre_moves": 0
+            },
+            "note": ""
+          },
+          "chain": {
+            "status": "OK",
+            "bracketing": "(((A1 A2) A3) A4)",
+            "cost": 418150,
+            "ops": {
+              "comparisons": 0,
+              "moves": 0,
+              "items_examined": 0,
+              "cells": 6,
+              "candidates": 10,
+              "enumerated": 0,
+              "calls": 21,
+              "pre": {
+                "items_examined": 5
+              }
+            },
+            "note": ""
+          },
+          "drum": {
+            "status": "OK",
+            "pieces": [
+              1,
+              2,
+              2,
+              2,
+              2,
+              2,
+              2
+            ],
+            "price": 133,
+            "ops": {
+              "comparisons": 0,
+              "moves": 0,
+              "items_examined": 0,
+              "cells": 13,
+              "candidates": 91,
+              "enumerated": 0,
+              "calls": 92,
+              "pre": {
+                "items_examined": 13
+              }
+            },
+            "note": ""
+          }
+        }
+      ],
+      "summary": {
+        "delivered_value": 4574,
+        "route_cost": 388,
+        "evacuation_cost": null,
+        "unreachable_days": 2,
+        "rescue_total": 2401,
+        "alarm_wait": 292,
+        "urgent_mean_wait": 0.125
+      }
+    },
+    "simple": {
+      "case_id": "1-06",
+      "calendar": {
+        "name": "Official LIFELINE calendar - Project Statement section 7.4, page 7",
+        "note": "Daily changes start from the base case. Wave indices are zero-based positions in sorted wave labels, wrapping modulo the number of waves. Only days 6 and 7 retain the union of every wave. Stock resets each day; no extra expiry rule is prescribed.",
+        "inventory_mode": "daily",
+        "closure_mode": "daily",
+        "days": [
+          {
+            "day": 1,
+            "event": "Normal",
+            "target_key": "target_0"
+          },
+          {
+            "day": 2,
+            "event": "Storm",
+            "target_key": "target_1",
+            "wave_indices": [
+              0
+            ],
+            "minutes_ratio": [
+              3,
+              2
+            ],
+            "multipliers": {
+              "3": 2
+            },
+            "extra_alarms": [
+              [
+                0,
+                9
+              ]
+            ]
+          },
+          {
+            "day": 3,
+            "event": "Food shortage",
+            "target_key": "target_2",
+            "wave_indices": [
+              1
+            ],
+            "multipliers": {
+              "0": 2
+            }
+          },
+          {
+            "day": 4,
+            "event": "Dangerous area",
+            "target_key": "target_0",
+            "wave_indices": [
+              2
+            ],
+            "penalty_threshold": 2,
+            "penalty_multiplier": 2
+          },
+          {
+            "day": 5,
+            "event": "Medical emergency",
+            "target_key": "target_1",
+            "wave_indices": [
+              3
+            ],
+            "multipliers": {
+              "2": 3
+            },
+            "extra_alarms": [
+              [
+                0,
+                10
+              ]
+            ]
+          },
+          {
+            "day": 6,
+            "event": "Flood",
+            "target_key": "target_2",
+            "all_waves": true
+          },
+          {
+            "day": 7,
+            "event": "Evacuation",
+            "target_key": "target_0",
+            "all_waves": true,
+            "load": false,
+            "evacuation": true,
+            "review": true
+          }
+        ]
+      },
+      "policy": "simple",
+      "days": [
+        {
+          "day": 1,
+          "event": "Normal",
+          "target": 4,
+          "closed_roads": [],
+          "route": {
+            "status": "OK",
+            "source": 0,
+            "target": 4,
+            "path": [
+              0,
+              3,
+              4
+            ],
+            "road_ids": [
+              2,
+              6
+            ],
+            "cost": 84,
+            "reachable": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6
+            ],
+            "distances": {
+              "0": 0,
+              "1": 11,
+              "2": 40,
+              "3": 33,
+              "4": 84,
+              "5": 58,
+              "6": 23
+            },
+            "fewest_path": [
+              0,
+              3,
+              4
+            ],
+            "fewest_cost": 84,
+            "ops": {
+              "comparisons": 10,
+              "moves": 21,
+              "edge_tests": 16,
+              "relaxations": 0,
+              "finds": 0,
+              "pre_comparisons": 12,
+              "pre_moves": 24
+            },
+            "note": "BFS minimizes road count, not travel cost"
+          },
+          "load": {
+            "status": "OK",
+            "selected": [
+              1,
+              2,
+              3,
+              4,
+              7,
+              9,
+              10,
+              11,
+              14,
+              18,
+              19
+            ],
+            "total_weight": 77,
+            "total_value": 807,
+            "ops": {
+              "items_examined": 38,
+              "comparisons": 64,
+              "moves": 95,
+              "calls": 1
+            },
+            "note": ""
+          },
+          "trip_made": true,
+          "trip_kind": "delivery",
+          "dispatch_status": "OK",
+          "rescue": {
+            "status": "OK",
+            "chosen": [
+              2,
+              3,
+              8,
+              13,
+              16
+            ],
+            "total": 280,
+            "ops": {
+              "comparisons": 34,
+              "moves": 52,
+              "probes": 0,
+              "items_examined": 13,
+              "cells": 0,
+              "subsets": 0,
+              "calls": 1,
+              "pre": {
+                "items_examined": 13,
+                "pair_tests": 0
+              }
+            },
+            "note": "earliest-finish greedy ignores values: not optimal for the value objective"
+          },
+          "alarms": {
+            "status": "OK",
+            "releases": [
+              [
+                1,
+                0
+              ],
+              [
+                2,
+                1
+              ],
+              [
+                3,
+                2
+              ],
+              [
+                4,
+                3
+              ],
+              [
+                5,
+                4
+              ],
+              [
+                6,
+                5
+              ],
+              [
+                7,
+                6
+              ],
+              [
+                8,
+                7
+              ],
+              [
+                9,
+                8
+              ],
+              [
+                10,
+                9
+              ],
+              [
+                11,
+                10
+              ],
+              [
+                12,
+                11
+              ],
+              [
+                13,
+                12
+              ]
+            ],
+            "max_backlog": 5,
+            "total_wait": 38,
+            "max_wait": 4,
+            "ops": {
+              "comparisons": 0,
+              "moves": 0,
+              "pushes": 0,
+              "pops": 0,
+              "pre": {
+                "comparisons": 12,
+                "moves": 0
+              }
+            },
+            "note": ""
+          },
+          "alarm_metrics": {
+            "urgent_count": 2,
+            "urgent_wait": 4,
+            "urgent_max_wait": 3
+          },
+          "checks": {
+            "reachability": true,
+            "route_open_roads_and_cost": true,
+            "capacity_and_load_value": true,
+            "rescue_availability_compatibility_and_total": true,
+            "alarm_order_and_release_ticks": true
+          },
+          "input": {
+            "base_case": "1-06",
+            "source": 0,
+            "target": 4,
+            "capacity": 82,
+            "resolved_wave_labels": [],
+            "all_waves": false,
+            "changed_minutes": {},
+            "changed_penalties": {},
+            "multipliers": {},
+            "eligible_crate_ids": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10,
+              11,
+              12,
+              13,
+              14,
+              15,
+              16,
+              17,
+              18,
+              19
+            ],
+            "available_window_ids": [
+              1,
+              2,
+              3,
+              5,
+              6,
+              7,
+              8,
+              10,
+              11,
+              12,
+              13,
+              15,
+              16
+            ],
+            "objective": "value",
+            "extra_alarms": [],
+            "counts": {
+              "locations": 7,
+              "roads": 8,
+              "crates": 19,
+              "windows": 13,
+              "alarms": 13
+            }
+          },
+          "methods": {
+            "A": "greedy",
+            "B": "bfs",
+            "C": "greedy",
+            "D": "fifo"
+          }
+        },
+        {
+          "day": 2,
+          "event": "Storm",
+          "target": 3,
+          "closed_roads": [
+            3
+          ],
+          "route": {
+            "status": "OK",
+            "source": 0,
+            "target": 3,
+            "path": [
+              0,
+              3
+            ],
+            "road_ids": [
+              2
+            ],
+            "cost": 48,
+            "reachable": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6
+            ],
+            "distances": {
+              "0": 0,
+              "1": 16,
+              "2": 58,
+              "3": 48,
+              "4": 124,
+              "5": 98,
+              "6": 32
+            },
+            "fewest_path": [
+              0,
+              3
+            ],
+            "fewest_cost": 48,
+            "ops": {
+              "comparisons": 10,
+              "moves": 21,
+              "edge_tests": 14,
+              "relaxations": 0,
+              "finds": 0,
+              "pre_comparisons": 10,
+              "pre_moves": 20
+            },
+            "note": "BFS minimizes road count, not travel cost"
+          },
+          "load": {
+            "status": "OK",
+            "selected": [
+              1,
+              2,
+              4,
+              6,
+              7,
+              9,
+              10,
+              11,
+              13,
+              14,
+              19
+            ],
+            "total_weight": 82,
+            "total_value": 843,
+            "ops": {
+              "items_examined": 38,
+              "comparisons": 65,
+              "moves": 95,
+              "calls": 1
+            },
+            "note": ""
+          },
+          "trip_made": true,
+          "trip_kind": "delivery",
+          "dispatch_status": "OK",
+          "rescue": {
+            "status": "OK",
+            "chosen": [
+              1,
+              2,
+              4,
+              16
+            ],
+            "total": 183,
+            "ops": {
+              "comparisons": 33,
+              "moves": 52,
+              "probes": 0,
+              "items_examined": 13,
+              "cells": 0,
+              "subsets": 0,
+              "calls": 1,
+              "pre": {
+                "items_examined": 13,
+                "pair_tests": 0
+              }
+            },
+            "note": "earliest-finish greedy ignores values: not optimal for the value objective"
+          },
+          "alarms": {
+            "status": "OK",
+            "releases": [
+              [
+                1,
+                0
+              ],
+              [
+                2,
+                1
+              ],
+              [
+                3,
+                2
+              ],
+              [
+                4,
+                3
+              ],
+              [
+                14,
+                4
+              ],
+              [
+                5,
+                5
+              ],
+              [
+                6,
+                6
+              ],
+              [
+                7,
+                7
+              ],
+              [
+                8,
+                8
+              ],
+              [
+                9,
+                9
+              ],
+              [
+                10,
+                10
+              ],
+              [
+                11,
+                11
+              ],
+              [
+                12,
+                12
+              ],
+              [
+                13,
+                13
+              ]
+            ],
+            "max_backlog": 6,
+            "total_wait": 51,
+            "max_wait": 5,
+            "ops": {
+              "comparisons": 0,
+              "moves": 0,
+              "pushes": 0,
+              "pops": 0,
+              "pre": {
+                "comparisons": 44,
+                "moves": 56
+              }
+            },
+            "note": ""
+          },
+          "alarm_metrics": {
+            "urgent_count": 3,
+            "urgent_wait": 9,
+            "urgent_max_wait": 4
+          },
+          "checks": {
+            "reachability": true,
+            "route_open_roads_and_cost": true,
+            "capacity_and_load_value": true,
+            "rescue_availability_compatibility_and_total": true,
+            "alarm_order_and_release_ticks": true
+          },
+          "input": {
+            "base_case": "1-06",
+            "source": 0,
+            "target": 3,
+            "capacity": 82,
+            "resolved_wave_labels": [
+              0
+            ],
+            "all_waves": false,
+            "changed_minutes": {
+              "0": 14,
+              "1": 54,
+              "2": 44,
+              "3": 86,
+              "4": 81,
+              "5": 12,
+              "6": 75,
+              "7": 66
+            },
+            "changed_penalties": {},
+            "multipliers": {
+              "3": 2
+            },
+            "eligible_crate_ids": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10,
+              11,
+              12,
+              13,
+              14,
+              15,
+              16,
+              17,
+              18,
+              19
+            ],
+            "available_window_ids": [
+              1,
+              2,
+              4,
+              5,
+              6,
+              7,
+              9,
+              10,
+              11,
+              12,
+              14,
+              15,
+              16
+            ],
+            "objective": "value",
+            "extra_alarms": [
+              {
+                "alarm_id": 14,
+                "tick": 0,
+                "priority": 9
+              }
+            ],
+            "counts": {
+              "locations": 7,
+              "roads": 8,
+              "crates": 19,
+              "windows": 13,
+              "alarms": 14
+            }
+          },
+          "methods": {
+            "A": "greedy",
+            "B": "bfs",
+            "C": "greedy",
+            "D": "fifo"
+          }
+        },
+        {
+          "day": 3,
+          "event": "Food shortage",
+          "target": 1,
+          "closed_roads": [
+            0
+          ],
+          "route": {
+            "status": "OK",
+            "source": 0,
+            "target": 1,
+            "path": [
+              0,
+              5,
+              1
+            ],
+            "road_ids": [
+              3,
+              4
+            ],
+            "cost": 114,
+            "reachable": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6
+            ],
+            "distances": {
+              "0": 0,
+              "1": 114,
+              "2": 40,
+              "3": 33,
+              "4": 84,
+              "5": 58,
+              "6": 81
+            },
+            "fewest_path": [
+              0,
+              5,
+              1
+            ],
+            "fewest_cost": 114,
+            "ops": {
+              "comparisons": 12,
+              "moves": 21,
+              "edge_tests": 14,
+              "relaxations": 0,
+              "finds": 0,
+              "pre_comparisons": 9,
+              "pre_moves": 18
+            },
+            "note": "BFS minimizes road count, not travel cost"
+          },
+          "load": {
+            "status": "OK",
+            "selected": [
+              1,
+              2,
+              3,
+              4,
+              7,
+              9,
+              10,
+              11,
+              13,
+              15,
+              18,
+              19
+            ],
+            "total_weight": 80,
+            "total_value": 1310,
+            "ops": {
+              "items_examined": 38,
+              "comparisons": 66,
+              "moves": 95,
+              "calls": 1
+            },
+            "note": ""
+          },
+          "trip_made": true,
+          "trip_kind": "delivery",
+          "dispatch_status": "OK",
+          "rescue": {
+            "status": "OK",
+            "chosen": [
+              3,
+              4,
+              8,
+              11,
+              13,
+              14,
+              16
+            ],
+            "total": 365,
+            "ops": {
+              "comparisons": 32,
+              "moves": 52,
+              "probes": 0,
+              "items_examined": 13,
+              "cells": 0,
+              "subsets": 0,
+              "calls": 1,
+              "pre": {
+                "items_examined": 13,
+                "pair_tests": 0
+              }
+            },
+            "note": "earliest-finish greedy ignores values: not optimal for the value objective"
+          },
+          "alarms": {
+            "status": "OK",
+            "releases": [
+              [
+                1,
+                0
+              ],
+              [
+                2,
+                1
+              ],
+              [
+                3,
+                2
+              ],
+              [
+                4,
+                3
+              ],
+              [
+                5,
+                4
+              ],
+              [
+                6,
+                5
+              ],
+              [
+                7,
+                6
+              ],
+              [
+                8,
+                7
+              ],
+              [
+                9,
+                8
+              ],
+              [
+                10,
+                9
+              ],
+              [
+                11,
+                10
+              ],
+              [
+                12,
+                11
+              ],
+              [
+                13,
+                12
+              ]
+            ],
+            "max_backlog": 5,
+            "total_wait": 38,
+            "max_wait": 4,
+            "ops": {
+              "comparisons": 0,
+              "moves": 0,
+              "pushes": 0,
+              "pops": 0,
+              "pre": {
+                "comparisons": 12,
+                "moves": 0
+              }
+            },
+            "note": ""
+          },
+          "alarm_metrics": {
+            "urgent_count": 2,
+            "urgent_wait": 4,
+            "urgent_max_wait": 3
+          },
+          "checks": {
+            "reachability": true,
+            "route_open_roads_and_cost": true,
+            "capacity_and_load_value": true,
+            "rescue_availability_compatibility_and_total": true,
+            "alarm_order_and_release_ticks": true
+          },
+          "input": {
+            "base_case": "1-06",
+            "source": 0,
+            "target": 1,
+            "capacity": 82,
+            "resolved_wave_labels": [
+              1
+            ],
+            "all_waves": false,
+            "changed_minutes": {},
+            "changed_penalties": {},
+            "multipliers": {
+              "0": 2
+            },
+            "eligible_crate_ids": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10,
+              11,
+              12,
+              13,
+              14,
+              15,
+              16,
+              17,
+              18,
+              19
+            ],
+            "available_window_ids": [
+              1,
+              3,
+              4,
+              5,
+              6,
+              8,
+              9,
+              10,
+              11,
+              13,
+              14,
+              15,
+              16
+            ],
+            "objective": "value",
+            "extra_alarms": [],
+            "counts": {
+              "locations": 7,
+              "roads": 8,
+              "crates": 19,
+              "windows": 13,
+              "alarms": 13
+            }
+          },
+          "methods": {
+            "A": "greedy",
+            "B": "bfs",
+            "C": "greedy",
+            "D": "fifo"
+          }
+        },
+        {
+          "day": 4,
+          "event": "Dangerous area",
+          "target": 4,
+          "closed_roads": [
+            2
+          ],
+          "route": {
+            "status": "OK",
+            "source": 0,
+            "target": 4,
+            "path": [
+              0,
+              1,
+              6,
+              3,
+              4
+            ],
+            "road_ids": [
+              0,
+              5,
+              7,
+              6
+            ],
+            "cost": 132,
+            "reachable": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6
+            ],
+            "distances": {
+              "0": 0,
+              "1": 13,
+              "2": 44,
+              "3": 81,
+              "4": 132,
+              "5": 58,
+              "6": 29
+            },
+            "fewest_path": [
+              0,
+              1,
+              6,
+              3,
+              4
+            ],
+            "fewest_cost": 132,
+            "ops": {
+              "comparisons": 13,
+              "moves": 21,
+              "edge_tests": 14,
+              "relaxations": 0,
+              "finds": 0,
+              "pre_comparisons": 9,
+              "pre_moves": 18
+            },
+            "note": "BFS minimizes road count, not travel cost"
+          },
+          "load": {
+            "status": "OK",
+            "selected": [
+              1,
+              2,
+              3,
+              4,
+              7,
+              9,
+              10,
+              11,
+              14,
+              18,
+              19
+            ],
+            "total_weight": 77,
+            "total_value": 807,
+            "ops": {
+              "items_examined": 38,
+              "comparisons": 64,
+              "moves": 95,
+              "calls": 1
+            },
+            "note": ""
+          },
+          "trip_made": true,
+          "trip_kind": "delivery",
+          "dispatch_status": "OK",
+          "rescue": {
+            "status": "OK",
+            "chosen": [
+              3,
+              4,
+              7,
+              8,
+              13,
+              14
+            ],
+            "total": 306,
+            "ops": {
+              "comparisons": 31,
+              "moves": 48,
+              "probes": 0,
+              "items_examined": 12,
+              "cells": 0,
+              "subsets": 0,
+              "calls": 1,
+              "pre": {
+                "items_examined": 12,
+                "pair_tests": 0
+              }
+            },
+            "note": "earliest-finish greedy ignores values: not optimal for the value objective"
+          },
+          "alarms": {
+            "status": "OK",
+            "releases": [
+              [
+                1,
+                0
+              ],
+              [
+                2,
+                1
+              ],
+              [
+                3,
+                2
+              ],
+              [
+                4,
+                3
+              ],
+              [
+                5,
+                4
+              ],
+              [
+                6,
+                5
+              ],
+              [
+                7,
+                6
+              ],
+              [
+                8,
+                7
+              ],
+              [
+                9,
+                8
+              ],
+              [
+                10,
+                9
+              ],
+              [
+                11,
+                10
+              ],
+              [
+                12,
+                11
+              ],
+              [
+                13,
+                12
+              ]
+            ],
+            "max_backlog": 5,
+            "total_wait": 38,
+            "max_wait": 4,
+            "ops": {
+              "comparisons": 0,
+              "moves": 0,
+              "pushes": 0,
+              "pops": 0,
+              "pre": {
+                "comparisons": 12,
+                "moves": 0
+              }
+            },
+            "note": ""
+          },
+          "alarm_metrics": {
+            "urgent_count": 2,
+            "urgent_wait": 4,
+            "urgent_max_wait": 3
+          },
+          "checks": {
+            "reachability": true,
+            "route_open_roads_and_cost": true,
+            "capacity_and_load_value": true,
+            "rescue_availability_compatibility_and_total": true,
+            "alarm_order_and_release_ticks": true
+          },
+          "input": {
+            "base_case": "1-06",
+            "source": 0,
+            "target": 4,
+            "capacity": 82,
+            "resolved_wave_labels": [
+              2
+            ],
+            "all_waves": false,
+            "changed_minutes": {},
+            "changed_penalties": {
+              "1": 4,
+              "2": 8,
+              "3": 8,
+              "6": 8
+            },
+            "multipliers": {},
+            "eligible_crate_ids": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10,
+              11,
+              12,
+              13,
+              14,
+              15,
+              16,
+              17,
+              18,
+              19
+            ],
+            "available_window_ids": [
+              2,
+              3,
+              4,
+              5,
+              7,
+              8,
+              9,
+              10,
+              12,
+              13,
+              14,
+              15
+            ],
+            "objective": "value",
+            "extra_alarms": [],
+            "counts": {
+              "locations": 7,
+              "roads": 8,
+              "crates": 19,
+              "windows": 12,
+              "alarms": 13
+            }
+          },
+          "methods": {
+            "A": "greedy",
+            "B": "bfs",
+            "C": "greedy",
+            "D": "fifo"
+          }
+        },
+        {
+          "day": 5,
+          "event": "Medical emergency",
+          "target": 3,
+          "closed_roads": [
+            3
+          ],
+          "route": {
+            "status": "OK",
+            "source": 0,
+            "target": 3,
+            "path": [
+              0,
+              3
+            ],
+            "road_ids": [
+              2
+            ],
+            "cost": 33,
+            "reachable": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6
+            ],
+            "distances": {
+              "0": 0,
+              "1": 11,
+              "2": 40,
+              "3": 33,
+              "4": 84,
+              "5": 66,
+              "6": 23
+            },
+            "fewest_path": [
+              0,
+              3
+            ],
+            "fewest_cost": 33,
+            "ops": {
+              "comparisons": 10,
+              "moves": 21,
+              "edge_tests": 14,
+              "relaxations": 0,
+              "finds": 0,
+              "pre_comparisons": 10,
+              "pre_moves": 20
+            },
+            "note": "BFS minimizes road count, not travel cost"
+          },
+          "load": {
+            "status": "OK",
+            "selected": [
+              1,
+              2,
+              3,
+              4,
+              7,
+              9,
+              10,
+              11,
+              14,
+              18,
+              19
+            ],
+            "total_weight": 77,
+            "total_value": 807,
+            "ops": {
+              "items_examined": 38,
+              "comparisons": 64,
+              "moves": 95,
+              "calls": 1
+            },
+            "note": ""
+          },
+          "trip_made": true,
+          "trip_kind": "delivery",
+          "dispatch_status": "OK",
+          "rescue": {
+            "status": "OK",
+            "chosen": [
+              3,
+              4,
+              7,
+              8,
+              13,
+              14,
+              16
+            ],
+            "total": 391,
+            "ops": {
+              "comparisons": 33,
+              "moves": 52,
+              "probes": 0,
+              "items_examined": 13,
+              "cells": 0,
+              "subsets": 0,
+              "calls": 1,
+              "pre": {
+                "items_examined": 13,
+                "pair_tests": 0
+              }
+            },
+            "note": "earliest-finish greedy ignores values: not optimal for the value objective"
+          },
+          "alarms": {
+            "status": "OK",
+            "releases": [
+              [
+                1,
+                0
+              ],
+              [
+                2,
+                1
+              ],
+              [
+                3,
+                2
+              ],
+              [
+                4,
+                3
+              ],
+              [
+                14,
+                4
+              ],
+              [
+                5,
+                5
+              ],
+              [
+                6,
+                6
+              ],
+              [
+                7,
+                7
+              ],
+              [
+                8,
+                8
+              ],
+              [
+                9,
+                9
+              ],
+              [
+                10,
+                10
+              ],
+              [
+                11,
+                11
+              ],
+              [
+                12,
+                12
+              ],
+              [
+                13,
+                13
+              ]
+            ],
+            "max_backlog": 6,
+            "total_wait": 51,
+            "max_wait": 5,
+            "ops": {
+              "comparisons": 0,
+              "moves": 0,
+              "pushes": 0,
+              "pops": 0,
+              "pre": {
+                "comparisons": 44,
+                "moves": 56
+              }
+            },
+            "note": ""
+          },
+          "alarm_metrics": {
+            "urgent_count": 3,
+            "urgent_wait": 9,
+            "urgent_max_wait": 4
+          },
+          "checks": {
+            "reachability": true,
+            "route_open_roads_and_cost": true,
+            "capacity_and_load_value": true,
+            "rescue_availability_compatibility_and_total": true,
+            "alarm_order_and_release_ticks": true
+          },
+          "input": {
+            "base_case": "1-06",
+            "source": 0,
+            "target": 3,
+            "capacity": 82,
+            "resolved_wave_labels": [
+              0
+            ],
+            "all_waves": false,
+            "changed_minutes": {},
+            "changed_penalties": {},
+            "multipliers": {
+              "2": 3
+            },
+            "eligible_crate_ids": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10,
+              11,
+              12,
+              13,
+              14,
+              15,
+              16,
+              17,
+              18,
+              19
+            ],
+            "available_window_ids": [
+              1,
+              2,
+              3,
+              4,
+              6,
+              7,
+              8,
+              9,
+              11,
+              12,
+              13,
+              14,
+              16
+            ],
+            "objective": "value",
+            "extra_alarms": [
+              {
+                "alarm_id": 14,
+                "tick": 0,
+                "priority": 10
+              }
+            ],
+            "counts": {
+              "locations": 7,
+              "roads": 8,
+              "crates": 19,
+              "windows": 13,
+              "alarms": 14
+            }
+          },
+          "methods": {
+            "A": "greedy",
+            "B": "bfs",
+            "C": "greedy",
+            "D": "fifo"
+          }
+        },
+        {
+          "day": 6,
+          "event": "Flood",
+          "target": 1,
+          "closed_roads": [
+            0,
+            2,
+            3
+          ],
+          "route": {
+            "status": "NO_ROUTE",
+            "source": 0,
+            "target": 1,
+            "path": [],
+            "road_ids": [],
+            "cost": null,
+            "reachable": [
+              0,
+              2
+            ],
+            "distances": {
+              "0": 0,
+              "1": null,
+              "2": 40,
+              "3": null,
+              "4": null,
+              "5": null,
+              "6": null
+            },
+            "fewest_path": [],
+            "fewest_cost": null,
+            "ops": {
+              "comparisons": 1,
+              "moves": 2,
+              "edge_tests": 2,
+              "relaxations": 0,
+              "finds": 0,
+              "pre_comparisons": 3,
+              "pre_moves": 6
+            },
+            "note": "BFS minimizes road count, not travel cost"
+          },
+          "load": null,
+          "trip_made": false,
+          "trip_kind": "delivery",
+          "dispatch_status": "NO_ROUTE",
+          "rescue": {
+            "status": "OK",
+            "chosen": [
+              2,
+              3,
+              8,
+              13,
+              16
+            ],
+            "total": 280,
+            "ops": {
+              "comparisons": 34,
+              "moves": 52,
+              "probes": 0,
+              "items_examined": 13,
+              "cells": 0,
+              "subsets": 0,
+              "calls": 1,
+              "pre": {
+                "items_examined": 13,
+                "pair_tests": 0
+              }
+            },
+            "note": "earliest-finish greedy ignores values: not optimal for the value objective"
+          },
+          "alarms": {
+            "status": "OK",
+            "releases": [
+              [
+                1,
+                0
+              ],
+              [
+                2,
+                1
+              ],
+              [
+                3,
+                2
+              ],
+              [
+                4,
+                3
+              ],
+              [
+                5,
+                4
+              ],
+              [
+                6,
+                5
+              ],
+              [
+                7,
+                6
+              ],
+              [
+                8,
+                7
+              ],
+              [
+                9,
+                8
+              ],
+              [
+                10,
+                9
+              ],
+              [
+                11,
+                10
+              ],
+              [
+                12,
+                11
+              ],
+              [
+                13,
+                12
+              ]
+            ],
+            "max_backlog": 5,
+            "total_wait": 38,
+            "max_wait": 4,
+            "ops": {
+              "comparisons": 0,
+              "moves": 0,
+              "pushes": 0,
+              "pops": 0,
+              "pre": {
+                "comparisons": 12,
+                "moves": 0
+              }
+            },
+            "note": ""
+          },
+          "alarm_metrics": {
+            "urgent_count": 2,
+            "urgent_wait": 4,
+            "urgent_max_wait": 3
+          },
+          "checks": {
+            "reachability": true,
+            "route_open_roads_and_cost": true,
+            "capacity_and_load_value": true,
+            "rescue_availability_compatibility_and_total": true,
+            "alarm_order_and_release_ticks": true
+          },
+          "input": {
+            "base_case": "1-06",
+            "source": 0,
+            "target": 1,
+            "capacity": 82,
+            "resolved_wave_labels": [],
+            "all_waves": true,
+            "changed_minutes": {},
+            "changed_penalties": {},
+            "multipliers": {},
+            "eligible_crate_ids": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10,
+              11,
+              12,
+              13,
+              14,
+              15,
+              16,
+              17,
+              18,
+              19
+            ],
+            "available_window_ids": [
+              1,
+              2,
+              3,
+              5,
+              6,
+              7,
+              8,
+              10,
+              11,
+              12,
+              13,
+              15,
+              16
+            ],
+            "objective": "value",
+            "extra_alarms": [],
+            "counts": {
+              "locations": 7,
+              "roads": 8,
+              "crates": 19,
+              "windows": 13,
+              "alarms": 13
+            }
+          },
+          "methods": {
+            "A": "greedy",
+            "B": "bfs",
+            "C": "greedy",
+            "D": "fifo"
+          }
+        },
+        {
+          "day": 7,
+          "event": "Evacuation",
+          "target": 4,
+          "closed_roads": [
+            0,
+            2,
+            3
+          ],
+          "route": {
+            "status": "NO_ROUTE",
+            "source": 0,
+            "target": 4,
+            "path": [],
+            "road_ids": [],
+            "cost": null,
+            "reachable": [
+              0,
+              2
+            ],
+            "distances": {
+              "0": 0,
+              "1": null,
+              "2": 40,
+              "3": null,
+              "4": null,
+              "5": null,
+              "6": null
+            },
+            "fewest_path": [],
+            "fewest_cost": null,
+            "ops": {
+              "comparisons": 1,
+              "moves": 2,
+              "edge_tests": 2,
+              "relaxations": 0,
+              "finds": 0,
+              "pre_comparisons": 3,
+              "pre_moves": 6
+            },
+            "note": "BFS minimizes road count, not travel cost"
+          },
+          "load": null,
+          "trip_made": false,
+          "trip_kind": "evacuation",
+          "dispatch_status": "NO_ROUTE",
+          "rescue": {
+            "status": "OK",
+            "chosen": [
+              1,
+              2,
+              4,
+              16
+            ],
+            "total": 183,
+            "ops": {
+              "comparisons": 33,
+              "moves": 52,
+              "probes": 0,
+              "items_examined": 13,
+              "cells": 0,
+              "subsets": 0,
+              "calls": 1,
+              "pre": {
+                "items_examined": 13,
+                "pair_tests": 0
+              }
+            },
+            "note": "earliest-finish greedy ignores values: not optimal for the value objective"
+          },
+          "alarms": {
+            "status": "OK",
+            "releases": [
+              [
+                1,
+                0
+              ],
+              [
+                2,
+                1
+              ],
+              [
+                3,
+                2
+              ],
+              [
+                4,
+                3
+              ],
+              [
+                5,
+                4
+              ],
+              [
+                6,
+                5
+              ],
+              [
+                7,
+                6
+              ],
+              [
+                8,
+                7
+              ],
+              [
+                9,
+                8
+              ],
+              [
+                10,
+                9
+              ],
+              [
+                11,
+                10
+              ],
+              [
+                12,
+                11
+              ],
+              [
+                13,
+                12
+              ]
+            ],
+            "max_backlog": 5,
+            "total_wait": 38,
+            "max_wait": 4,
+            "ops": {
+              "comparisons": 0,
+              "moves": 0,
+              "pushes": 0,
+              "pops": 0,
+              "pre": {
+                "comparisons": 12,
+                "moves": 0
+              }
+            },
+            "note": ""
+          },
+          "alarm_metrics": {
+            "urgent_count": 2,
+            "urgent_wait": 4,
+            "urgent_max_wait": 3
+          },
+          "checks": {
+            "reachability": true,
+            "route_open_roads_and_cost": true,
+            "capacity_and_load_value": true,
+            "rescue_availability_compatibility_and_total": true,
+            "alarm_order_and_release_ticks": true,
+            "cable_tree_connects_hq_component": true,
+            "chain_bracketing_cost": true,
+            "drum_length_and_price": true
+          },
+          "input": {
+            "base_case": "1-06",
+            "source": 0,
+            "target": 4,
+            "capacity": 82,
+            "resolved_wave_labels": [],
+            "all_waves": true,
+            "changed_minutes": {},
+            "changed_penalties": {},
+            "multipliers": {},
+            "eligible_crate_ids": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10,
+              11,
+              12,
+              13,
+              14,
+              15,
+              16,
+              17,
+              18,
+              19
+            ],
+            "available_window_ids": [
+              1,
+              2,
+              4,
+              5,
+              6,
+              7,
+              9,
+              10,
+              11,
+              12,
+              14,
+              15,
+              16
+            ],
+            "objective": "value",
+            "extra_alarms": [],
+            "counts": {
+              "locations": 7,
+              "roads": 8,
+              "crates": 19,
+              "windows": 13,
+              "alarms": 13
+            }
+          },
+          "methods": {
+            "A": "greedy",
+            "B": "bfs",
+            "C": "greedy",
+            "D": "fifo",
+            "F": "kruskal",
+            "G_chain": "dp",
+            "G_drum": "greedy"
+          },
+          "network": {
+            "status": "OK",
+            "road_ids": [
+              1
+            ],
+            "cost": 27,
+            "components": [
+              [
+                0,
+                2
+              ]
+            ],
+            "ops": {
+              "comparisons": 1,
+              "moves": 2,
+              "edge_tests": 1,
+              "relaxations": 0,
+              "finds": 5,
+              "pre_comparisons": 0,
+              "pre_moves": 0
+            },
+            "note": ""
+          },
+          "chain": {
+            "status": "OK",
+            "bracketing": "(((A1 A2) A3) A4)",
+            "cost": 418150,
+            "ops": {
+              "comparisons": 0,
+              "moves": 0,
+              "items_examined": 0,
+              "cells": 6,
+              "candidates": 10,
+              "enumerated": 0,
+              "calls": 1,
+              "pre": {
+                "items_examined": 5
+              }
+            },
+            "note": ""
+          },
+          "drum": {
+            "status": "OK",
+            "pieces": [
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              1
+            ],
+            "price": 133,
+            "ops": {
+              "comparisons": 35,
+              "moves": 52,
+              "items_examined": 13,
+              "cells": 0,
+              "candidates": 0,
+              "enumerated": 0,
+              "calls": 1,
+              "pre": {
+                "items_examined": 13
+              }
+            },
+            "note": "greedy by price per length: a rule of thumb, not optimal in general"
+          }
+        }
+      ],
+      "summary": {
+        "delivered_value": 4574,
+        "route_cost": 411,
+        "evacuation_cost": null,
+        "unreachable_days": 2,
+        "rescue_total": 1988,
+        "alarm_wait": 292,
+        "urgent_mean_wait": 2.375
+      }
+    }
+  }
+}

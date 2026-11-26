@@ -55,6 +55,13 @@ class HTTPTests(unittest.TestCase):
         status, data = self.request('POST', '/campaign', {'case_id': 'demo', 'calendar': calendar()})
         self.assertEqual((status, len(data['days'])), (200, 7))
 
+    def test_official_calendar_is_api_default(self):
+        status, data = self.request('POST', '/campaign', {'case_id': 'demo'})
+        self.assertEqual(status, 200)
+        self.assertEqual(data['days'][1]['closed_roads'], [2])
+        self.assertEqual(data['days'][1]['input']['changed_minutes'], {'0': 2, '1': 2, '2': 11})
+        self.assertIsNone(data['days'][6]['load'])
+
     def test_g_endpoints(self):
         self.assertEqual(self.request('POST', '/chain', {'case_id': 'demo'})[1]['cost'], 1000)
         self.assertEqual(self.request('POST', '/drum', {'case_id': 'demo', 'length': 4})[1]['price'], 10)

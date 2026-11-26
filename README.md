@@ -4,7 +4,7 @@ Group 41: Ayna Khan (24I-0097-C), Dur E Adan (24I-3037-C), Hamza Sardar (24I-008
 Repository: see `repository.txt`.
 
 **Status of this README.** The sections for modules A (relief inventory), D (emergency queue), C (rescue scheduling) and G (chains and cuts) are complete.
-Modules B/F, the loader, campaign, CLI and local backend have now been added by Hamza. The campaign uses an explicitly labelled example calendar until the original course calendar is supplied. The failure-mode list of section 9 is still the draft of Ayna.
+Modules B/F, the loader, campaign, CLI and local backend have now been added by Hamza. The campaign now implements the official calendar from Project Statement section 7.4 (page 7); five master cases and their baselines have been verified. The failure-mode list of section 9 is still the draft of Ayna.
 
 ## 1. Setup and dependencies
 
@@ -36,8 +36,10 @@ All commands are run from the repository root. `MASTER` is the folder with the m
 | Fits, comparison tables and plots of C and G | `python experiments/analyzeC.py`, `python experiments/analyzeG.py` |
 | Predictions against measurements of C and G | `python experiments/predictionsC.py`, `python experiments/predictionsG.py` |
 | Sample outputs of C and G; rebuild the test fixtures | `python experiments/sampleC.py --master MASTER` (add `--fixture` to rebuild the fixture), `python experiments/sampleG.py --master MASTER` |
-| Seven-day campaign and baseline comparison | `python -m src.cli --master MASTER --output results/sample-outputs/campaign-example.json campaign --case 41-00 --calendar calendars/example.json --compare` (example rules, see section 13) |
-| B/F and campaign tests | `python -m unittest tests.testhamza tests.testbackend` |
+| Official seven-day campaign (readable output) | `python -m src.cli --master MASTER campaign --case 41-00 --compare` |
+| Reproduce five official campaigns, comparisons and report figures | `python experiments/run_campaign.py --master MASTER` |
+| Save the complete daily JSON | `python -m src.cli --master MASTER --output results/sample-outputs/campaign-official.json campaign --case 41-00 --compare` |
+| B/F and campaign tests | `python -m unittest tests.testhamza tests.testofficialcampaign tests.testbackend` |
 | B/F experiments, fits and plots | `python experiments/runBF.py --master MASTER`, then `python experiments/analyzeBF.py` |
 | B/F and integration fault injection | `python experiments/faultBF.py` |
 | Verify master SHA-256 manifest | `python -m src.cli --master MASTER verify` |
@@ -54,7 +56,7 @@ src/        models.py (data types, errors)   measure.py (timing, memory, fits)  
             modules/inventory.py (A)   modules/emergencyqueue.py (D)   modules/rescue.py (C)   modules/chains.py (G)
             network.py  loader.py  validation.py  campaign.py  cli.py  backend.py  server.py
             modules/routes.py (B)  modules/networkplan.py (F)
-calendars/  example.json (explicit example, not the official course calendar)
+calendars/  official.json (section 7.4, default)  example.json (historical custom example)
 tests/      testinventory.py  testqueue.py  testmeasure.py  testfaultinjection.py   testrescue.py  testfaultinjectionC.py   testchains.py  testfaultinjectionG.py
             reference/ (independent reference methods, never imported by src)   fixtures/ (small samples of the master data)
 experiments/ runAD.py  analyzeAD.py  predictionsAD.py  sampleAD.py  mastersample.py   runC.py  analyzeC.py  predictionsC.py  sampleC.py   runG.py  analyzeG.py  predictionsG.py  sampleG.py
@@ -149,7 +151,7 @@ Notation: n crates, W truck capacity (kg), m alarms; n windows (C); n matrices a
 - **B interface:** `routes.solve(locations, roads, target, method="dijkstra", blocked=(), source=0, deadline=None)`. Methods: `dijkstra`, `bellman`, `bfs`. Retained the proposal choices; the proposed array Dijkstra is not implemented. A source-to-source route costs zero.
 - **F input/output:** the same map with positive cable costs; selected roads and total cable cost, plus component vertex sets. Kruskal with path compression/union by size is primary, O(E log E + E alpha(V)); heap Prim is the independent baseline, O((V+E) log V). O(V+E) storage. Both return `FOREST` if disconnected, `OK` for one component, `EMPTY` for an empty requested subset. Equal-cost edges use road id as the deterministic tie break. Retained the proposal choices; Boruvka and array Prim were candidates only.
 - **F interface:** `networkplan.solve(locations, roads, method="kruskal", blocked=(), vertices=None, source=0, deadline=None)`. All components by default; pass `vertices=route.reachable` for HQ-only cable planning. Both network modules accept a deadline and raise `TimeBudgetExceeded`; the harness records DNF. Graph records are in `src/network.py`; teammate models and implementations are unchanged.
-- **Campaign interface:** `run_campaign(case, calendar, policy="optimized", deadline=None)` calls the existing A/B/C/D entry points with the day's transformed input, including exactly `rescue.available_on_day` and `rescue.solve`. Optional review calls F plus `chains.solve_chain(dims, "dp")` and `chains.solve_drum(prices, length, "dp")`. See section 13 for daily state and example assumptions.
+- **Campaign interface:** `run_campaign(case, calendar=None, policy="optimized", deadline=None)` calls the existing A/B/C/D entry points with the day's transformed input, including exactly `rescue.available_on_day` and `rescue.solve`. Optional review calls F plus `chains.solve_chain(dims, "dp")` and `chains.solve_drum(prices, length, "dp")`. The default is the official calendar; section 13 documents the daily state, exact baselines and output verification.
 
 ## 6. Operation counts (Section 7.3 of the statement)
 
@@ -170,7 +172,7 @@ The column `ops` of `results.csv` holds one number per run; the breakdown is in 
 | G, DP (drum) | selection and tabulation | table cells (L) + candidates (L(L+1)/2); the memoised recursion has the same counts and L(L+1)/2 + 1 calls |
 | G, greedy cut | ordering | comparisons + moves of our merge sort of the L pieces + pieces examined |
 | G, brute force | hard problems | bracketings (Catalan(n-1)) or cuts (2^(L-1)) enumerated |
-| B/F, all methods | networks and ordering | adjacency-edge examinations + successful relaxations + key comparisons + element/heap-slot writes + union-find root/parent traversals; counts include adjacency/output ordering and BFS reachability; input validation is timed but its field checks are not counted |
+| B/F, all methods | networks and ordering | adjacency-edge examinations + successful relaxations + key comparisons + element/heap-slot writes + union-find root/parent traversals; core counts include output ordering and BFS reachability; adjacency sorting is reported separately as pre_comparisons/pre_moves; input validation is timed but its field checks are not counted |
 
 Preprocessing is counted separately: module D first checks in one pass that ticks do not decrease (m - 1 comparisons) and runs the merge sort only if they do; this is
 `pre_comparisons` and `pre_moves` in the note. Modules C and G count the validation pass over the input as `pre_items` in the note (and the pair tests of brute force in C as `pre_pair_tests`); recursive `calls` are in the note, not in `ops`. Memory (`mem_bytes`) is the peak of `tracemalloc` during one extra run, beyond the input; it is skipped (and said so in the note) when a run takes more than 8 s, because `tracemalloc` slows the run down.
@@ -258,8 +260,8 @@ Full tables: `results/comparison-AD.md`, `results/comparison-C.md`, `results/com
 
 ### Modules B, F
 
-- **B: ship heap Dijkstra**, with BFS for reachability and hop count. In `B-scale-V`, seven sizes (16 to 1024), the largest Dijkstra run took 11.71 ms versus 16.60 ms for Bellman-Ford. All 867 sampled target/wave comparisons agree on shortest cost; BFS costs up to 20 times the optimum. Assumption: positive step costs and sparse networks. Negative weights invalidate Dijkstra; validation rejects them. Monitor edge signs and E/V before selecting the method. The early-stopping Bellman-Ford baseline can be competitive on small, favourably ordered maps.
-- **F: ship Kruskal**, with heap Prim as the check. In `F-scale-V`, the largest runs took 16.94 ms (Kruskal) and 18.03 ms (Prim), a small difference specific to this network. All 289 sampled wave-state forest comparisons agree. Assumption: sparse maps; for dense maps consider array Prim. Monitor E/V, memory and the measured crossover rather than claiming Kruskal always wins.
+- **B: ship heap Dijkstra**, with BFS for reachability and hop count. In `B-scale-V`, seven sizes (16 to 1024), the largest Dijkstra run took 11.78 ms versus 16.69 ms for Bellman-Ford. All 867 sampled target/wave comparisons agree on shortest cost; BFS costs up to 20 times the optimum. Assumption: positive step costs and sparse networks. Negative weights invalidate Dijkstra; validation rejects them. Monitor edge signs and E/V before selecting the method. The early-stopping Bellman-Ford baseline can be competitive on small, favourably ordered maps.
+- **F: ship Kruskal**, with heap Prim as the check. In `F-scale-V`, the largest runs took 17.04 ms (Kruskal) and 18.99 ms (Prim), a small difference specific to this network. All 289 sampled wave-state forest comparisons agree. Assumption: sparse maps; for dense maps consider array Prim. Monitor E/V, memory and the measured crossover rather than claiming Kruskal always wins.
 - Full evidence and failure-mode contribution for Ayna: `results/comparison-BF.md`, `fits-BF.md`, `quality-BF.csv`, `plots/captions-BF.md`. Growth uses connected prefixes of one sampled real L graph, not independent graphs or pooled networks. Times are one-machine/session measurements with unverified power state; seven sizes do not establish a universal exponent. No five-minute DNF is claimed at these sizes.
 
 ### The three failure modes of the whole engine that worry us most (ranked)
@@ -306,44 +308,94 @@ Full tables: `results/comparison-AD.md`, `results/comparison-C.md`, `results/com
 ## 13. Hamza's integration, backend and report handoff
 
 The existing A/C/D/G implementations and result rows were preserved. Hamza's
-results are the B/F rows in `results/results.csv` and files ending in BF.
+results are the B/F rows in `results/results.csv`, the BF files and the official
+campaign artifacts. Teammate implementations and 169 existing result rows are preserved.
 `hamza_work.md` lists the deliverables and remaining handoff decisions.
 
-### Campaign and calendar
+### Campaign and official calendar
 
-Run the command in section 2 from this folder. `calendars/example.json` is a
-working example inferred from repository notes, **not a recovered official
-calendar**. The original project statement/calendar is absent. The example
-uses tools x2/day 2, food x2/day 3, medicine x3/day 5, extra alarms (0,9)/day 2
-and (0,10)/day 5; rescue always uses Adan's `(id + day) % 5` filter. Day 7 skips
-loading and reviews F/G. It assumes daily stock reset, no expiry cutoff and no
-road-closure dates. These are explicit example assumptions, not course rules.
+The original Project Statement is now available. `calendars/official.json`
+implements section 7.4, page 7, and is the default for the CLI and backend.
+`calendars/example.json` remains a labelled historical custom example; the
+old campaign-example output is historical and is not official evidence.
 
-A calendar has `name`, optional `note`, `inventory_mode` (`daily` or `consume`)
-and exactly seven `days` in order. Daily fields:
+| Day | Change applied to base data | Blocked roads | Destination |
+|---|---|---|---|
+| 1 | Normal | none | target_0 |
+| 2 | minutes = ceil(3 * base minutes / 2), tools x2, extra alarm (tick 0, priority 9) | wave 0 | target_1 |
+| 3 | food x2 | wave 1 | target_2 |
+| 4 | penalties >= 2 doubled | wave 2 | target_0 |
+| 5 | medicine x3, extra alarm (tick 0, priority 10) | wave 3 | target_1 |
+| 6 | Flood | union of all waves | target_2 |
+| 7 | No loading; one-way evacuation from HQ | union of all waves | target_0 |
+
+Each day starts at HQ. Days 2-5 close only the listed wave, not a cumulative
+union. Wave index i wraps modulo the number of waves; indices refer to
+ascending stored wave-label positions, normalizing both 0-based and 1-based
+master groups. Changes to minutes, penalties, values, alarms and rescue
+availability start afresh from base data each day. Only days 6 and 7 share the
+all-wave closure. Unreachable destinations skip the trip and load, but rescue
+and alarm processing still run. Day 7 is a real trip with no load, and its cost
+is included if reachable. Costs describe the outbound route; the statement
+does not prescribe a second return-leg computation.
+
+The statement specifies no removal of used crates or expiry cutoff, so official
+runs reset stock daily and add neither rule. Custom calendars retain optional
+`inventory_mode="consume"`, `hour` and `capacity` controls.
+
+A calendar has `name`, optional `note`, `inventory_mode` (`daily` or `consume`),
+`closure_mode` (`daily` or `cumulative`) and seven days in order. Custom calendars
+without closure_mode retain the former cumulative behavior. Daily fields:
 
 | Field | Meaning |
 |---|---|
-| `day` | Integer 1..7 |
-| `target` | Location id; default case `target_0` |
-| `close_waves` | Wave ids closed cumulatively; master groups may start at wave 0 |
-| `close_roads`, `open_roads` | Explicit road ids; reopening applied after wave closures |
-| `multipliers` | Map of category 0..4 to a nonnegative integer; each day's values start from base values |
-| `extra_alarms` | New `[tick, priority]` pairs for that day |
-| `hour` | Optional expiry cutoff; retain crates with expiry >= hour |
-| `capacity` | Optional nonnegative integer overriding the case capacity |
-| `load` | Boolean; default true; unreachable target prevents dispatch |
-| `objective` | Rescue `count` or `value` (default value) |
-| `review` | Boolean; optional F and G calls |
+| day, event | Day 1..7 and optional display label |
+| target or target_key | Literal location id, or target_0/target_1/target_2; never both |
+| close_waves | Exact stored wave labels |
+| wave_indices | Zero-based positions, modulo number of waves |
+| all_waves | Close every listed wave |
+| close_roads, open_roads | Explicit ids; reopening applied after closures |
+| minutes_ratio | Positive integer numerator/denominator; rounded up exactly |
+| penalty_threshold, penalty_multiplier | Multiply penalties at/above threshold |
+| multipliers | Category 0..4 to a nonnegative integer; base crate values multiplied exactly |
+| extra_alarms | Additional [tick, priority] pairs for that day |
+| hour, capacity | Optional custom expiry cutoff / capacity override |
+| load | Whether loading is permitted; default true |
+| objective | Rescue count or value (default value) |
+| evacuation | Day-7 trip with load=false |
+| review | Optional F/G review, enabled on official day 7 |
 
-Closure state persists; rescue and alarms are recomputed from base data daily.
-`consume` removes dispatched crate ids on subsequent days; `daily` resets stock.
-All transformations leave the original case and calendar unchanged. The simple
-comparison runs independently using ratio loading, BFS travel, earliest-finish
-value scheduling and FIFO alarms. Output includes routes, daily statuses, loads,
-rescue plans, alarm release ticks, urgent-alarm wait, totals and the exact calendar.
-A sum of rescue totals is meaningful only when all days use the same objective;
-route cost sums only nonempty dispatches; delivered value and route cost are separate metrics, not a combined score.
+Three independent runs receive identical daily inputs:
+
+- Optimized: A DP, B Dijkstra, C greedy-count/DP-value, D urgency heap,
+  F Kruskal, G bottom-up DP.
+- Algorithm baselines: A ratio greedy, B Bellman-Ford, C quadratic DP,
+  D urgency scan, F Prim, G memoized chain/drum. B/C/D/F/G agree exactly;
+  the loading heuristic is compared on its value gap.
+- Simple policies: ratio loading, BFS travel, earliest-finish value scheduling,
+  FIFO alarms, and greedy drum cuts. These are explicitly nonoptimal policies,
+  not replacements for the exact algorithm baselines.
+
+`src/campaign_checks.py` independently verifies open-road route costs,
+reachability, capacity and daily load value, rescue availability/compatibility,
+exact alarm order/ticks, HQ cable connectivity and G output reconstruction.
+The standard-library heap in that verifier is not used by decision algorithms.
+Every day records its input changes, methods, decisions, checked constraints
+and outcome. Full base input is stored once per case in results/campaign/*.json.
+The case input plus each day's changes reconstructs the complete daily input.
+
+Official evidence covers 1-06 (S), 1-26 (M), 2-40 (L), 4-47 (trap 47) and
+2-48 (trap 48), selected from seed-41 every-seventh tier samples: 105 daily
+policy records, all checked. Trap 47's normal-day greedy load reaches 57.071%
+of optimum; trap 48's BFS route costs 5.333 times the cheapest route. The large
+landslide case explicitly reports disconnected targets on six days.
+
+`python experiments/run_campaign.py --master MASTER` reproduces all five runs,
+three policies each, readable output, CSV comparisons and three report figures.
+For one case, the command in section 2 prints a readable table with inputs,
+methods and checked constraints. Use --output PATH for full JSON, or --format
+json for JSON on screen. Different objectives remain separate metrics, not a
+combined score; aggregate rescue totals require the same objective each day.
 
 ### Loader and validation
 
@@ -362,7 +414,7 @@ reading unrelated large tables for B/F experiments.
 Python interface: `Backend("MASTER")` exposes `list_cases()`, `case(case_id)`,
 `route(case_id, target, method="dijkstra", blocked=())`,
 `network(case_id, blocked=(), method="kruskal", reachable_only=True)`,
-`campaign(case_id, calendar, policy="optimized")`, `chain(case_id, method="dp")`
+`campaign(case_id, calendar=None, policy="optimized")`, `chain(case_id, method="dp")`
 and `drum(case_id, length=None, method="dp")`. An eight-case cache avoids repeated
 CSV scans. Results are JSON-ready dictionaries; individual records in case data
 serialize as field-order arrays with the fields documented in their classes.
@@ -370,6 +422,8 @@ serialize as field-order arrays with the fields documented in their classes.
 `python -m src.server --master MASTER --port 8000` binds only to 127.0.0.1.
 GET `/health`, `/cases`; POST `/case`, `/route`, `/network`, `/campaign`, `/chain`,
 `/drum`, using a JSON object with the corresponding Python argument names.
+POST `/campaign` accepts `{"case_id":"41-00"}` for the official default,
+or add policy="baseline"/"simple" or a custom calendar.
 Example POST `/route` body: `{"case_id":"41-00","target":7,"blocked":[]}`.
 Errors return JSON with HTTP 422, unknown paths 404. The server is a local,
 single-request-at-a-time adapter; use the Python functions or a same-origin dev
@@ -381,12 +435,31 @@ proxy from the frontend. No frontend was replaced or built here.
   result tables, recommendations, assumptions and failure-mode paragraph.
 - `results/plots/B-*.png`, `F-*.png`, `captions-BF.md`: six figures, captions and timing limits.
 - `results/predictions-vs-measurements-BF.md`: pre-run predictions versus outcomes.
-- `results/fault-injection-BF.txt`: 10 seeded faults caught in disposable copies;
+- `results/fault-injection-BF.txt`: 15 seeded faults caught in disposable copies;
   one deliberately broken relaxation loops and is caught by a five-second timeout.
 - `results/test-summary-BF.txt`: final unit/integration/HTTP test run.
-- `results/sample-outputs/campaign-example.json`: runnable example and baseline
-  comparison; not an official-calendar campaign result.
+- `results/campaign-comparison.md`, `campaign-daily.csv`, `campaign-summary.csv`
+  and `campaign/*.json`: official daily outcomes and baseline comparisons.
+- `results/sample-outputs/campaign-official.txt`: readable program output.
+- `results/plots/campaign-*.png`, `captions-campaign.md`: three report figures.
+- `results/predictions-vs-measurements-campaign.md`: official-campaign predictions.
+- The earlier campaign-example.json remains historical, explicitly nonofficial evidence.
 
 Ayna still owns `report.pdf` and the ranked final failure modes; Adan owns the
 frontend. Their output files were not rewritten. The handoff and reproducible commands
 above accompany the B/F and campaign implementation.
+
+
+### Completion and remaining team work
+
+Hamza's modules B/F, their unit/reference tests and seven-size experiments,
+the shared loader/validation, official seven-day coordinator/CLI, backend/API,
+output invariants, 15 fault injections and report-ready tables/plots/test
+summary are complete. B/F round 2 separates preprocessing counts, reports fit
+confidence intervals/R-squared and numerical prediction relative errors.
+
+No calendar configuration remains for Ayna. She incorporates the supplied
+B/F and campaign evidence into report.pdf and finalizes her ranked failure
+modes. Adan connects his frontend to the documented API. The group performs
+the final demo and submission packaging. Their report/frontend files and the
+unrelated local proposal changes were not overwritten.

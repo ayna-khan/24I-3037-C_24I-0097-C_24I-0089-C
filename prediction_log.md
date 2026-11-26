@@ -723,4 +723,14 @@ input family, not blind predictions or worst-case Bellman-Ford claims.
 The fits will report prediction/measurement relative error as required by
 section 7.3. Master-data quality comparisons will be rerun unchanged.
 
-After this round: pending.
+After this round: 105/105 daily policy records passed, all exact baselines
+agreed, and all four campaign predictions met tolerance. Trap-47 day-1
+greedy/DP was 0.570707; trap-48 BFS/cheapest was 5.333333. All 15 exponent
+predictions in B/F round 2 were inside +/-0.35; fitted slopes, confidence
+intervals, R-squared and relative errors are in results/fits-BF.* and
+results/predictions-vs-measurements-BF.md. These round-2 predictions were
+informed by round 1 as declared above. Core counts now exclude adjacency
+preprocessing; round-1 outcomes remain in the earlier log and Git history.
+Published growth timings were run before the campaign/test workloads. No
+new absolute-runtime prediction or five-minute DNF demonstration is claimed.
+No pre-run prediction was changed.

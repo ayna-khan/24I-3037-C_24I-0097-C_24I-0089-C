@@ -11,5 +11,10 @@ campaign-skip-day-values: CAUGHT (test assertion/error)
 campaign-skip-availability: CAUGHT (test assertion/error)
 campaign-forget-closures: CAUGHT (test assertion/error)
 loader-truncate-floats: CAUGHT (test assertion/error)
+calendar-no-storm-ceiling: CAUGHT (test assertion/error)
+calendar-no-penalty-change: CAUGHT (test assertion/error)
+calendar-accumulate-daily-waves: CAUGHT (test assertion/error)
+calendar-no-wave-modulo: CAUGHT (test assertion/error)
+calendar-drop-evacuation-cost: CAUGHT (test assertion/error)
 
-SUMMARY: 10/10 faults caught. Production files untouched.
+SUMMARY: 15/15 faults caught. Production files untouched.

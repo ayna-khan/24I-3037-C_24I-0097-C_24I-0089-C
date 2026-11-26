@@ -28,7 +28,10 @@ def main():
         part.sort(key=lambda r: int(r['size']))
         for metric in ('time_s', 'ops', 'mem_bytes'):
             fit = fit_loglog([int(r['size']) for r in part], [float(r[metric]) for r in part])
-            fits.append(dict(module=module, algorithm=method, metric=metric, **fit))
+            predicted = (1.0 if metric == 'mem_bytes' or method == 'bfs' else
+                         1.1 if method in ('dijkstra', 'bellman') else 1.2)
+            fits.append(dict(module=module, algorithm=method, metric=metric, **fit,
+                             predicted_exponent=predicted, relative_error=abs(fit['slope'] - predicted) / abs(fit['slope'])))
     with (out / 'fits-BF.csv').open('w', newline='', encoding='utf-8') as f:
         w = csv.DictWriter(f, fieldnames=list(fits[0]))
         w.writeheader()
@@ -40,6 +43,9 @@ def main():
               '|---|---|---|---:|---:|---:|---:|']
     for fit in fits:
         fit_md.append(f"| {fit['module']} | {fit['algorithm']} | {fit['metric']} | {fit['slope']:.3f} | {fit['ci95']:.3f} | {fit['r2']:.4f} | {fit['n']} |")
+    fit_md += ['', 'Round 2: preprocessing is separate from core counts. Point predictions are informed by round 1.', '',
+               '| Method | Metric | Predicted exponent | Observed | Relative error |', '|---|---|---:|---:|---:|']
+    fit_md += [f"| {f['algorithm']} | {f['metric']} | {f['predicted_exponent']:.2f} | {f['slope']:.3f} | {f['relative_error']:.3%} |" for f in fits]
     (out / 'fits-BF.md').write_text('\n'.join(fit_md) + '\n', encoding='utf-8')
     ratios = [float(r['bfs_ratio']) for r in quality if r['bfs_ratio']]
     forest = [r for r in quality if r['forest_agrees']]
@@ -63,6 +69,13 @@ def main():
     preds += [f'| {i} | {"HIT" if hit else "MISS"} | {evidence} |' for i, hit, evidence in checks]
     preds += ['', f'{sum(hit for _, hit, _ in checks)} of {len(checks)} predictions met the stated tolerance.',
               'A miss remains a miss; the pre-run prediction was not rewritten.']
+    preds += ['', '## Round 2 (informed by round 1)', '',
+              'Historical round-1 outcomes remain in prediction_log.md and Git history. These are the new pre-run point predictions.', '',
+              '| Method | Metric | Prediction | Observed | Tolerance | Relative error | Result |',
+              '|---|---|---:|---:|---:|---:|---|']
+    for f in fits:
+        preds.append(f"| {f['algorithm']} | {f['metric']} | {f['predicted_exponent']:.2f} | {f['slope']:.3f} | +/- 0.35 | {f['relative_error']:.3%} | "
+                     f"{'HIT' if abs(f['slope'] - f['predicted_exponent']) <= .35 else 'MISS'} |")
     (out / 'predictions-vs-measurements-BF.md').write_text('\n'.join(preds) + '\n', encoding='utf-8')
     comparison = ['# B/F comparison and recommendation', '',
                   f"Master sample: {env['sampled_cases']} cases, {len(quality)} route checks, {len(forest)} forest checks, including cumulative waves.",
@@ -108,7 +121,8 @@ networks. Input construction/CSV loading is excluded. Times are medians of five
 runs after one discarded warmup; error bars show half the IQR each side (not a
 confidence interval). Memory is peak tracemalloc allocation in a separate run,
 beyond the input. Counts sum comparisons, moves, edge tests, relaxations and
-union-find parent traversals, including ordering for adjacency/output.
+union-find parent traversals. Adjacency ordering is reported as pre_* counts
+separately; core counts include output ordering and Kruskal edge sorting.
 
 - B-time.png / B-operations.png / B-memory.png: positive-cost Dijkstra and
   Bellman-Ford solve the same problem; BFS is only the fewest-roads baseline.

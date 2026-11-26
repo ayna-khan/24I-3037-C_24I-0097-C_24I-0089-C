@@ -19,6 +19,7 @@ sys.path.insert(0, str(ROOT))
 from src import measure
 from src.loader import load_cases, read_cases
 from src.modules import routes, networkplan
+from src.models import TimeBudgetExceeded
 
 
 def sample_metadata(master):
@@ -46,6 +47,8 @@ def prefix(case, n):
 
 
 def measured(module, algorithm, cid, nodes, edges, target):
+    base = dict(module=module, experiment=f'{module}-scale-V', algorithm=algorithm,
+                instance=cid, size=len(nodes), size2=len(edges))
     def call(deadline):
         if module == 'B':
             return routes.solve(nodes, edges, target, algorithm, deadline=deadline)
@@ -53,7 +56,10 @@ def measured(module, algorithm, cid, nodes, edges, target):
 
     # Calibration only chooses a batch size. One further warmup is discarded.
     start = perf_counter()
-    call(start + measure.DNF_SECONDS)
+    try:
+        call(start + measure.DNF_SECONDS)
+    except TimeBudgetExceeded:
+        return dict(base, status='DNF', note='300 s deadline during calibration; input loading excluded')
     batch = max(1, min(100, math.ceil(.01 / max(perf_counter() - start, 1e-9))))
 
     def timed(deadline):
@@ -61,15 +67,15 @@ def measured(module, algorithm, cid, nodes, edges, target):
             plan = call(deadline)
         return plan
 
-    base = dict(module=module, experiment=f'{module}-scale-V', algorithm=algorithm,
-                instance=cid, size=len(nodes), size2=len(edges))
     times, plan = measure.time_runs(timed)
     if times is None:
         return dict(base, status='DNF', note='300 s deadline; input loading excluded')
     med, iqr = measure.median_iqr([t / batch for t in times])
-    return dict(base, time_s=f'{med:.9g}', time_iqr_s=f'{iqr:.9g}', ops=sum(plan.ops.values()),
+    return dict(base, time_s=f'{med:.9g}', time_iqr_s=f'{iqr:.9g}',
+                ops=sum(v for k, v in plan.ops.items() if not k.startswith('pre_')),
                 mem_bytes=measure.peak_memory(call), status=plan.status,
-                note=json.dumps(dict(counts=plan.ops, batch=batch, construction='single-network BFS prefix')))
+                note=json.dumps(dict(counts=plan.ops, batch=batch, construction='single-network BFS prefix',
+                                     round=2, preprocessing='pre_* excluded from ops, included in time/memory')))
 
 
 def main():

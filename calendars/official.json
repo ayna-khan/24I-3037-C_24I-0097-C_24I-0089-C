@@ -1,0 +1,15 @@
+{
+  "name": "Official LIFELINE calendar - Project Statement section 7.4, page 7",
+  "note": "Daily changes start from the base case. Wave indices are zero-based positions in sorted wave labels, wrapping modulo the number of waves. Only days 6 and 7 retain the union of every wave. Stock resets each day; no extra expiry rule is prescribed.",
+  "inventory_mode": "daily",
+  "closure_mode": "daily",
+  "days": [
+    {"day": 1, "event": "Normal", "target_key": "target_0"},
+    {"day": 2, "event": "Storm", "target_key": "target_1", "wave_indices": [0], "minutes_ratio": [3, 2], "multipliers": {"3": 2}, "extra_alarms": [[0, 9]]},
+    {"day": 3, "event": "Food shortage", "target_key": "target_2", "wave_indices": [1], "multipliers": {"0": 2}},
+    {"day": 4, "event": "Dangerous area", "target_key": "target_0", "wave_indices": [2], "penalty_threshold": 2, "penalty_multiplier": 2},
+    {"day": 5, "event": "Medical emergency", "target_key": "target_1", "wave_indices": [3], "multipliers": {"2": 3}, "extra_alarms": [[0, 10]]},
+    {"day": 6, "event": "Flood", "target_key": "target_2", "all_waves": true},
+    {"day": 7, "event": "Evacuation", "target_key": "target_0", "all_waves": true, "load": false, "evacuation": true, "review": true}
+  ]
+}

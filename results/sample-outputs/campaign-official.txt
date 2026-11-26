@@ -1,0 +1,374 @@
+Case 1-06 | optimized | Official LIFELINE calendar - Project Statement section 7.4, page 7
+Day | Event | Target | Blocked | Trip | Route cost | Load value | Rescue total | Urgent wait
+  1 | Normal | 4 | 0 | OK | 84 | 826 | 342 | 0.000
+    Input: {'locations': 7, 'roads': 8, 'crates': 19, 'windows': 13, 'alarms': 13}; capacity=82; wave labels=[]; methods={'A': 'dp', 'B': 'dijkstra', 'C': 'dp', 'D': 'heap'}
+    Checked: reachability, route_open_roads_and_cost, capacity_and_load_value, rescue_availability_compatibility_and_total, alarm_order_and_release_ticks
+  2 | Storm | 3 | 1 | OK | 48 | 843 | 304 | 0.333
+    Input: {'locations': 7, 'roads': 8, 'crates': 19, 'windows': 13, 'alarms': 14}; capacity=82; wave labels=[0]; methods={'A': 'dp', 'B': 'dijkstra', 'C': 'dp', 'D': 'heap'}
+    Checked: reachability, route_open_roads_and_cost, capacity_and_load_value, rescue_availability_compatibility_and_total, alarm_order_and_release_ticks
+  3 | Food shortage | 1 | 1 | OK | 91 | 1310 | 365 | 0.000
+    Input: {'locations': 7, 'roads': 8, 'crates': 19, 'windows': 13, 'alarms': 13}; capacity=82; wave labels=[1]; methods={'A': 'dp', 'B': 'dijkstra', 'C': 'dp', 'D': 'heap'}
+    Checked: reachability, route_open_roads_and_cost, capacity_and_load_value, rescue_availability_compatibility_and_total, alarm_order_and_release_ticks
+  4 | Dangerous area | 4 | 1 | OK | 132 | 826 | 353 | 0.000
+    Input: {'locations': 7, 'roads': 8, 'crates': 19, 'windows': 12, 'alarms': 13}; capacity=82; wave labels=[2]; methods={'A': 'dp', 'B': 'dijkstra', 'C': 'dp', 'D': 'heap'}
+    Checked: reachability, route_open_roads_and_cost, capacity_and_load_value, rescue_availability_compatibility_and_total, alarm_order_and_release_ticks
+  5 | Medical emergency | 3 | 1 | OK | 33 | 826 | 391 | 0.333
+    Input: {'locations': 7, 'roads': 8, 'crates': 19, 'windows': 13, 'alarms': 14}; capacity=82; wave labels=[0]; methods={'A': 'dp', 'B': 'dijkstra', 'C': 'dp', 'D': 'heap'}
+    Checked: reachability, route_open_roads_and_cost, capacity_and_load_value, rescue_availability_compatibility_and_total, alarm_order_and_release_ticks
+  6 | Flood | 1 | 3 | NO_ROUTE | None | - | 342 | 0.000
+    Input: {'locations': 7, 'roads': 8, 'crates': 19, 'windows': 13, 'alarms': 13}; capacity=82; wave labels=[]; methods={'A': 'dp', 'B': 'dijkstra', 'C': 'dp', 'D': 'heap'}
+    Checked: reachability, route_open_roads_and_cost, capacity_and_load_value, rescue_availability_compatibility_and_total, alarm_order_and_release_ticks
+  7 | Evacuation | 4 | 3 | NO_ROUTE | None | - | 304 | 0.000
+    Input: {'locations': 7, 'roads': 8, 'crates': 19, 'windows': 13, 'alarms': 13}; capacity=82; wave labels=[]; methods={'A': 'dp', 'B': 'dijkstra', 'C': 'dp', 'D': 'heap', 'F': 'kruskal', 'G_chain': 'dp', 'G_drum': 'dp'}
+    Checked: reachability, route_open_roads_and_cost, capacity_and_load_value, rescue_availability_compatibility_and_total, alarm_order_and_release_ticks, cable_tree_connects_hq_component, chain_bracketing_cost, drum_length_and_price
+Summary: {'delivered_value': 4631, 'route_cost': 388, 'evacuation_cost': None, 'unreachable_days': 2, 'rescue_total': 2401, 'alarm_wait': 292, 'urgent_mean_wait': 0.125}
+
+Case 1-06 | baseline | Official LIFELINE calendar - Project Statement section 7.4, page 7
+Day | Event | Target | Blocked | Trip | Route cost | Load value | Rescue total | Urgent wait
+  1 | Normal | 4 | 0 | OK | 84 | 807 | 342 | 0.000
+    Input: {'locations': 7, 'roads': 8, 'crates': 19, 'windows': 13, 'alarms': 13}; capacity=82; wave labels=[]; methods={'A': 'greedy', 'B': 'bellman', 'C': 'dpquad', 'D': 'scan'}
+    Checked: reachability, route_open_roads_and_cost, capacity_and_load_value, rescue_availability_compatibility_and_total, alarm_order_and_release_ticks
+  2 | Storm | 3 | 1 | OK | 48 | 843 | 304 | 0.333
+    Input: {'locations': 7, 'roads': 8, 'crates': 19, 'windows': 13, 'alarms': 14}; capacity=82; wave labels=[0]; methods={'A': 'greedy', 'B': 'bellman', 'C': 'dpquad', 'D': 'scan'}
+    Checked: reachability, route_open_roads_and_cost, capacity_and_load_value, rescue_availability_compatibility_and_total, alarm_order_and_release_ticks
+  3 | Food shortage | 1 | 1 | OK | 91 | 1310 | 365 | 0.000
+    Input: {'locations': 7, 'roads': 8, 'crates': 19, 'windows': 13, 'alarms': 13}; capacity=82; wave labels=[1]; methods={'A': 'greedy', 'B': 'bellman', 'C': 'dpquad', 'D': 'scan'}
+    Checked: reachability, route_open_roads_and_cost, capacity_and_load_value, rescue_availability_compatibility_and_total, alarm_order_and_release_ticks
+  4 | Dangerous area | 4 | 1 | OK | 132 | 807 | 353 | 0.000
+    Input: {'locations': 7, 'roads': 8, 'crates': 19, 'windows': 12, 'alarms': 13}; capacity=82; wave labels=[2]; methods={'A': 'greedy', 'B': 'bellman', 'C': 'dpquad', 'D': 'scan'}
+    Checked: reachability, route_open_roads_and_cost, capacity_and_load_value, rescue_availability_compatibility_and_total, alarm_order_and_release_ticks
+  5 | Medical emergency | 3 | 1 | OK | 33 | 807 | 391 | 0.333
+    Input: {'locations': 7, 'roads': 8, 'crates': 19, 'windows': 13, 'alarms': 14}; capacity=82; wave labels=[0]; methods={'A': 'greedy', 'B': 'bellman', 'C': 'dpquad', 'D': 'scan'}
+    Checked: reachability, route_open_roads_and_cost, capacity_and_load_value, rescue_availability_compatibility_and_total, alarm_order_and_release_ticks
+  6 | Flood | 1 | 3 | NO_ROUTE | None | - | 342 | 0.000
+    Input: {'locations': 7, 'roads': 8, 'crates': 19, 'windows': 13, 'alarms': 13}; capacity=82; wave labels=[]; methods={'A': 'greedy', 'B': 'bellman', 'C': 'dpquad', 'D': 'scan'}
+    Checked: reachability, route_open_roads_and_cost, capacity_and_load_value, rescue_availability_compatibility_and_total, alarm_order_and_release_ticks
+  7 | Evacuation | 4 | 3 | NO_ROUTE | None | - | 304 | 0.000
+    Input: {'locations': 7, 'roads': 8, 'crates': 19, 'windows': 13, 'alarms': 13}; capacity=82; wave labels=[]; methods={'A': 'greedy', 'B': 'bellman', 'C': 'dpquad', 'D': 'scan', 'F': 'prim', 'G_chain': 'memo', 'G_drum': 'memo'}
+    Checked: reachability, route_open_roads_and_cost, capacity_and_load_value, rescue_availability_compatibility_and_total, alarm_order_and_release_ticks, cable_tree_connects_hq_component, chain_bracketing_cost, drum_length_and_price
+Summary: {'delivered_value': 4574, 'route_cost': 388, 'evacuation_cost': None, 'unreachable_days': 2, 'rescue_total': 2401, 'alarm_wait': 292, 'urgent_mean_wait': 0.125}
+
+Case 1-06 | simple | Official LIFELINE calendar - Project Statement section 7.4, page 7
+Day | Event | Target | Blocked | Trip | Route cost | Load value | Rescue total | Urgent wait
+  1 | Normal | 4 | 0 | OK | 84 | 807 | 280 | 2.000
+    Input: {'locations': 7, 'roads': 8, 'crates': 19, 'windows': 13, 'alarms': 13}; capacity=82; wave labels=[]; methods={'A': 'greedy', 'B': 'bfs', 'C': 'greedy', 'D': 'fifo'}
+    Checked: reachability, route_open_roads_and_cost, capacity_and_load_value, rescue_availability_compatibility_and_total, alarm_order_and_release_ticks
+  2 | Storm | 3 | 1 | OK | 48 | 843 | 183 | 3.000
+    Input: {'locations': 7, 'roads': 8, 'crates': 19, 'windows': 13, 'alarms': 14}; capacity=82; wave labels=[0]; methods={'A': 'greedy', 'B': 'bfs', 'C': 'greedy', 'D': 'fifo'}
+    Checked: reachability, route_open_roads_and_cost, capacity_and_load_value, rescue_availability_compatibility_and_total, alarm_order_and_release_ticks
+  3 | Food shortage | 1 | 1 | OK | 114 | 1310 | 365 | 2.000
+    Input: {'locations': 7, 'roads': 8, 'crates': 19, 'windows': 13, 'alarms': 13}; capacity=82; wave labels=[1]; methods={'A': 'greedy', 'B': 'bfs', 'C': 'greedy', 'D': 'fifo'}
+    Checked: reachability, route_open_roads_and_cost, capacity_and_load_value, rescue_availability_compatibility_and_total, alarm_order_and_release_ticks
+  4 | Dangerous area | 4 | 1 | OK | 132 | 807 | 306 | 2.000
+    Input: {'locations': 7, 'roads': 8, 'crates': 19, 'windows': 12, 'alarms': 13}; capacity=82; wave labels=[2]; methods={'A': 'greedy', 'B': 'bfs', 'C': 'greedy', 'D': 'fifo'}
+    Checked: reachability, route_open_roads_and_cost, capacity_and_load_value, rescue_availability_compatibility_and_total, alarm_order_and_release_ticks
+  5 | Medical emergency | 3 | 1 | OK | 33 | 807 | 391 | 3.000
+    Input: {'locations': 7, 'roads': 8, 'crates': 19, 'windows': 13, 'alarms': 14}; capacity=82; wave labels=[0]; methods={'A': 'greedy', 'B': 'bfs', 'C': 'greedy', 'D': 'fifo'}
+    Checked: reachability, route_open_roads_and_cost, capacity_and_load_value, rescue_availability_compatibility_and_total, alarm_order_and_release_ticks
+  6 | Flood | 1 | 3 | NO_ROUTE | None | - | 280 | 2.000
+    Input: {'locations': 7, 'roads': 8, 'crates': 19, 'windows': 13, 'alarms': 13}; capacity=82; wave labels=[]; methods={'A': 'greedy', 'B': 'bfs', 'C': 'greedy', 'D': 'fifo'}
+    Checked: reachability, route_open_roads_and_cost, capacity_and_load_value, rescue_availability_compatibility_and_total, alarm_order_and_release_ticks
+  7 | Evacuation | 4 | 3 | NO_ROUTE | None | - | 183 | 2.000
+    Input: {'locations': 7, 'roads': 8, 'crates': 19, 'windows': 13, 'alarms': 13}; capacity=82; wave labels=[]; methods={'A': 'greedy', 'B': 'bfs', 'C': 'greedy', 'D': 'fifo', 'F': 'kruskal', 'G_chain': 'dp', 'G_drum': 'greedy'}
+    Checked: reachability, route_open_roads_and_cost, capacity_and_load_value, rescue_availability_compatibility_and_total, alarm_order_and_release_ticks, cable_tree_connects_hq_component, chain_bracketing_cost, drum_length_and_price
+Summary: {'delivered_value': 4574, 'route_cost': 411, 'evacuation_cost': None, 'unreachable_days': 2, 'rescue_total': 1988, 'alarm_wait': 292, 'urgent_mean_wait': 2.375}
+
+Case 1-26 | optimized | Official LIFELINE calendar - Project Statement section 7.4, page 7
+Day | Event | Target | Blocked | Trip | Route cost | Load value | Rescue total | Urgent wait
+  1 | Normal | 87 | 0 | OK | 47 | 2258 | 2140 | 0.172
+    Input: {'locations': 122, 'roads': 152, 'crates': 74, 'windows': 138, 'alarms': 687}; capacity=232; wave labels=[]; methods={'A': 'dp', 'B': 'dijkstra', 'C': 'dp', 'D': 'heap'}
+    Checked: reachability, route_open_roads_and_cost, capacity_and_load_value, rescue_availability_compatibility_and_total, alarm_order_and_release_ticks
+  2 | Storm | 27 | 37 | OK | 216 | 2969 | 2223 | 0.171
+    Input: {'locations': 122, 'roads': 152, 'crates': 74, 'windows': 138, 'alarms': 688}; capacity=232; wave labels=[0]; methods={'A': 'dp', 'B': 'dijkstra', 'C': 'dp', 'D': 'heap'}
+    Checked: reachability, route_open_roads_and_cost, capacity_and_load_value, rescue_availability_compatibility_and_total, alarm_order_and_release_ticks
+  3 | Food shortage | 55 | 1 | OK | 25 | 2612 | 2122 | 0.172
+    Input: {'locations': 122, 'roads': 152, 'crates': 74, 'windows': 137, 'alarms': 687}; capacity=232; wave labels=[1]; methods={'A': 'dp', 'B': 'dijkstra', 'C': 'dp', 'D': 'heap'}
+    Checked: reachability, route_open_roads_and_cost, capacity_and_load_value, rescue_availability_compatibility_and_total, alarm_order_and_release_ticks
+  4 | Dangerous area | 87 | 8 | OK | 59 | 2258 | 2099 | 0.172
+    Input: {'locations': 122, 'roads': 152, 'crates': 74, 'windows': 137, 'alarms': 687}; capacity=232; wave labels=[2]; methods={'A': 'dp', 'B': 'dijkstra', 'C': 'dp', 'D': 'heap'}
+    Checked: reachability, route_open_roads_and_cost, capacity_and_load_value, rescue_availability_compatibility_and_total, alarm_order_and_release_ticks
+  5 | Medical emergency | 27 | 37 | OK | 151 | 3142 | 1933 | 0.171
+    Input: {'locations': 122, 'roads': 152, 'crates': 74, 'windows': 138, 'alarms': 688}; capacity=232; wave labels=[0]; methods={'A': 'dp', 'B': 'dijkstra', 'C': 'dp', 'D': 'heap'}
+    Checked: reachability, route_open_roads_and_cost, capacity_and_load_value, rescue_availability_compatibility_and_total, alarm_order_and_release_ticks
+  6 | Flood | 55 | 46 | NO_ROUTE | None | - | 2140 | 0.172
+    Input: {'locations': 122, 'roads': 152, 'crates': 74, 'windows': 138, 'alarms': 687}; capacity=232; wave labels=[]; methods={'A': 'dp', 'B': 'dijkstra', 'C': 'dp', 'D': 'heap'}
+    Checked: reachability, route_open_roads_and_cost, capacity_and_load_value, rescue_availability_compatibility_and_total, alarm_order_and_release_ticks
+  7 | Evacuation | 87 | 46 | EVACUATION | 93 | - | 2223 | 0.172
+    Input: {'locations': 122, 'roads': 152, 'crates': 74, 'windows': 138, 'alarms': 687}; capacity=232; wave labels=[]; methods={'A': 'dp', 'B': 'dijkstra', 'C': 'dp', 'D': 'heap', 'F': 'kruskal', 'G_chain': 'dp', 'G_drum': 'dp'}
+    Checked: reachability, route_open_roads_and_cost, capacity_and_load_value, rescue_availability_compatibility_and_total, alarm_order_and_release_ticks, cable_tree_connects_hq_component, chain_bracketing_cost, drum_length_and_price
+Summary: {'delivered_value': 13239, 'route_cost': 591, 'evacuation_cost': 93, 'unreachable_days': 1, 'rescue_total': 14880, 'alarm_wait': 497324, 'urgent_mean_wait': 0.1720747295968535}
+
+Case 1-26 | baseline | Official LIFELINE calendar - Project Statement section 7.4, page 7
+Day | Event | Target | Blocked | Trip | Route cost | Load value | Rescue total | Urgent wait
+  1 | Normal | 87 | 0 | OK | 47 | 2257 | 2140 | 0.172
+    Input: {'locations': 122, 'roads': 152, 'crates': 74, 'windows': 138, 'alarms': 687}; capacity=232; wave labels=[]; methods={'A': 'greedy', 'B': 'bellman', 'C': 'dpquad', 'D': 'scan'}
+    Checked: reachability, route_open_roads_and_cost, capacity_and_load_value, rescue_availability_compatibility_and_total, alarm_order_and_release_ticks
+  2 | Storm | 27 | 37 | OK | 216 | 2959 | 2223 | 0.171
+    Input: {'locations': 122, 'roads': 152, 'crates': 74, 'windows': 138, 'alarms': 688}; capacity=232; wave labels=[0]; methods={'A': 'greedy', 'B': 'bellman', 'C': 'dpquad', 'D': 'scan'}
+    Checked: reachability, route_open_roads_and_cost, capacity_and_load_value, rescue_availability_compatibility_and_total, alarm_order_and_release_ticks
+  3 | Food shortage | 55 | 1 | OK | 25 | 2595 | 2122 | 0.172
+    Input: {'locations': 122, 'roads': 152, 'crates': 74, 'windows': 137, 'alarms': 687}; capacity=232; wave labels=[1]; methods={'A': 'greedy', 'B': 'bellman', 'C': 'dpquad', 'D': 'scan'}
+    Checked: reachability, route_open_roads_and_cost, capacity_and_load_value, rescue_availability_compatibility_and_total, alarm_order_and_release_ticks
+  4 | Dangerous area | 87 | 8 | OK | 59 | 2257 | 2099 | 0.172
+    Input: {'locations': 122, 'roads': 152, 'crates': 74, 'windows': 137, 'alarms': 687}; capacity=232; wave labels=[2]; methods={'A': 'greedy', 'B': 'bellman', 'C': 'dpquad', 'D': 'scan'}
+    Checked: reachability, route_open_roads_and_cost, capacity_and_load_value, rescue_availability_compatibility_and_total, alarm_order_and_release_ticks
+  5 | Medical emergency | 27 | 37 | OK | 151 | 3139 | 1933 | 0.171
+    Input: {'locations': 122, 'roads': 152, 'crates': 74, 'windows': 138, 'alarms': 688}; capacity=232; wave labels=[0]; methods={'A': 'greedy', 'B': 'bellman', 'C': 'dpquad', 'D': 'scan'}
+    Checked: reachability, route_open_roads_and_cost, capacity_and_load_value, rescue_availability_compatibility_and_total, alarm_order_and_release_ticks
+  6 | Flood | 55 | 46 | NO_ROUTE | None | - | 2140 | 0.172
+    Input: {'locations': 122, 'roads': 152, 'crates': 74, 'windows': 138, 'alarms': 687}; capacity=232; wave labels=[]; methods={'A': 'greedy', 'B': 'bellman', 'C': 'dpquad', 'D': 'scan'}
+    Checked: reachability, route_open_roads_and_cost, capacity_and_load_value, rescue_availability_compatibility_and_total, alarm_order_and_release_ticks
+  7 | Evacuation | 87 | 46 | EVACUATION | 93 | - | 2223 | 0.172
+    Input: {'locations': 122, 'roads': 152, 'crates': 74, 'windows': 138, 'alarms': 687}; capacity=232; wave labels=[]; methods={'A': 'greedy', 'B': 'bellman', 'C': 'dpquad', 'D': 'scan', 'F': 'prim', 'G_chain': 'memo', 'G_drum': 'memo'}
+    Checked: reachability, route_open_roads_and_cost, capacity_and_load_value, rescue_availability_compatibility_and_total, alarm_order_and_release_ticks, cable_tree_connects_hq_component, chain_bracketing_cost, drum_length_and_price
+Summary: {'delivered_value': 13207, 'route_cost': 591, 'evacuation_cost': 93, 'unreachable_days': 1, 'rescue_total': 14880, 'alarm_wait': 497324, 'urgent_mean_wait': 0.1720747295968535}
+
+Case 1-26 | simple | Official LIFELINE calendar - Project Statement section 7.4, page 7
+Day | Event | Target | Blocked | Trip | Route cost | Load value | Rescue total | Urgent wait
+  1 | Normal | 87 | 0 | OK | 47 | 2257 | 1689 | 110.007
+    Input: {'locations': 122, 'roads': 152, 'crates': 74, 'windows': 138, 'alarms': 687}; capacity=232; wave labels=[]; methods={'A': 'greedy', 'B': 'bfs', 'C': 'greedy', 'D': 'fifo'}
+    Checked: reachability, route_open_roads_and_cost, capacity_and_load_value, rescue_availability_compatibility_and_total, alarm_order_and_release_ticks
+  2 | Storm | 27 | 37 | OK | 368 | 2959 | 1773 | 110.267
+    Input: {'locations': 122, 'roads': 152, 'crates': 74, 'windows': 138, 'alarms': 688}; capacity=232; wave labels=[0]; methods={'A': 'greedy', 'B': 'bfs', 'C': 'greedy', 'D': 'fifo'}
+    Checked: reachability, route_open_roads_and_cost, capacity_and_load_value, rescue_availability_compatibility_and_total, alarm_order_and_release_ticks
+  3 | Food shortage | 55 | 1 | OK | 72 | 2595 | 1751 | 110.007
+    Input: {'locations': 122, 'roads': 152, 'crates': 74, 'windows': 137, 'alarms': 687}; capacity=232; wave labels=[1]; methods={'A': 'greedy', 'B': 'bfs', 'C': 'greedy', 'D': 'fifo'}
+    Checked: reachability, route_open_roads_and_cost, capacity_and_load_value, rescue_availability_compatibility_and_total, alarm_order_and_release_ticks
+  4 | Dangerous area | 87 | 8 | OK | 59 | 2257 | 1798 | 110.007
+    Input: {'locations': 122, 'roads': 152, 'crates': 74, 'windows': 137, 'alarms': 687}; capacity=232; wave labels=[2]; methods={'A': 'greedy', 'B': 'bfs', 'C': 'greedy', 'D': 'fifo'}
+    Checked: reachability, route_open_roads_and_cost, capacity_and_load_value, rescue_availability_compatibility_and_total, alarm_order_and_release_ticks
+  5 | Medical emergency | 27 | 37 | OK | 249 | 3139 | 1616 | 110.267
+    Input: {'locations': 122, 'roads': 152, 'crates': 74, 'windows': 138, 'alarms': 688}; capacity=232; wave labels=[0]; methods={'A': 'greedy', 'B': 'bfs', 'C': 'greedy', 'D': 'fifo'}
+    Checked: reachability, route_open_roads_and_cost, capacity_and_load_value, rescue_availability_compatibility_and_total, alarm_order_and_release_ticks
+  6 | Flood | 55 | 46 | NO_ROUTE | None | - | 1689 | 110.007
+    Input: {'locations': 122, 'roads': 152, 'crates': 74, 'windows': 138, 'alarms': 687}; capacity=232; wave labels=[]; methods={'A': 'greedy', 'B': 'bfs', 'C': 'greedy', 'D': 'fifo'}
+    Checked: reachability, route_open_roads_and_cost, capacity_and_load_value, rescue_availability_compatibility_and_total, alarm_order_and_release_ticks
+  7 | Evacuation | 87 | 46 | EVACUATION | 93 | - | 1773 | 110.007
+    Input: {'locations': 122, 'roads': 152, 'crates': 74, 'windows': 138, 'alarms': 687}; capacity=232; wave labels=[]; methods={'A': 'greedy', 'B': 'bfs', 'C': 'greedy', 'D': 'fifo', 'F': 'kruskal', 'G_chain': 'dp', 'G_drum': 'greedy'}
+    Checked: reachability, route_open_roads_and_cost, capacity_and_load_value, rescue_availability_compatibility_and_total, alarm_order_and_release_ticks, cable_tree_connects_hq_component, chain_bracketing_cost, drum_length_and_price
+Summary: {'delivered_value': 13207, 'route_cost': 888, 'evacuation_cost': 93, 'unreachable_days': 1, 'rescue_total': 12089, 'alarm_wait': 497324, 'urgent_mean_wait': 110.08161258603737}
+
+Case 2-40 | optimized | Official LIFELINE calendar - Project Statement section 7.4, page 7
+Day | Event | Target | Blocked | Trip | Route cost | Load value | Rescue total | Urgent wait
+  1 | Normal | 306 | 0 | OK | 13339 | 16871 | 3613 | 0.075
+    Input: {'locations': 529, 'roads': 529, 'crates': 501, 'windows': 872, 'alarms': 2258}; capacity=1708; wave labels=[]; methods={'A': 'dp', 'B': 'dijkstra', 'C': 'dp', 'D': 'heap'}
+    Checked: reachability, route_open_roads_and_cost, capacity_and_load_value, rescue_availability_compatibility_and_total, alarm_order_and_release_ticks
+  2 | Storm | 315 | 58 | NO_ROUTE | None | - | 3612 | 0.075
+    Input: {'locations': 529, 'roads': 529, 'crates': 501, 'windows': 872, 'alarms': 2259}; capacity=1708; wave labels=[0]; methods={'A': 'dp', 'B': 'dijkstra', 'C': 'dp', 'D': 'heap'}
+    Checked: reachability, route_open_roads_and_cost, capacity_and_load_value, rescue_availability_compatibility_and_total, alarm_order_and_release_ticks
+  3 | Food shortage | 423 | 58 | NO_ROUTE | None | - | 3626 | 0.075
+    Input: {'locations': 529, 'roads': 529, 'crates': 501, 'windows': 872, 'alarms': 2258}; capacity=1708; wave labels=[1]; methods={'A': 'dp', 'B': 'dijkstra', 'C': 'dp', 'D': 'heap'}
+    Checked: reachability, route_open_roads_and_cost, capacity_and_load_value, rescue_availability_compatibility_and_total, alarm_order_and_release_ticks
+  4 | Dangerous area | 306 | 58 | NO_ROUTE | None | - | 3596 | 0.075
+    Input: {'locations': 529, 'roads': 529, 'crates': 501, 'windows': 872, 'alarms': 2258}; capacity=1708; wave labels=[2]; methods={'A': 'dp', 'B': 'dijkstra', 'C': 'dp', 'D': 'heap'}
+    Checked: reachability, route_open_roads_and_cost, capacity_and_load_value, rescue_availability_compatibility_and_total, alarm_order_and_release_ticks
+  5 | Medical emergency | 315 | 58 | NO_ROUTE | None | - | 3336 | 0.075
+    Input: {'locations': 529, 'roads': 529, 'crates': 501, 'windows': 872, 'alarms': 2259}; capacity=1708; wave labels=[0]; methods={'A': 'dp', 'B': 'dijkstra', 'C': 'dp', 'D': 'heap'}
+    Checked: reachability, route_open_roads_and_cost, capacity_and_load_value, rescue_availability_compatibility_and_total, alarm_order_and_release_ticks
+  6 | Flood | 423 | 174 | NO_ROUTE | None | - | 3613 | 0.075
+    Input: {'locations': 529, 'roads': 529, 'crates': 501, 'windows': 872, 'alarms': 2258}; capacity=1708; wave labels=[]; methods={'A': 'dp', 'B': 'dijkstra', 'C': 'dp', 'D': 'heap'}
+    Checked: reachability, route_open_roads_and_cost, capacity_and_load_value, rescue_availability_compatibility_and_total, alarm_order_and_release_ticks
+  7 | Evacuation | 306 | 174 | NO_ROUTE | None | - | 3612 | 0.075
+    Input: {'locations': 529, 'roads': 529, 'crates': 501, 'windows': 872, 'alarms': 2258}; capacity=1708; wave labels=[]; methods={'A': 'dp', 'B': 'dijkstra', 'C': 'dp', 'D': 'heap', 'F': 'kruskal', 'G_chain': 'dp', 'G_drum': 'dp'}
+    Checked: reachability, route_open_roads_and_cost, capacity_and_load_value, rescue_availability_compatibility_and_total, alarm_order_and_release_ticks, cable_tree_connects_hq_component, chain_bracketing_cost, drum_length_and_price
+Summary: {'delivered_value': 16871, 'route_cost': 13339, 'evacuation_cost': None, 'unreachable_days': 6, 'rescue_total': 25008, 'alarm_wait': 5955475, 'urgent_mean_wait': 0.07526881720430108}
+
+Case 2-40 | baseline | Official LIFELINE calendar - Project Statement section 7.4, page 7
+Day | Event | Target | Blocked | Trip | Route cost | Load value | Rescue total | Urgent wait
+  1 | Normal | 306 | 0 | OK | 13339 | 16865 | 3613 | 0.075
+    Input: {'locations': 529, 'roads': 529, 'crates': 501, 'windows': 872, 'alarms': 2258}; capacity=1708; wave labels=[]; methods={'A': 'greedy', 'B': 'bellman', 'C': 'dpquad', 'D': 'scan'}
+    Checked: reachability, route_open_roads_and_cost, capacity_and_load_value, rescue_availability_compatibility_and_total, alarm_order_and_release_ticks
+  2 | Storm | 315 | 58 | NO_ROUTE | None | - | 3612 | 0.075
+    Input: {'locations': 529, 'roads': 529, 'crates': 501, 'windows': 872, 'alarms': 2259}; capacity=1708; wave labels=[0]; methods={'A': 'greedy', 'B': 'bellman', 'C': 'dpquad', 'D': 'scan'}
+    Checked: reachability, route_open_roads_and_cost, capacity_and_load_value, rescue_availability_compatibility_and_total, alarm_order_and_release_ticks
+  3 | Food shortage | 423 | 58 | NO_ROUTE | None | - | 3626 | 0.075
+    Input: {'locations': 529, 'roads': 529, 'crates': 501, 'windows': 872, 'alarms': 2258}; capacity=1708; wave labels=[1]; methods={'A': 'greedy', 'B': 'bellman', 'C': 'dpquad', 'D': 'scan'}
+    Checked: reachability, route_open_roads_and_cost, capacity_and_load_value, rescue_availability_compatibility_and_total, alarm_order_and_release_ticks
+  4 | Dangerous area | 306 | 58 | NO_ROUTE | None | - | 3596 | 0.075
+    Input: {'locations': 529, 'roads': 529, 'crates': 501, 'windows': 872, 'alarms': 2258}; capacity=1708; wave labels=[2]; methods={'A': 'greedy', 'B': 'bellman', 'C': 'dpquad', 'D': 'scan'}
+    Checked: reachability, route_open_roads_and_cost, capacity_and_load_value, rescue_availability_compatibility_and_total, alarm_order_and_release_ticks
+  5 | Medical emergency | 315 | 58 | NO_ROUTE | None | - | 3336 | 0.075
+    Input: {'locations': 529, 'roads': 529, 'crates': 501, 'windows': 872, 'alarms': 2259}; capacity=1708; wave labels=[0]; methods={'A': 'greedy', 'B': 'bellman', 'C': 'dpquad', 'D': 'scan'}
+    Checked: reachability, route_open_roads_and_cost, capacity_and_load_value, rescue_availability_compatibility_and_total, alarm_order_and_release_ticks
+  6 | Flood | 423 | 174 | NO_ROUTE | None | - | 3613 | 0.075
+    Input: {'locations': 529, 'roads': 529, 'crates': 501, 'windows': 872, 'alarms': 2258}; capacity=1708; wave labels=[]; methods={'A': 'greedy', 'B': 'bellman', 'C': 'dpquad', 'D': 'scan'}
+    Checked: reachability, route_open_roads_and_cost, capacity_and_load_value, rescue_availability_compatibility_and_total, alarm_order_and_release_ticks
+  7 | Evacuation | 306 | 174 | NO_ROUTE | None | - | 3612 | 0.075
+    Input: {'locations': 529, 'roads': 529, 'crates': 501, 'windows': 872, 'alarms': 2258}; capacity=1708; wave labels=[]; methods={'A': 'greedy', 'B': 'bellman', 'C': 'dpquad', 'D': 'scan', 'F': 'prim', 'G_chain': 'memo', 'G_drum': 'memo'}
+    Checked: reachability, route_open_roads_and_cost, capacity_and_load_value, rescue_availability_compatibility_and_total, alarm_order_and_release_ticks, cable_tree_connects_hq_component, chain_bracketing_cost, drum_length_and_price
+Summary: {'delivered_value': 16865, 'route_cost': 13339, 'evacuation_cost': None, 'unreachable_days': 6, 'rescue_total': 25008, 'alarm_wait': 5955475, 'urgent_mean_wait': 0.07526881720430108}
+
+Case 2-40 | simple | Official LIFELINE calendar - Project Statement section 7.4, page 7
+Day | Event | Target | Blocked | Trip | Route cost | Load value | Rescue total | Urgent wait
+  1 | Normal | 306 | 0 | OK | 13339 | 16865 | 2803 | 365.994
+    Input: {'locations': 529, 'roads': 529, 'crates': 501, 'windows': 872, 'alarms': 2258}; capacity=1708; wave labels=[]; methods={'A': 'greedy', 'B': 'bfs', 'C': 'greedy', 'D': 'fifo'}
+    Checked: reachability, route_open_roads_and_cost, capacity_and_load_value, rescue_availability_compatibility_and_total, alarm_order_and_release_ticks
+  2 | Storm | 315 | 58 | NO_ROUTE | None | - | 2913 | 366.232
+    Input: {'locations': 529, 'roads': 529, 'crates': 501, 'windows': 872, 'alarms': 2259}; capacity=1708; wave labels=[0]; methods={'A': 'greedy', 'B': 'bfs', 'C': 'greedy', 'D': 'fifo'}
+    Checked: reachability, route_open_roads_and_cost, capacity_and_load_value, rescue_availability_compatibility_and_total, alarm_order_and_release_ticks
+  3 | Food shortage | 423 | 58 | NO_ROUTE | None | - | 2967 | 365.994
+    Input: {'locations': 529, 'roads': 529, 'crates': 501, 'windows': 872, 'alarms': 2258}; capacity=1708; wave labels=[1]; methods={'A': 'greedy', 'B': 'bfs', 'C': 'greedy', 'D': 'fifo'}
+    Checked: reachability, route_open_roads_and_cost, capacity_and_load_value, rescue_availability_compatibility_and_total, alarm_order_and_release_ticks
+  4 | Dangerous area | 306 | 58 | NO_ROUTE | None | - | 2707 | 365.994
+    Input: {'locations': 529, 'roads': 529, 'crates': 501, 'windows': 872, 'alarms': 2258}; capacity=1708; wave labels=[2]; methods={'A': 'greedy', 'B': 'bfs', 'C': 'greedy', 'D': 'fifo'}
+    Checked: reachability, route_open_roads_and_cost, capacity_and_load_value, rescue_availability_compatibility_and_total, alarm_order_and_release_ticks
+  5 | Medical emergency | 315 | 58 | NO_ROUTE | None | - | 2501 | 366.232
+    Input: {'locations': 529, 'roads': 529, 'crates': 501, 'windows': 872, 'alarms': 2259}; capacity=1708; wave labels=[0]; methods={'A': 'greedy', 'B': 'bfs', 'C': 'greedy', 'D': 'fifo'}
+    Checked: reachability, route_open_roads_and_cost, capacity_and_load_value, rescue_availability_compatibility_and_total, alarm_order_and_release_ticks
+  6 | Flood | 423 | 174 | NO_ROUTE | None | - | 2803 | 365.994
+    Input: {'locations': 529, 'roads': 529, 'crates': 501, 'windows': 872, 'alarms': 2258}; capacity=1708; wave labels=[]; methods={'A': 'greedy', 'B': 'bfs', 'C': 'greedy', 'D': 'fifo'}
+    Checked: reachability, route_open_roads_and_cost, capacity_and_load_value, rescue_availability_compatibility_and_total, alarm_order_and_release_ticks
+  7 | Evacuation | 306 | 174 | NO_ROUTE | None | - | 2913 | 365.994
+    Input: {'locations': 529, 'roads': 529, 'crates': 501, 'windows': 872, 'alarms': 2258}; capacity=1708; wave labels=[]; methods={'A': 'greedy', 'B': 'bfs', 'C': 'greedy', 'D': 'fifo', 'F': 'kruskal', 'G_chain': 'dp', 'G_drum': 'greedy'}
+    Checked: reachability, route_open_roads_and_cost, capacity_and_load_value, rescue_availability_compatibility_and_total, alarm_order_and_release_ticks, cable_tree_connects_hq_component, chain_bracketing_cost, drum_length_and_price
+Summary: {'delivered_value': 16865, 'route_cost': 13339, 'evacuation_cost': None, 'unreachable_days': 6, 'rescue_total': 19607, 'alarm_wait': 5955475, 'urgent_mean_wait': 366.06182795698925}
+
+Case 4-47 | optimized | Official LIFELINE calendar - Project Statement section 7.4, page 7
+Day | Event | Target | Blocked | Trip | Route cost | Load value | Rescue total | Urgent wait
+  1 | Normal | 486 | 0 | OK | 357 | 198 | 2019 | 0.073
+    Input: {'locations': 710, 'roads': 898, 'crates': 13, 'windows': 2131, 'alarms': 3256}; capacity=40; wave labels=[]; methods={'A': 'dp', 'B': 'dijkstra', 'C': 'dp', 'D': 'heap'}
+    Checked: reachability, route_open_roads_and_cost, capacity_and_load_value, rescue_availability_compatibility_and_total, alarm_order_and_release_ticks
+  2 | Storm | 99 | 3 | OK | 691 | 198 | 1918 | 0.072
+    Input: {'locations': 710, 'roads': 898, 'crates': 13, 'windows': 2131, 'alarms': 3257}; capacity=40; wave labels=[0]; methods={'A': 'dp', 'B': 'dijkstra', 'C': 'dp', 'D': 'heap'}
+    Checked: reachability, route_open_roads_and_cost, capacity_and_load_value, rescue_availability_compatibility_and_total, alarm_order_and_release_ticks
+  3 | Food shortage | 392 | 10 | OK | 301 | 210 | 1948 | 0.073
+    Input: {'locations': 710, 'roads': 898, 'crates': 13, 'windows': 2131, 'alarms': 3256}; capacity=40; wave labels=[1]; methods={'A': 'dp', 'B': 'dijkstra', 'C': 'dp', 'D': 'heap'}
+    Checked: reachability, route_open_roads_and_cost, capacity_and_load_value, rescue_availability_compatibility_and_total, alarm_order_and_release_ticks
+  4 | Dangerous area | 486 | 22 | OK | 375 | 198 | 2015 | 0.073
+    Input: {'locations': 710, 'roads': 898, 'crates': 13, 'windows': 2131, 'alarms': 3256}; capacity=40; wave labels=[2]; methods={'A': 'dp', 'B': 'dijkstra', 'C': 'dp', 'D': 'heap'}
+    Checked: reachability, route_open_roads_and_cost, capacity_and_load_value, rescue_availability_compatibility_and_total, alarm_order_and_release_ticks
+  5 | Medical emergency | 99 | 9 | OK | 465 | 198 | 2039 | 0.072
+    Input: {'locations': 710, 'roads': 898, 'crates': 13, 'windows': 2132, 'alarms': 3257}; capacity=40; wave labels=[3]; methods={'A': 'dp', 'B': 'dijkstra', 'C': 'dp', 'D': 'heap'}
+    Checked: reachability, route_open_roads_and_cost, capacity_and_load_value, rescue_availability_compatibility_and_total, alarm_order_and_release_ticks
+  6 | Flood | 392 | 57 | OK | 301 | 198 | 2019 | 0.073
+    Input: {'locations': 710, 'roads': 898, 'crates': 13, 'windows': 2131, 'alarms': 3256}; capacity=40; wave labels=[]; methods={'A': 'dp', 'B': 'dijkstra', 'C': 'dp', 'D': 'heap'}
+    Checked: reachability, route_open_roads_and_cost, capacity_and_load_value, rescue_availability_compatibility_and_total, alarm_order_and_release_ticks
+  7 | Evacuation | 486 | 57 | NO_ROUTE | None | - | 1918 | 0.073
+    Input: {'locations': 710, 'roads': 898, 'crates': 13, 'windows': 2131, 'alarms': 3256}; capacity=40; wave labels=[]; methods={'A': 'dp', 'B': 'dijkstra', 'C': 'dp', 'D': 'heap', 'F': 'kruskal', 'G_chain': 'dp', 'G_drum': 'dp'}
+    Checked: reachability, route_open_roads_and_cost, capacity_and_load_value, rescue_availability_compatibility_and_total, alarm_order_and_release_ticks, cable_tree_connects_hq_component, chain_bracketing_cost, drum_length_and_price
+Summary: {'delivered_value': 1200, 'route_cost': 2490, 'evacuation_cost': None, 'unreachable_days': 1, 'rescue_total': 13876, 'alarm_wait': 8468938, 'urgent_mean_wait': 0.0724450194049159}
+
+Case 4-47 | baseline | Official LIFELINE calendar - Project Statement section 7.4, page 7
+Day | Event | Target | Blocked | Trip | Route cost | Load value | Rescue total | Urgent wait
+  1 | Normal | 486 | 0 | OK | 357 | 113 | 2019 | 0.073
+    Input: {'locations': 710, 'roads': 898, 'crates': 13, 'windows': 2131, 'alarms': 3256}; capacity=40; wave labels=[]; methods={'A': 'greedy', 'B': 'bellman', 'C': 'dpquad', 'D': 'scan'}
+    Checked: reachability, route_open_roads_and_cost, capacity_and_load_value, rescue_availability_compatibility_and_total, alarm_order_and_release_ticks
+  2 | Storm | 99 | 3 | OK | 691 | 113 | 1918 | 0.072
+    Input: {'locations': 710, 'roads': 898, 'crates': 13, 'windows': 2131, 'alarms': 3257}; capacity=40; wave labels=[0]; methods={'A': 'greedy', 'B': 'bellman', 'C': 'dpquad', 'D': 'scan'}
+    Checked: reachability, route_open_roads_and_cost, capacity_and_load_value, rescue_availability_compatibility_and_total, alarm_order_and_release_ticks
+  3 | Food shortage | 392 | 10 | OK | 301 | 121 | 1948 | 0.073
+    Input: {'locations': 710, 'roads': 898, 'crates': 13, 'windows': 2131, 'alarms': 3256}; capacity=40; wave labels=[1]; methods={'A': 'greedy', 'B': 'bellman', 'C': 'dpquad', 'D': 'scan'}
+    Checked: reachability, route_open_roads_and_cost, capacity_and_load_value, rescue_availability_compatibility_and_total, alarm_order_and_release_ticks
+  4 | Dangerous area | 486 | 22 | OK | 375 | 113 | 2015 | 0.073
+    Input: {'locations': 710, 'roads': 898, 'crates': 13, 'windows': 2131, 'alarms': 3256}; capacity=40; wave labels=[2]; methods={'A': 'greedy', 'B': 'bellman', 'C': 'dpquad', 'D': 'scan'}
+    Checked: reachability, route_open_roads_and_cost, capacity_and_load_value, rescue_availability_compatibility_and_total, alarm_order_and_release_ticks
+  5 | Medical emergency | 99 | 9 | OK | 465 | 139 | 2039 | 0.072
+    Input: {'locations': 710, 'roads': 898, 'crates': 13, 'windows': 2132, 'alarms': 3257}; capacity=40; wave labels=[3]; methods={'A': 'greedy', 'B': 'bellman', 'C': 'dpquad', 'D': 'scan'}
+    Checked: reachability, route_open_roads_and_cost, capacity_and_load_value, rescue_availability_compatibility_and_total, alarm_order_and_release_ticks
+  6 | Flood | 392 | 57 | OK | 301 | 113 | 2019 | 0.073
+    Input: {'locations': 710, 'roads': 898, 'crates': 13, 'windows': 2131, 'alarms': 3256}; capacity=40; wave labels=[]; methods={'A': 'greedy', 'B': 'bellman', 'C': 'dpquad', 'D': 'scan'}
+    Checked: reachability, route_open_roads_and_cost, capacity_and_load_value, rescue_availability_compatibility_and_total, alarm_order_and_release_ticks
+  7 | Evacuation | 486 | 57 | NO_ROUTE | None | - | 1918 | 0.073
+    Input: {'locations': 710, 'roads': 898, 'crates': 13, 'windows': 2131, 'alarms': 3256}; capacity=40; wave labels=[]; methods={'A': 'greedy', 'B': 'bellman', 'C': 'dpquad', 'D': 'scan', 'F': 'prim', 'G_chain': 'memo', 'G_drum': 'memo'}
+    Checked: reachability, route_open_roads_and_cost, capacity_and_load_value, rescue_availability_compatibility_and_total, alarm_order_and_release_ticks, cable_tree_connects_hq_component, chain_bracketing_cost, drum_length_and_price
+Summary: {'delivered_value': 712, 'route_cost': 2490, 'evacuation_cost': None, 'unreachable_days': 1, 'rescue_total': 13876, 'alarm_wait': 8468938, 'urgent_mean_wait': 0.0724450194049159}
+
+Case 4-47 | simple | Official LIFELINE calendar - Project Statement section 7.4, page 7
+Day | Event | Target | Blocked | Trip | Route cost | Load value | Rescue total | Urgent wait
+  1 | Normal | 486 | 0 | OK | 357 | 113 | 1315 | 387.344
+    Input: {'locations': 710, 'roads': 898, 'crates': 13, 'windows': 2131, 'alarms': 3256}; capacity=40; wave labels=[]; methods={'A': 'greedy', 'B': 'bfs', 'C': 'greedy', 'D': 'fifo'}
+    Checked: reachability, route_open_roads_and_cost, capacity_and_load_value, rescue_availability_compatibility_and_total, alarm_order_and_release_ticks
+  2 | Storm | 99 | 3 | OK | 691 | 113 | 1296 | 387.187
+    Input: {'locations': 710, 'roads': 898, 'crates': 13, 'windows': 2131, 'alarms': 3257}; capacity=40; wave labels=[0]; methods={'A': 'greedy', 'B': 'bfs', 'C': 'greedy', 'D': 'fifo'}
+    Checked: reachability, route_open_roads_and_cost, capacity_and_load_value, rescue_availability_compatibility_and_total, alarm_order_and_release_ticks
+  3 | Food shortage | 392 | 10 | OK | 301 | 121 | 1173 | 387.344
+    Input: {'locations': 710, 'roads': 898, 'crates': 13, 'windows': 2131, 'alarms': 3256}; capacity=40; wave labels=[1]; methods={'A': 'greedy', 'B': 'bfs', 'C': 'greedy', 'D': 'fifo'}
+    Checked: reachability, route_open_roads_and_cost, capacity_and_load_value, rescue_availability_compatibility_and_total, alarm_order_and_release_ticks
+  4 | Dangerous area | 486 | 22 | OK | 375 | 113 | 1312 | 387.344
+    Input: {'locations': 710, 'roads': 898, 'crates': 13, 'windows': 2131, 'alarms': 3256}; capacity=40; wave labels=[2]; methods={'A': 'greedy', 'B': 'bfs', 'C': 'greedy', 'D': 'fifo'}
+    Checked: reachability, route_open_roads_and_cost, capacity_and_load_value, rescue_availability_compatibility_and_total, alarm_order_and_release_ticks
+  5 | Medical emergency | 99 | 9 | OK | 465 | 139 | 1401 | 387.187
+    Input: {'locations': 710, 'roads': 898, 'crates': 13, 'windows': 2132, 'alarms': 3257}; capacity=40; wave labels=[3]; methods={'A': 'greedy', 'B': 'bfs', 'C': 'greedy', 'D': 'fifo'}
+    Checked: reachability, route_open_roads_and_cost, capacity_and_load_value, rescue_availability_compatibility_and_total, alarm_order_and_release_ticks
+  6 | Flood | 392 | 57 | OK | 301 | 113 | 1315 | 387.344
+    Input: {'locations': 710, 'roads': 898, 'crates': 13, 'windows': 2131, 'alarms': 3256}; capacity=40; wave labels=[]; methods={'A': 'greedy', 'B': 'bfs', 'C': 'greedy', 'D': 'fifo'}
+    Checked: reachability, route_open_roads_and_cost, capacity_and_load_value, rescue_availability_compatibility_and_total, alarm_order_and_release_ticks
+  7 | Evacuation | 486 | 57 | NO_ROUTE | None | - | 1296 | 387.344
+    Input: {'locations': 710, 'roads': 898, 'crates': 13, 'windows': 2131, 'alarms': 3256}; capacity=40; wave labels=[]; methods={'A': 'greedy', 'B': 'bfs', 'C': 'greedy', 'D': 'fifo', 'F': 'kruskal', 'G_chain': 'dp', 'G_drum': 'greedy'}
+    Checked: reachability, route_open_roads_and_cost, capacity_and_load_value, rescue_availability_compatibility_and_total, alarm_order_and_release_ticks, cable_tree_connects_hq_component, chain_bracketing_cost, drum_length_and_price
+Summary: {'delivered_value': 712, 'route_cost': 2490, 'evacuation_cost': None, 'unreachable_days': 1, 'rescue_total': 9108, 'alarm_wait': 8468938, 'urgent_mean_wait': 387.29926692539885}
+
+Case 2-48 | optimized | Official LIFELINE calendar - Project Statement section 7.4, page 7
+Day | Event | Target | Blocked | Trip | Route cost | Load value | Rescue total | Urgent wait
+  1 | Normal | 1 | 0 | OK | 12 | 19164 | 3769 | 0.111
+    Input: {'locations': 1511, 'roads': 1511, 'crates': 591, 'windows': 910, 'alarms': 2269}; capacity=1682; wave labels=[]; methods={'A': 'dp', 'B': 'dijkstra', 'C': 'dp', 'D': 'heap'}
+    Checked: reachability, route_open_roads_and_cost, capacity_and_load_value, rescue_availability_compatibility_and_total, alarm_order_and_release_ticks
+  2 | Storm | 2 | 167 | OK | 8 | 20857 | 4055 | 0.111
+    Input: {'locations': 1511, 'roads': 1511, 'crates': 591, 'windows': 910, 'alarms': 2270}; capacity=1682; wave labels=[0]; methods={'A': 'dp', 'B': 'dijkstra', 'C': 'dp', 'D': 'heap'}
+    Checked: reachability, route_open_roads_and_cost, capacity_and_load_value, rescue_availability_compatibility_and_total, alarm_order_and_release_ticks
+  3 | Food shortage | 1510 | 167 | NO_ROUTE | None | - | 4116 | 0.111
+    Input: {'locations': 1511, 'roads': 1511, 'crates': 591, 'windows': 909, 'alarms': 2269}; capacity=1682; wave labels=[1]; methods={'A': 'dp', 'B': 'dijkstra', 'C': 'dp', 'D': 'heap'}
+    Checked: reachability, route_open_roads_and_cost, capacity_and_load_value, rescue_availability_compatibility_and_total, alarm_order_and_release_ticks
+  4 | Dangerous area | 1 | 167 | OK | 22 | 19164 | 3823 | 0.111
+    Input: {'locations': 1511, 'roads': 1511, 'crates': 591, 'windows': 909, 'alarms': 2269}; capacity=1682; wave labels=[2]; methods={'A': 'dp', 'B': 'dijkstra', 'C': 'dp', 'D': 'heap'}
+    Checked: reachability, route_open_roads_and_cost, capacity_and_load_value, rescue_availability_compatibility_and_total, alarm_order_and_release_ticks
+  5 | Medical emergency | 2 | 167 | OK | 7 | 22928 | 3702 | 0.111
+    Input: {'locations': 1511, 'roads': 1511, 'crates': 591, 'windows': 910, 'alarms': 2270}; capacity=1682; wave labels=[0]; methods={'A': 'dp', 'B': 'dijkstra', 'C': 'dp', 'D': 'heap'}
+    Checked: reachability, route_open_roads_and_cost, capacity_and_load_value, rescue_availability_compatibility_and_total, alarm_order_and_release_ticks
+  6 | Flood | 1510 | 501 | NO_ROUTE | None | - | 3769 | 0.111
+    Input: {'locations': 1511, 'roads': 1511, 'crates': 591, 'windows': 910, 'alarms': 2269}; capacity=1682; wave labels=[]; methods={'A': 'dp', 'B': 'dijkstra', 'C': 'dp', 'D': 'heap'}
+    Checked: reachability, route_open_roads_and_cost, capacity_and_load_value, rescue_availability_compatibility_and_total, alarm_order_and_release_ticks
+  7 | Evacuation | 1 | 501 | EVACUATION | 12 | - | 4055 | 0.111
+    Input: {'locations': 1511, 'roads': 1511, 'crates': 591, 'windows': 910, 'alarms': 2269}; capacity=1682; wave labels=[]; methods={'A': 'dp', 'B': 'dijkstra', 'C': 'dp', 'D': 'heap', 'F': 'kruskal', 'G_chain': 'dp', 'G_drum': 'dp'}
+    Checked: reachability, route_open_roads_and_cost, capacity_and_load_value, rescue_availability_compatibility_and_total, alarm_order_and_release_ticks, cable_tree_connects_hq_component, chain_bracketing_cost, drum_length_and_price
+Summary: {'delivered_value': 82113, 'route_cost': 61, 'evacuation_cost': 12, 'unreachable_days': 2, 'rescue_total': 27289, 'alarm_wait': 6013604, 'urgent_mean_wait': 0.11104060913705584}
+
+Case 2-48 | baseline | Official LIFELINE calendar - Project Statement section 7.4, page 7
+Day | Event | Target | Blocked | Trip | Route cost | Load value | Rescue total | Urgent wait
+  1 | Normal | 1 | 0 | OK | 12 | 19159 | 3769 | 0.111
+    Input: {'locations': 1511, 'roads': 1511, 'crates': 591, 'windows': 910, 'alarms': 2269}; capacity=1682; wave labels=[]; methods={'A': 'greedy', 'B': 'bellman', 'C': 'dpquad', 'D': 'scan'}
+    Checked: reachability, route_open_roads_and_cost, capacity_and_load_value, rescue_availability_compatibility_and_total, alarm_order_and_release_ticks
+  2 | Storm | 2 | 167 | OK | 8 | 20850 | 4055 | 0.111
+    Input: {'locations': 1511, 'roads': 1511, 'crates': 591, 'windows': 910, 'alarms': 2270}; capacity=1682; wave labels=[0]; methods={'A': 'greedy', 'B': 'bellman', 'C': 'dpquad', 'D': 'scan'}
+    Checked: reachability, route_open_roads_and_cost, capacity_and_load_value, rescue_availability_compatibility_and_total, alarm_order_and_release_ticks
+  3 | Food shortage | 1510 | 167 | NO_ROUTE | None | - | 4116 | 0.111
+    Input: {'locations': 1511, 'roads': 1511, 'crates': 591, 'windows': 909, 'alarms': 2269}; capacity=1682; wave labels=[1]; methods={'A': 'greedy', 'B': 'bellman', 'C': 'dpquad', 'D': 'scan'}
+    Checked: reachability, route_open_roads_and_cost, capacity_and_load_value, rescue_availability_compatibility_and_total, alarm_order_and_release_ticks
+  4 | Dangerous area | 1 | 167 | OK | 22 | 19159 | 3823 | 0.111
+    Input: {'locations': 1511, 'roads': 1511, 'crates': 591, 'windows': 909, 'alarms': 2269}; capacity=1682; wave labels=[2]; methods={'A': 'greedy', 'B': 'bellman', 'C': 'dpquad', 'D': 'scan'}
+    Checked: reachability, route_open_roads_and_cost, capacity_and_load_value, rescue_availability_compatibility_and_total, alarm_order_and_release_ticks
+  5 | Medical emergency | 2 | 167 | OK | 7 | 22922 | 3702 | 0.111
+    Input: {'locations': 1511, 'roads': 1511, 'crates': 591, 'windows': 910, 'alarms': 2270}; capacity=1682; wave labels=[0]; methods={'A': 'greedy', 'B': 'bellman', 'C': 'dpquad', 'D': 'scan'}
+    Checked: reachability, route_open_roads_and_cost, capacity_and_load_value, rescue_availability_compatibility_and_total, alarm_order_and_release_ticks
+  6 | Flood | 1510 | 501 | NO_ROUTE | None | - | 3769 | 0.111
+    Input: {'locations': 1511, 'roads': 1511, 'crates': 591, 'windows': 910, 'alarms': 2269}; capacity=1682; wave labels=[]; methods={'A': 'greedy', 'B': 'bellman', 'C': 'dpquad', 'D': 'scan'}
+    Checked: reachability, route_open_roads_and_cost, capacity_and_load_value, rescue_availability_compatibility_and_total, alarm_order_and_release_ticks
+  7 | Evacuation | 1 | 501 | EVACUATION | 12 | - | 4055 | 0.111
+    Input: {'locations': 1511, 'roads': 1511, 'crates': 591, 'windows': 910, 'alarms': 2269}; capacity=1682; wave labels=[]; methods={'A': 'greedy', 'B': 'bellman', 'C': 'dpquad', 'D': 'scan', 'F': 'prim', 'G_chain': 'memo', 'G_drum': 'memo'}
+    Checked: reachability, route_open_roads_and_cost, capacity_and_load_value, rescue_availability_compatibility_and_total, alarm_order_and_release_ticks, cable_tree_connects_hq_component, chain_bracketing_cost, drum_length_and_price
+Summary: {'delivered_value': 82090, 'route_cost': 61, 'evacuation_cost': 12, 'unreachable_days': 2, 'rescue_total': 27289, 'alarm_wait': 6013604, 'urgent_mean_wait': 0.11104060913705584}
+
+Case 2-48 | simple | Official LIFELINE calendar - Project Statement section 7.4, page 7
+Day | Event | Target | Blocked | Trip | Route cost | Load value | Rescue total | Urgent wait
+  1 | Normal | 1 | 0 | OK | 64 | 19159 | 2870 | 375.944
+    Input: {'locations': 1511, 'roads': 1511, 'crates': 591, 'windows': 910, 'alarms': 2269}; capacity=1682; wave labels=[]; methods={'A': 'greedy', 'B': 'bfs', 'C': 'greedy', 'D': 'fifo'}
+    Checked: reachability, route_open_roads_and_cost, capacity_and_load_value, rescue_availability_compatibility_and_total, alarm_order_and_release_ticks
+  2 | Storm | 2 | 167 | OK | 8 | 20850 | 3261 | 376.113
+    Input: {'locations': 1511, 'roads': 1511, 'crates': 591, 'windows': 910, 'alarms': 2270}; capacity=1682; wave labels=[0]; methods={'A': 'greedy', 'B': 'bfs', 'C': 'greedy', 'D': 'fifo'}
+    Checked: reachability, route_open_roads_and_cost, capacity_and_load_value, rescue_availability_compatibility_and_total, alarm_order_and_release_ticks
+  3 | Food shortage | 1510 | 167 | NO_ROUTE | None | - | 3022 | 375.944
+    Input: {'locations': 1511, 'roads': 1511, 'crates': 591, 'windows': 909, 'alarms': 2269}; capacity=1682; wave labels=[1]; methods={'A': 'greedy', 'B': 'bfs', 'C': 'greedy', 'D': 'fifo'}
+    Checked: reachability, route_open_roads_and_cost, capacity_and_load_value, rescue_availability_compatibility_and_total, alarm_order_and_release_ticks
+  4 | Dangerous area | 1 | 167 | OK | 68 | 19159 | 2846 | 375.944
+    Input: {'locations': 1511, 'roads': 1511, 'crates': 591, 'windows': 909, 'alarms': 2269}; capacity=1682; wave labels=[2]; methods={'A': 'greedy', 'B': 'bfs', 'C': 'greedy', 'D': 'fifo'}
+    Checked: reachability, route_open_roads_and_cost, capacity_and_load_value, rescue_availability_compatibility_and_total, alarm_order_and_release_ticks
+  5 | Medical emergency | 2 | 167 | OK | 7 | 22922 | 2821 | 376.113
+    Input: {'locations': 1511, 'roads': 1511, 'crates': 591, 'windows': 910, 'alarms': 2270}; capacity=1682; wave labels=[0]; methods={'A': 'greedy', 'B': 'bfs', 'C': 'greedy', 'D': 'fifo'}
+    Checked: reachability, route_open_roads_and_cost, capacity_and_load_value, rescue_availability_compatibility_and_total, alarm_order_and_release_ticks
+  6 | Flood | 1510 | 501 | NO_ROUTE | None | - | 2870 | 375.944
+    Input: {'locations': 1511, 'roads': 1511, 'crates': 591, 'windows': 910, 'alarms': 2269}; capacity=1682; wave labels=[]; methods={'A': 'greedy', 'B': 'bfs', 'C': 'greedy', 'D': 'fifo'}
+    Checked: reachability, route_open_roads_and_cost, capacity_and_load_value, rescue_availability_compatibility_and_total, alarm_order_and_release_ticks
+  7 | Evacuation | 1 | 501 | EVACUATION | 64 | - | 3261 | 375.944
+    Input: {'locations': 1511, 'roads': 1511, 'crates': 591, 'windows': 910, 'alarms': 2269}; capacity=1682; wave labels=[]; methods={'A': 'greedy', 'B': 'bfs', 'C': 'greedy', 'D': 'fifo', 'F': 'kruskal', 'G_chain': 'dp', 'G_drum': 'greedy'}
+    Checked: reachability, route_open_roads_and_cost, capacity_and_load_value, rescue_availability_compatibility_and_total, alarm_order_and_release_ticks, cable_tree_connects_hq_component, chain_bracketing_cost, drum_length_and_price
+Summary: {'delivered_value': 82090, 'route_cost': 211, 'evacuation_cost': 64, 'unreachable_days': 2, 'rescue_total': 20951, 'alarm_wait': 6013604, 'urgent_mean_wait': 375.9927030456853}

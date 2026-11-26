@@ -5,7 +5,8 @@ networks. Input construction/CSV loading is excluded. Times are medians of five
 runs after one discarded warmup; error bars show half the IQR each side (not a
 confidence interval). Memory is peak tracemalloc allocation in a separate run,
 beyond the input. Counts sum comparisons, moves, edge tests, relaxations and
-union-find parent traversals, including ordering for adjacency/output.
+union-find parent traversals. Adjacency ordering is reported as pre_* counts
+separately; core counts include output ordering and Kruskal edge sorting.
 
 - B-time.png / B-operations.png / B-memory.png: positive-cost Dijkstra and
   Bellman-Ford solve the same problem; BFS is only the fewest-roads baseline.

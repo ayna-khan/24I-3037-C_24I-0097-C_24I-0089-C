@@ -5,14 +5,14 @@ Largest growth input: 1024 vertices from case 10-40.
 
 | Module | Method | Median seconds at largest size | IQR seconds | Operations | Peak bytes beyond input |
 |---|---|---:|---:|---:|---:|
-| B | dijkstra | 0.0117117 | 1.94000004e-05 | 35349 | 744192 |
-| B | bellman | 0.0166039 | 6.51999999e-05 | 53403 | 752400 |
-| B | bfs | 0.0101313 | 4.3e-05 | 27011 | 641376 |
-| F | kruskal | 0.0169383 | 6.51e-05 | 65339 | 258896 |
-| F | prim | 0.0180257 | 5.98000006e-05 | 73050 | 605584 |
+| B | dijkstra | 0.0117786 | 6.17000005e-05 | 29856 | 744464 |
+| B | bellman | 0.0166897 | 0.0001496 | 47910 | 752672 |
+| B | bfs | 0.0102044 | 3.42999992e-05 | 21518 | 641584 |
+| F | kruskal | 0.0170418 | 4.45999995e-05 | 65339 | 259104 |
+| F | prim | 0.0189913 | 0.0031237 | 67557 | 605856 |
 
 B: Dijkstra and Bellman-Ford agree in every comparison. BFS chooses a fewest-roads route but its worst cost ratio is 20.000; mean ratio is 1.276 over reachable nonzero-cost targets.
-F: Kruskal and Prim agree on every forest cost. Largest-input Prim/Kruskal time ratio is 1.064.
+F: Kruskal and Prim agree on every forest cost. Largest-input Prim/Kruskal time ratio is 1.114.
 
 Ship heap Dijkstra for positive travel costs and BFS for reachability/hops. Keep Bellman-Ford as a check; it can be competitive on small, favourably ordered graphs because it stops early. Reject negative minutes/penalties rather than feeding them to Dijkstra.
 

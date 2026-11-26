@@ -18,12 +18,17 @@ MUTANTS = [
     ('campaign-skip-availability', 'src/campaign.py', 'rescue.available_on_day(case.windows, day)', 'list(case.windows)'),
     ('campaign-forget-closures', 'src/campaign.py', 'closed.update(case.waves[wave])', 'closed.update(())'),
     ('loader-truncate-floats', 'src/loader.py', 'else int(v)', 'else int(float(v))'),
+    ('calendar-no-storm-ceiling', 'src/campaign.py', '(r.minutes * numerator + denominator - 1) // denominator', '(r.minutes * numerator) // denominator'),
+    ('calendar-no-penalty-change', 'src/campaign.py', 'n.penalty * multiplier if n.penalty >= threshold else n.penalty', 'n.penalty'),
+    ('calendar-accumulate-daily-waves', 'src/campaign.py', "calendar.get('closure_mode', 'cumulative') == 'daily'", 'False'),
+    ('calendar-no-wave-modulo', 'src/campaign.py', 'wave_labels[i % len(wave_labels)]', 'wave_labels[i]'),
+    ('calendar-drop-evacuation-cost', 'src/campaign.py', "if d['trip_made']),", "if d['load'] and d['load']['selected']),"),
 ]
 
 
 def run(root):
     env = dict(os.environ, PYTHONPATH=str(root), PYTHONDONTWRITEBYTECODE='1')
-    return subprocess.run([sys.executable, '-m', 'unittest', 'tests.testhamza'], cwd=root,
+    return subprocess.run([sys.executable, '-m', 'unittest', 'tests.testhamza', 'tests.testofficialcampaign'], cwd=root,
                           env=env, capture_output=True, text=True, timeout=5)
 
 
@@ -36,9 +41,15 @@ def main():
     with tempfile.TemporaryDirectory(prefix='lifeline-fault-') as temp:
         target = Path(temp)
         shutil.copytree(ROOT / 'src', target / 'src', ignore=shutil.ignore_patterns('__pycache__'))
+        shutil.copytree(ROOT / 'calendars', target / 'calendars')
+        shutil.copytree(ROOT / 'experiments', target / 'experiments', ignore=shutil.ignore_patterns('__pycache__'))
         (target / 'tests').mkdir()
         (target / 'tests/__init__.py').write_text('')
         shutil.copy2(ROOT / 'tests/testhamza.py', target / 'tests/testhamza.py')
+        shutil.copy2(ROOT / 'tests/testofficialcampaign.py', target / 'tests/testofficialcampaign.py')
+        clean_copy = run(target)
+        if clean_copy.returncode:
+            raise RuntimeError('Unmodified disposable copy failed: ' + clean_copy.stdout + clean_copy.stderr)
         for name, file, old, new in MUTANTS:
             path = target / file
             original = path.read_text(encoding='utf-8')

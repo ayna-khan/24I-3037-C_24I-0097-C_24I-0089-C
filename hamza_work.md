@@ -1,86 +1,92 @@
-# Hamza's work and handoff
+# Hamza's completed work and final handoff
 
-Built on Ayna's A/D and Adan's C/G implementations; those modules, tests and
-169 existing result rows are unchanged. The implementation, tests, evidence and handoff are included in this delivery.
+The original Project Statement has now been checked. The required calendar
+from section 7.4 (page 7) is implemented and is the CLI/backend default.
+Ayna does not need to invent or configure that calendar.
 
-## Required by the assignment image, now implemented
+## Completed against Hamza's assignment
 
-- B route planning: counted binary-heap Dijkstra, BFS reachability/fewest roads,
-  Bellman-Ford exact baseline, closures, deterministic paths and NO_ROUTE.
-- F network planning: Kruskal/union-find primary, heap Prim baseline, minimum
-  spanning forests and optional HQ-reachable subset.
-- Loader and validation: streamed master CSVs, typed teammate records,
-  schema/value/identity/reference checks, optional all-file SHA-256 verification.
-- Seven-day coordinator and CLI: calendar file, cumulative closures/reopening,
-  daily values/expiry/availability, optional consumed stock, A/B/C/D calls,
-  F/G review, independent simple-policy comparison and JSON export.
-- Frontend backend: Python service functions and a local JSON HTTP adapter,
-  including the exact C/G entry points Adan supplied.
-- Experiments: seven sizes, 35 measured configurations, one warmup and five
-  timed repetitions, median/IQR, memory, operation counts, fitted exponents,
-  pre-run predictions, quality comparisons and six plots with captions.
-- Tests: independent Floyd-Warshall/exhaustive-forest references, randomized
-  checks, malformed CSVs, campaign integration and actual HTTP endpoints.
-  Ten seeded faults are caught (including a deliberate loop via timeout).
-- Documentation: filled Hamza's README placeholders and appended B/F prediction
-  entries. Report-ready results/fits/figures and a failure-mode paragraph are
-  in results/comparison-BF.md and the related BF files.
+| Assigned work | Implementation and evidence |
+|---|---|
+| B route planning | src/modules/routes.py: counted heap Dijkstra, BFS reachability/fewest roads, Bellman-Ford baseline, deterministic routes/NO_ROUTE |
+| F network planning | src/modules/networkplan.py: Kruskal with union-find, Prim baseline, HQ-component tree/whole-map forest |
+| Tests/experiments for B/F | Independent references and randomized tests; seven geometric sizes; identical baseline inputs; predictions, timing/IQR, separate preprocessing counts, memory, fits/95% intervals/R-squared/relative error; results/results.csv and BF plots/tables |
+| Seven-day campaign and CLI | src/campaign.py, src/cli.py, calendars/official.json; exact daily targets/closures, storm rounding, penalties/values/alarms, rescue availability, unreachable trips and no-load evacuation |
+| Shared system work | Streaming loader, cross-table validation, reusable measurement harness, daily independent output invariants, integration/HTTP tests and 15 detected seeded faults |
+| Interface backend | src/backend.py and src/server.py; Python API plus local JSON endpoints, official default calendar, case cache and explicit invalid-input responses |
+| Final-report contribution | B/F and official campaign tables, nine plots with captions, test summary, sample program output and failure-mode paragraph ready for Ayna |
 
-## Evidence
+Teammates' A/C/D/G implementations, tests and 169 existing result rows are
+preserved. Changes to shared documentation fill Hamza's parts or document
+integration. The unrelated local proposal.tex/proposal.pdf edits are excluded.
 
-62 sampled master cases: 867 Dijkstra/Bellman comparisons and 289
-Kruskal/Prim comparisons, all agreeing; closure waves are cumulative.
-Growth uses nested connected prefixes of case 10-40 (16..1024 vertices),
-not pooled networks. BFS costs up to 20 times the cheapest route. All eight
-pre-run predictions met their tolerances. All 20 master-file hashes verified.
-Timing is one session on this machine, with power state unverified; fits
-include a changing edge density and do not establish universal exponents.
-An initial trial overlapped fault injection and was discarded; published
-measurements were rerun with no other project benchmark running.
+## Official campaign evidence
 
-The example campaign on case 41-00 gives these separate metrics:
+Five master_release_v1 cases from seed-41 every-seventh tier samples:
+1-06 (S), 1-26 (M), 2-40 (L), 4-47 (trap 47), 2-48 (trap 48).
+Each runs seven days with optimized algorithms, algorithm baselines and
+additional simple policies: 105 daily policy records, all invariants passed.
+Exact route/rescue/queue/cable/G baselines agree on identical daily inputs.
 
-| Metric | Optimized | Simple baseline |
-|---|---:|---:|
-| Delivered value | 4585 | 4532 |
-| Dispatched route cost | 450 | 450 |
-| Rescue total value | 1907 | 1606 |
-| Urgent-alarm mean wait | 0.7 | 5.9 |
+- Days 2-5 block only their own wave, with zero-based wrapping over sorted
+  stored wave labels (supports 0-based and 1-based master groups).
+- Day 2: ceil(1.5 * base road minutes), tools x2, alarm priority 9 at tick 0.
+- Day 3: food x2. Day 4: base penalties >=2 doubled.
+- Day 5: medicine x3, alarm priority 10 at tick 0.
+- Days 6-7: union of all closure waves. Day 7: evacuation without loading.
+- Targets follow target_0, target_1, target_2, target_0, target_1, target_2,
+  target_0; each day starts at HQ and all daily transformations reset.
+- Rescue filtering uses Adan's exact entry points. F/G run in day-7 review
+  using Adan's solve_chain/solve_drum signatures.
+- The statement prescribes no stock consumption or expiry cutoff, so the
+  official run resets daily stock. Custom controls remain available.
+- Costs describe the outbound route; no unprescribed return leg is invented.
 
-The example uses daily stock reset and does not invent closure dates. These
-numbers demonstrate integration, not compliance with an unavailable calendar.
-No combined score or universal improvement guarantee is claimed.
+Difficult scenarios: trap-47 normal-day greedy loading delivers 113 against
+DP's 198 (57.071%); trap-48 BFS travel costs 64 against Dijkstra's 12 (5.333x).
+The large landslide case has six unreachable days, explicitly skipped.
+Daily inputs, decisions, checked constraints and outcomes are in the JSON
+traces and compact CSV/readable output. They reconstruct all daily changes.
 
-## Run it
+## Reproduce and hand off
 
 ```text
 python -m unittest discover -s tests -t .
-python -m src.cli --master MASTER --output results/sample-outputs/campaign-example.json campaign --case 41-00 --calendar calendars/example.json --compare
+python -m src.cli --master MASTER campaign --case 41-00 --compare
+python experiments/run_campaign.py --master MASTER
 python -m src.server --master MASTER --port 8000
 python experiments/runBF.py --master MASTER
 python experiments/analyzeBF.py
 python experiments/faultBF.py
 ```
 
-README section 13 documents calendar fields and the frontend API. The server
-runs locally; a browser frontend can use a same-origin development proxy.
-The test summary is results/test-summary-BF.txt. Measurements are in
-results/results.csv (only B/F rows added); the six new figures are
-results/plots/B-*.png and F-*.png, with captions-BF.md.
+The campaign CLI defaults to readable output; --output PATH saves JSON.
+`--calendar PATH` is only needed for a custom calendar. Frontend POST /campaign
+can send {"case_id":"41-00"}; official rules apply automatically.
+README section 13 documents all inputs, endpoints, policies and assumptions.
 
-## Remaining decisions and teammate handoff
+Files for Ayna:
+- results/campaign-comparison.md, campaign-daily.csv, campaign-summary.csv.
+- results/campaign/*.json: immutable base input and all three daily runs.
+- results/sample-outputs/campaign-official.txt: readable program output.
+- results/plots/campaign-*.png and captions-campaign.md: three campaign figures.
+- results/comparison-BF.md, fits-BF.*, quality-BF.csv, B/F plots and captions.
+- results/test-summary-BF.txt, fault-injection-BF.txt and prediction checks.
 
-1. Supply/confirm the original project calendar and statement. The repository
-   and Adan's PDF contain only partial events; calendars/example.json is
-   explicitly labelled as an example. Replace it with the exact dates,
-   targets, closures, expiry and stock semantics, then rerun the coordinator.
-   The implementation supports those changes without editing teammates' code.
-2. Adan connects the frontend to Backend or the local JSON endpoints; see
-   README section 13. No frontend files were changed.
-3. Ayna uses the B/F tables, plots, captions and test summary for report.pdf
-   and decides the final ranked failure-mode list. Hamza's contribution is
-   prepared locally; no messages were sent to teammates.
-4. Pull the latest main branch to receive this delivery. Predictions were
-   committed before the experiment (ef1cce6); implementation and results are
-   in the following delivery commit. Unrelated local proposal.tex/proposal.pdf
-   changes were excluded.
+B/F round 2 reran 35 configurations with preprocessing reported separately.
+All 15 informed exponent predictions met tolerance; all four precommitted
+campaign predictions met tolerance. 867 master route comparisons and 289
+forest comparisons agree. Original historical results remain in Git history;
+no teammate result row was replaced. All 20 master checksums were verified.
+Timing is one session/machine, power state unverified; nested prefixes of one
+network do not establish universal growth. No real five-minute DNF run is
+claimed; deadline/DNF behavior is implemented and tested without a long wait.
+
+## Remaining team work
+
+No assigned Hamza implementation or calendar-configuration item remains.
+Adan connects his frontend to the documented backend/API. Ayna incorporates
+the supplied evidence into report.pdf and finalizes her ranked failure-mode
+list. The group performs the live demo and submission packaging. No report
+or frontend file belonging to a teammate was overwritten, and no messages
+were sent to teammates by the assistant.

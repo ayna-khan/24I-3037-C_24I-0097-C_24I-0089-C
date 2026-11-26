@@ -30,7 +30,7 @@ class Backend:
             subset = routes.solve(c.locations, c.roads, 0, blocked=blocked).reachable
         return networkplan.solve(c.locations, c.roads, method, blocked, subset)._asdict()
 
-    def campaign(self, case_id, calendar, policy='optimized'):
+    def campaign(self, case_id, calendar=None, policy='optimized'):
         return run_campaign(self._cases(case_id), calendar, policy)
 
     def chain(self, case_id, method='dp'):
