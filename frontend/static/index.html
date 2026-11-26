@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Lifeline Gazette</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' fill='%231d1a15'/%3E%3Cpath d='M6 2h4v4h4v4h-4v4H6v-4H2V6h4z' fill='%23f6f1e4'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&family=Playfair+Display:ital,wght@0,600;0,800;0,900;1,500&family=Old+Standard+TT:ital,wght@0,400;0,700;1,400&family=Oswald:wght@400;600&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="sheet">
+  <header class="masthead">
+    <div class="mast-row">
+      <div class="ear">“All the relief that’s fit to dispatch.”<br><span>Group 41 · Seed 41</span></div>
+      <h1>The Lifeline Gazette</h1>
+      <div class="ear" id="conditions">Awaiting the wire…</div>
+    </div>
+    <div class="dateline">
+      <span>Algorithmic Relief-Command Engine</span>
+      <span id="dateline">No case on the desk</span>
+      <span>Price: one O(n log n)</span>
+    </div>
+    <form class="case-bar" id="caseForm">
+      <label>Tier
+        <select id="tierFilter"><option value="">All</option><option>S</option><option>M</option><option>L</option><option>X</option></select>
+      </label>
+      <label>Disaster
+        <select id="scenarioFilter"><option value="">All</option></select>
+      </label>
+      <label>Case
+        <input id="caseId" list="caseList" value="41-00" autocomplete="off" spellcheck="false">
+        <datalist id="caseList"></datalist>
+      </label>
+      <span class="match" id="matchCount"></span>
+      <button type="submit">Print this edition</button>
+    </form>
+    <nav id="nav">
+      <button data-page="front" class="on">The Daily Edition</button>
+      <button data-page="week">Week in Review</button>
+      <button data-page="maps">The Map Room</button>
+      <button data-page="works">The Works Desk</button>
+      <button data-page="about">About This Paper</button>
+    </nav>
+  </header>
+
+  <div id="status" class="status" role="status" aria-live="polite"></div>
+
+  <main>
+    <section id="front" class="page on">
+      <div class="days" id="days"></div>
+      <div id="edition"></div>
+    </section>
+    <section id="week" class="page"><div id="weekBody"></div></section>
+    <section id="maps" class="page"><div id="mapsBody"></div></section>
+    <section id="works" class="page"><div id="worksBody"></div></section>
+    <section id="about" class="page">
+      <h2 class="headline">How the Gazette gets its facts</h2>
+      <p class="deck">Every figure in this paper is computed on request by the project’s own Python modules. Nothing is typed in by hand.</p>
+      <table class="grid">
+        <thead><tr><th>Desk</th><th>Shipped method</th><th>Checked against</th><th>Cost</th></tr></thead>
+        <tbody>
+          <tr><td>A · Relief inventory</td><td>Dynamic programming over truck capacity</td><td>Ratio greedy, brute force</td><td>O(nW)</td></tr>
+          <tr><td>B · Route planning</td><td>Heap Dijkstra, with BFS for reachability</td><td>Bellman-Ford, BFS</td><td>O((V+E) log V)</td></tr>
+          <tr><td>C · Rescue scheduling</td><td>Earliest-finish greedy (count); DP with binary search (value)</td><td>Quadratic DP, brute force</td><td>O(n log n)</td></tr>
+          <tr><td>D · Emergency queue</td><td>Binary min-heap on priority, tick, id</td><td>Linear scan, first come first served</td><td>O(m log m)</td></tr>
+          <tr><td>F · Network planning</td><td>Kruskal with union-find</td><td>Prim</td><td>O(E log E)</td></tr>
+          <tr><td>G · Chains and cuts</td><td>Bottom-up DP with split table</td><td>Memoised recursion, greedy cut, brute force</td><td>O(n³) chain, O(L²) drum</td></tr>
+        </tbody>
+      </table>
+      <div class="columns two">
+        <div>
+          <h3 class="kicker">The newsroom</h3>
+          <p><b>Ayna Khan</b> (24I-0097) — modules A and D.<br>
+             <b>Dur E Adan</b> (24I-3037) — modules C, G and this interface.<br>
+             <b>Hamza Sardar</b> (24I-0089) — modules B and F, loader, campaign and backend.</p>
+        </div>
+        <div>
+          <h3 class="kicker">Standing notes</h3>
+          <p>The seven-day calendar is the one in <code>calendars/official.json</code>. Maps are schematic: the data gives road costs, not map positions, so distances on paper mean nothing.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer>Printed from <code>master_release_v1</code> · FAST NUCES · Design and Analysis of Algorithms · Group 41</footer>
+</div>
+<div id="tip" class="tip" hidden></div>
+<script src="draw.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
