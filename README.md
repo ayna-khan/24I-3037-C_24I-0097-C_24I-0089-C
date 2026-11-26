@@ -44,6 +44,7 @@ All commands are run from the repository root. `MASTER` is the folder with the m
 | B/F and integration fault injection | `python experiments/faultBF.py` |
 | Verify master SHA-256 manifest | `python -m src.cli --master MASTER verify` |
 | Local frontend API | `python -m src.server --master MASTER --port 8000` |
+| Newspaper interface, The Lifeline Gazette | `python -m frontend --master MASTER --open` |
 
 The experiments use no random numbers: samples and pools are fixed by the group seed 41 (see section 4), so a rerun gives the same
 inputs and the same operation counts. Times vary from machine to machine.
@@ -56,6 +57,7 @@ src/        models.py (data types, errors)   measure.py (timing, memory, fits)  
             modules/inventory.py (A)   modules/emergencyqueue.py (D)   modules/rescue.py (C)   modules/chains.py (G)
             network.py  loader.py  validation.py  campaign.py  cli.py  backend.py  server.py
             modules/routes.py (B)  modules/networkplan.py (F)
+frontend/   server.py (pages and API on one origin)   static/ (index.html, style.css, draw.js, app.js)
 calendars/  official.json (section 7.4, default)  example.json (historical custom example)
 tests/      testinventory.py  testqueue.py  testmeasure.py  testfaultinjection.py   testrescue.py  testfaultinjectionC.py   testchains.py  testfaultinjectionG.py
             reference/ (independent reference methods, never imported by src)   fixtures/ (small samples of the master data)
@@ -463,3 +465,24 @@ B/F and campaign evidence into report.pdf and finalizes her ranked failure
 modes. Adan connects his frontend to the documented API. The group performs
 the final demo and submission packaging. Their report/frontend files and the
 unrelated local proposal changes were not overwritten.
+
+## 14. Interface: The Lifeline Gazette (Adan)
+
+`python -m frontend --master MASTER --open` serves the interface at `http://127.0.0.1:8000/` (change with `--port`; do not run
+`src.server` on the same port at the same time). It needs only the Python standard library and a browser; the fonts come from
+Google Fonts and fall back to system serif fonts offline.
+
+| Page | What it shows |
+|---|---|
+| The Daily Edition | one of the seven campaign days: route map (B), load manifest (A), alarm dispatches (D), rescue timetable (C), checked constraints; day 7 adds F and G |
+| Week in Review | the week's totals and, on request, our methods against the algorithm baselines and the simple policies |
+| The Map Room | live B and F: choose target and method, close roads or waves, show the cable network |
+| The Works Desk | live G: matrix chain and drum cut with every method |
+
+All results come from the endpoints of section 13; the pages compute no decisions themselves. Maps are schematic, because the
+data has no coordinates for locations; networks above 260 locations show the part around the route.
+
+The server reuses the request handler of `src/server.py`. One difference: when it starts, it notes where the rows of each case lie
+in the CSV files (about 20 s), and then passes only those rows to the unchanged `src.loader.load_case`. Opening a case then takes
+about 1 s instead of about 1 minute on our machine. `tests/testfrontend.py` checks that both ways give the same case data on a
+small fixture. Restart the server if the dataset files change.
