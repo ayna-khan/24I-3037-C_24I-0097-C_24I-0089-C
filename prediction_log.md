@@ -649,3 +649,34 @@ the price of length j is about scale x j^0.7 plus noise, so the price per length
 - Round 2 uses prefixes of one real price table (case 12-47). The price table is concave with noise, which is what makes the greedy cut look good in round 3; a price table with bonuses for long pieces would not.
 - Round 3 is a sample of 62 cases of one dataset, not a guarantee. The chain ratios (G3.7, G3.8) compare the optimum with one naive order, not with all heuristics.
 - Round 4 uses at most 12 matrices and a drum of length 20, so the numbers about brute force say little about the sizes of the data. There is no DNF round for module G: the 300 s rule is implemented in the harness (a deadline in the algorithms) and tested, but no size of the data reaches it with the DP (n = 300: about 1 s).
+
+
+## Module B and Module F — Hamza, round 1
+
+Date: 2026-11-26 (client date), recorded before the first full B/F experiment.
+No B/F timing calibration was run before these predictions. This is a new local
+round, not a repeat or replacement of Ayna's or Adan's measurements.
+
+Plan: `python experiments/runBF.py --master MASTER`. One discarded warmup,
+five repetitions, median/IQR, single thread, input loading excluded, separate
+peak-memory run. At least five nested connected BFS prefixes of ONE sampled L
+network (16 to 1024 vertices when available); never pool networks. Quality:
+seed 41, every seventh tier case, 20 S/20 M/10 L/12 X, all three targets before
+and after each cumulative closure wave. Growth evidence is specific to this
+network and its changing edge density, not a controlled universal exponent.
+
+| id | prediction | tolerance |
+|---|---|---|
+| BF1 | Dijkstra and Bellman-Ford shortest costs agree on every quality row | 100% |
+| BF2 | Kruskal and Prim forest costs agree after every wave | 100% |
+| BF3 | BFS travel cost is never below optimal travel cost | ratio >= 1 |
+| BF4 | At least one sampled route shows a cost loss from BFS | max ratio > 1 |
+| BF5 | Dijkstra counted-operation log-log slope in V is near sparse n log n | 0.7 to 1.8 |
+| BF6 | Kruskal counted-operation slope is near sparse E log E | 0.7 to 1.8 |
+| BF7 | Dijkstra is faster than Bellman-Ford on the largest prefix | ratio Bellman/Dijkstra > 1 |
+| BF8 | All growth runs finish within 300 seconds | no DNF |
+
+No prediction of an absolute runtime: CPU power state is unknown. Bellman-Ford
+can stop early on this network, so BF7 may fail despite the worst-case theory.
+
+After the run: pending.
