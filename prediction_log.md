@@ -689,3 +689,38 @@ the published growth measurements were rerun after that work finished. No
 other project benchmark was running during the published timings. CPU power
 state and unrelated background load could not be verified. The quality pass
 was also rerun. No pre-run prediction was changed.
+
+## Hamza: official campaign and B/F round 2
+
+Recorded 2026-11-26 08:48:06 UTC (before the full runs in this round).
+The original Project Statement is now available. Section 7.4 fixes the
+calendar, so the former example no longer represents the required campaign.
+The official run uses five seed-41 sample cases (S, M, L, trap 47 and trap 48),
+seven days each, optimized methods, algorithm baselines and simple policies.
+
+Predictions for `python experiments/run_campaign.py --master MASTER`:
+
+| ID | Point prediction | Tolerance and reasoning |
+|---|---|---|
+| CAM1 | All 105 daily policy records pass the output invariants | 100%; daily changes are checked against input contracts |
+| CAM2 | Exact B/C/D/F/G baselines agree in every applicable comparison | 100%; same problem and identical daily input |
+| CAM3 | Day-1 greedy load value on trap 47 is at most 60% of DP | 0 to 0.60; hostile data construction |
+| CAM4 | Day-1 BFS cost on trap 48 exceeds cheapest cost | ratio > 1; hop-count trap |
+
+B/F round 2 repeats the same seven input sizes after adjacency sorting is
+reported separately as pre_comparisons/pre_moves. It retains the 300-second
+deadline and warmup/five-run protocol. Core operations exclude pre_*; timing
+and memory include preprocessing. No new absolute-time claim is made.
+
+For every method/metric fit, tolerance is +/- 0.35 in the exponent:
+- Memory exponent: 1.0 for every method.
+- BFS time and core-operation exponents: 1.0.
+- Dijkstra and early-stopping Bellman-Ford time/core exponents: 1.1.
+- Kruskal and Prim time/core exponents: 1.2.
+
+These point predictions are informed by the earlier published round and its
+input family, not blind predictions or worst-case Bellman-Ford claims.
+The fits will report prediction/measurement relative error as required by
+section 7.3. Master-data quality comparisons will be rerun unchanged.
+
+After this round: pending.
